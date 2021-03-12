@@ -61,132 +61,132 @@
 
 namespace game_framework {
 
-	CPractice::CPractice() {
-		x = y = 0;
-	}
+	//CPractice::CPractice() {
+	//	x = y = 0;
+	//}
 
-	void CPractice::OnMove() {
-		if (y <= SIZE_Y) {
-			x += 3;
-			y += 3;
-		}
-		else {
-			x = y = 0;
-		}
-	}
+	//void CPractice::OnMove() {
+	//	if (y <= SIZE_Y) {
+	//		x += 3;
+	//		y += 3;
+	//	}
+	//	else {
+	//		x = y = 0;
+	//	}
+	//}
 
-	void CPractice::LoadBitmap() {
-		pic.LoadBitmap(IDB_KID);
-	}
+	//void CPractice::LoadBitmap() {
+	//	pic.LoadBitmap(IDB_KING);
+	//}
 
-	void CPractice::OnShow() {
-		pic.SetTopLeft(x, y);
-		pic.ShowBitmap();
-	}
+	//void CPractice::OnShow() {
+	//	pic.SetTopLeft(x, y);
+	//	pic.ShowBitmap();
+	//}
 
-	CGameMap::CGameMap() : X(20), Y(40), MW(120), MH(100) {
-		int map_init[4][5] = { {0, 0, 1, 0, 0},
-							   {0, 1, 2, 1, 0},
-							   {1, 2, 1, 2, 1},
-							   {2, 1, 2, 1, 2} };
-		for (int i = 0; i < 4; i++) {
-			for (int j = 0; j < 5; j++) {
-				map[i][j] = map_init[i][j];
-			}
-		}
+	//CGameMap::CGameMap() : X(20), Y(40), MW(120), MH(100) {
+	//	int map_init[4][5] = { {0, 0, 1, 0, 0},
+	//						   {0, 1, 2, 1, 0},
+	//						   {1, 2, 1, 2, 1},
+	//						   {2, 1, 2, 1, 2} };
+	//	for (int i = 0; i < 4; i++) {
+	//		for (int j = 0; j < 5; j++) {
+	//			map[i][j] = map_init[i][j];
+	//		}
+	//	}
 
-		random_num = 0;
-		balls = NULL;
-	}
+	//	random_num = 0;
+	//	balls = NULL;
+	//}
 
-	void CGameMap::LoadBitmap() {
-		blue.LoadBitmap(IDB_BLUE);
-		green.LoadBitmap(IDB_GREEN);
-	}
+	//void CGameMap::LoadBitmap() {
+	//	blue.LoadBitmap(IDB_BLUE);
+	//	green.LoadBitmap(IDB_GREEN);
+	//}
 
-	void CGameMap::OnShow() {
-		for (int i = 0; i < 5; i++) {
-			for (int j = 0; j < 4; j++) {
-				switch (map[j][i])
-				{
-				case 0:
-					break;
-				case 1:
-					blue.SetTopLeft(X + (MW*i), Y + (MH*j));
-					blue.ShowBitmap();
-					break;
-				case 2:
-					green.SetTopLeft(X + (MW*i), Y + (MH*j));
-					green.ShowBitmap();
-					break;
-				default:
-					ASSERT(0);
-				}
-			}
-		}
+	//void CGameMap::OnShow() {
+	//	for (int i = 0; i < 5; i++) {
+	//		for (int j = 0; j < 4; j++) {
+	//			switch (map[j][i])
+	//			{
+	//			case 0:
+	//				break;
+	//			case 1:
+	//				blue.SetTopLeft(X + (MW*i), Y + (MH*j));
+	//				blue.ShowBitmap();
+	//				break;
+	//			case 2:
+	//				green.SetTopLeft(X + (MW*i), Y + (MH*j));
+	//				green.ShowBitmap();
+	//				break;
+	//			default:
+	//				ASSERT(0);
+	//			}
+	//		}
+	//	}
 
-		for (int i = 0; i < random_num; i++) {
-			balls[i].OnShow();
-		}
-	}
+	//	for (int i = 0; i < random_num; i++) {
+	//		balls[i].OnShow();
+	//	}
+	//}
 
-	void CGameMap::InitializeBouncingBall(int ini_index, int row, int col) {
-		const int VELOCITY = 10;
-		const int BALL_PIC_HEIGHT = 15;
-		int floor = Y + (row + 1)*MH - BALL_PIC_HEIGHT;
-		balls[ini_index].LoadBitmap();
-		balls[ini_index].SetFloor(floor);
-		balls[ini_index].SetVelocity(VELOCITY + col);
-		balls[ini_index].SetXY(X + col * MW + MW / 2, floor);
-	}
+	//void CGameMap::InitializeBouncingBall(int ini_index, int row, int col) {
+	//	const int VELOCITY = 10;
+	//	const int BALL_PIC_HEIGHT = 15;
+	//	int floor = Y + (row + 1)*MH - BALL_PIC_HEIGHT;
+	//	balls[ini_index].LoadBitmap();
+	//	balls[ini_index].SetFloor(floor);
+	//	balls[ini_index].SetVelocity(VELOCITY + col);
+	//	balls[ini_index].SetXY(X + col * MW + MW / 2, floor);
+	//}
 
-	void CGameMap::RandomBouncingBall() {
-		const int MAX_RAND_NUM = 10;
-		random_num = (rand()) % MAX_RAND_NUM + 1;
+	//void CGameMap::RandomBouncingBall() {
+	//	const int MAX_RAND_NUM = 10;
+	//	random_num = (rand()) % MAX_RAND_NUM + 1;
 
-		delete[] balls;
-		balls = new CBouncingBall[random_num];
-		int ini_index = 0;
-		for (int row = 0; row < 4; row++) {
-			for (int col = 0; col < 5; col++) {
-				if (map[row][col] != 0 && ini_index < random_num) {
-					InitializeBouncingBall(ini_index, row, col);
-					ini_index++;
-				}
-			}
-		}
-	}
+	//	delete[] balls;
+	//	balls = new CBouncingBall[random_num];
+	//	int ini_index = 0;
+	//	for (int row = 0; row < 4; row++) {
+	//		for (int col = 0; col < 5; col++) {
+	//			if (map[row][col] != 0 && ini_index < random_num) {
+	//				InitializeBouncingBall(ini_index, row, col);
+	//				ini_index++;
+	//			}
+	//		}
+	//	}
+	//}
 
-	void CGameMap::OnKeyDown(UINT nChar) {
-		const int KEY_SPACE = 0x20;
-		if (nChar == KEY_SPACE)
-			RandomBouncingBall();
-	}
-	
-	void CGameMap::OnMove()
-	{
-		for (int i = 0; i < random_num; i++) {
-			balls[i].OnMove();
-		}
-	}
+	//void CGameMap::OnKeyDown(UINT nChar) {
+	//	const int KEY_SPACE = 0x20;
+	//	if (nChar == KEY_SPACE)
+	//		RandomBouncingBall();
+	//}
+	//
+	//void CGameMap::OnMove()
+	//{
+	//	for (int i = 0; i < random_num; i++) {
+	//		balls[i].OnMove();
+	//	}
+	//}
 
-	CGameMap::~CGameMap() {
-		delete[] balls;
-	}
+	//CGameMap::~CGameMap() {
+	//	delete[] balls;
+	//}
 
-	void CBouncingBall::SetXY(int x, int y) {
-		this->x = x;
-		this->y = y;
-	}
+	//void CBouncingBall::SetXY(int x, int y) {
+	//	this->x = x;
+	//	this->y = y;
+	//}
 
-	void CBouncingBall::SetFloor(int floor) {
-		this->floor = floor;
-	}
+	//void CBouncingBall::SetFloor(int floor) {
+	//	this->floor = floor;
+	//}
 
-	void CBouncingBall::SetVelocity(int velocity) {
-		this->velocity = velocity;
-		this->initial_velocity = velocity;
-	}
+	//void CBouncingBall::SetVelocity(int velocity) {
+	//	this->velocity = velocity;
+	//	this->initial_velocity = velocity;
+	//}
 
 
 /////////////////////////////////////////////////////////////////////////////
@@ -409,18 +409,18 @@ void CGameStateRun::OnMove()							// 移動遊戲元素
 	//	picX = picY = 0;
 	//}
 	//practice.SetTopLeft(picX, picY);
-	c_practice.OnMove();
-	gamemap.OnMove();
+	//c_practice.OnMove();
+	//gamemap.OnMove();
 	
 }
 
 void CGameStateRun::OnInit()  								// 遊戲的初值及圖形設定
 {
 
-	c_practice.LoadBitmap();
-	gamemap.LoadBitmap();
+	//c_practice.LoadBitmap();
+	//gamemap.LoadBitmap();
 	//practice.LoadBitmap(IDB_KID);
-	//kings.LoadBitmap(IDB_KINGS, RGB(255,255,255));
+	//kings.LoadBitmap(IDB_KING, RGB(255,255,255));
 
 	//
 	// 當圖很多時，OnInit載入所有的圖要花很多時間。為避免玩遊戲的人
@@ -472,7 +472,7 @@ void CGameStateRun::OnKeyDown(UINT nChar, UINT nRepCnt, UINT nFlags)
 	if (nChar == KEY_DOWN)
 		eraser.SetMovingDown(true);
 
-	gamemap.OnKeyDown(nChar);
+	//gamemap.OnKeyDown(nChar);
 }
 
 void CGameStateRun::OnKeyUp(UINT nChar, UINT nRepCnt, UINT nFlags)
@@ -518,6 +518,7 @@ void CGameStateRun::OnRButtonUp(UINT nFlags, CPoint point)	// 處理滑鼠的動作
 
 void CGameStateRun::OnShow()
 {
+	//gamemap.OnShow();
 	//
 	//  注意：Show裡面千萬不要移動任何物件的座標，移動座標的工作應由Move做才對，
 	//        否則當視窗重新繪圖時(OnDraw)，物件就會移動，看起來會很怪。換個術語
@@ -544,7 +545,7 @@ void CGameStateRun::OnShow()
 	//practice.ShowBitmap();
 	//kings.ShowBitmap();
 	//c_practice.OnShow();
-	gamemap.OnShow();
+	
 
 }
 }

@@ -41,38 +41,39 @@
 #include "CEraser.h"
 #include "CBall.h"
 #include "CBouncingBall.h"
+#include "King.h"
 
 namespace game_framework {
 
-	class CPractice {
-	public:
-		CPractice();
-		void LoadBitmap();
-		void OnMove();
-		void OnShow();
-	private:
-		CMovingBitmap pic;
-		int x, y;
-	};
+	//class CPractice {
+	//public:
+	//	CPractice();
+	//	void LoadBitmap();
+	//	void OnMove();
+	//	void OnShow();
+	//private:
+	//	CMovingBitmap pic;
+	//	int x, y;
+	//};
 
-	class CGameMap {
-	public:
-		CGameMap();
-		void LoadBitmap();
-		void OnShow();
-		void OnMove();
-		void OnKeyDown(UINT);
-		void RandomBouncingBall();
-		void InitializeBouncingBall(int, int, int);
-		~CGameMap();
-	protected:
-		CMovingBitmap blue, green;
-		int map[4][5];
-		const int X, Y;
-		const int MW, MH;
-		CBouncingBall* balls;
-		int random_num;
-	};
+	//class CGameMap {
+	//public:
+	//	CGameMap();
+	//	void LoadBitmap();
+	//	void OnShow();
+	//	void OnMove();
+	//	void OnKeyDown(UINT);
+	//	void RandomBouncingBall();
+	//	void InitializeBouncingBall(int, int, int);
+	//	~CGameMap();
+	//protected:
+	//	CMovingBitmap blue, green;
+	//	int map[4][5];
+	//	const int X, Y;
+	//	const int MW, MH;
+	//	CBouncingBall* balls;
+	//	int random_num;
+	//};
 
 	/////////////////////////////////////////////////////////////////////////////
 	// Constants
@@ -134,9 +135,11 @@ namespace game_framework {
 		CBouncingBall   bball;		// ¤ÏÂÐ¼u¸õªº²y
 		CMovingBitmap	practice;
 		int				picX, picY;
-		CMovingBitmap	kings;
-		CPractice		c_practice;
-		CGameMap		gamemap;
+		//King			king;
+		//CMovingBitmap	kings;
+		//CPractice		c_practice;
+		//CGameMap		gamemap;
+		
 	};
 
 	/////////////////////////////////////////////////////////////////////////////
