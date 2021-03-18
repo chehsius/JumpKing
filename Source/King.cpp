@@ -7,9 +7,6 @@
 #include "King.h"
 
 namespace game_framework {
-	/////////////////////////////////////////////////////////////////////////////
-	// King: King class
-	/////////////////////////////////////////////////////////////////////////////
 
 	King::King()
 	{
@@ -42,30 +39,66 @@ namespace game_framework {
 		const int Y_POS = 400;
 		x = X_POS;
 		y = Y_POS;
-		isMovingLeft = isMovingRight = isMovingUp = isMovingDown = false;
+		isMovingLeft = isMovingRight = isMovingUp = isMovingDown = isJumping = false;
 	}
 
 	void King::LoadBitmap()
 	{
-		animation.AddBitmap(IDB_KING, RGB(255, 255, 255));
-		//animation.AddBitmap(IDB_ERASER2, RGB(255, 255, 255));
-		//animation.AddBitmap(IDB_ERASER3, RGB(255, 255, 255));
-		//animation.AddBitmap(IDB_ERASER2, RGB(255, 255, 255));
+		animation.AddBitmap(IDB_KINGLEFTSTAND, RGB(255, 255, 255));
+		animation.AddBitmap(IDB_KINGRIGHTSTAND, RGB(255, 255, 255));
+		animation.AddBitmap(IDB_KINGLEFTWALK_1, RGB(255, 255, 255));
+		animation.AddBitmap(IDB_KINGLEFTWALK_2, RGB(255, 255, 255));
+		animation.AddBitmap(IDB_KINGLEFTWALK_3, RGB(255, 255, 255));
+		animation.AddBitmap(IDB_KINGRIGHTWALK_1, RGB(255, 255, 255));
+		animation.AddBitmap(IDB_KINGRIGHTWALK_2, RGB(255, 255, 255));
+		animation.AddBitmap(IDB_KINGRIGHTWALK_3, RGB(255, 255, 255));
+		animation.AddBitmap(IDB_KINGCHARGE, RGB(255, 255, 255));
 	}
 
-	void King::OnMove()
+	void King::OnMove(Map *m)
 	{
-		const int STEP_SIZE = 2;
-		animation.OnMove();
-		if (isMovingLeft)
-			x -= STEP_SIZE;
-		if (isMovingRight)
+		const int STEP_SIZE = 3;
+		
+		if (isMovingLeft) {
+			if (m->isEmpty(x - 1, y)) {
+				animation.OnMoveLeft();
+				x -= STEP_SIZE;
+			}
+		}
+		if (isMovingRight) {
+			animation.OnMoveRight();
 			x += STEP_SIZE;
+		}
 		if (isMovingUp)
 			y -= STEP_SIZE;
 		if (isMovingDown)
 			y += STEP_SIZE;
+		if (isJumping) {
+			y += 9;
+			isJumping = false;
+		}
 	}
+	//void King::OnMove()
+	//{
+	//	const int STEP_SIZE = 3;
+	//	
+	//	if (isMovingLeft) {
+	//		animation.OnMoveLeft();
+	//		x -= STEP_SIZE;	
+	//	}
+	//	if (isMovingRight) {
+	//		animation.OnMoveRight();
+	//		x += STEP_SIZE;
+	//	}
+	//	if (isMovingUp)
+	//		y -= STEP_SIZE;
+	//	if (isMovingDown)
+	//		y += STEP_SIZE;
+	//	if (isJumping) {
+	//		y += 9;
+	//		isJumping = false;
+	//	}
+	//}
 
 	void King::SetMovingDown(bool flag)
 	{
@@ -75,16 +108,47 @@ namespace game_framework {
 	void King::SetMovingLeft(bool flag)
 	{
 		isMovingLeft = flag;
+		if (isMovingLeft && isMovingRight) {
+			animation.SetBitmapNumber(1);
+			isMovingLeft = isMovingRight = false;
+		}
+		else if (isMovingLeft) {
+			animation.SetBitmapNumber(2);
+			//animation.SetTopLeft(25, y);
+		}
+		else if (!isMovingLeft && isMovingRight) {
+			animation.SetBitmapNumber(5);
+			isMovingRight = true;
+			//animation.SetTopLeft(25, y);
+		}
+		
 	}
 
 	void King::SetMovingRight(bool flag)
 	{
 		isMovingRight = flag;
+		if (isMovingRight && isMovingLeft) {
+			animation.SetBitmapNumber(0);
+			isMovingRight = isMovingLeft = false;
+		}
+		else if (isMovingRight) {
+			animation.SetBitmapNumber(5);
+		}
+		else if (!isMovingRight && isMovingLeft) {
+			animation.SetBitmapNumber(2);
+			isMovingLeft = true;
+		}
 	}
 
 	void King::SetMovingUp(bool flag)
 	{
 		isMovingUp = flag;
+	}
+
+	void King::SetJumping(bool flag)
+	{
+		isJumping = flag;
+		animation.SetBitmapNumber(8);
 	}
 
 	void King::SetXY(int nx, int ny)

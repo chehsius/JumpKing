@@ -61,75 +61,6 @@
 
 namespace game_framework {
 
-	//CPractice::CPractice() {
-	//	x = y = 0;
-	//}
-
-	//void CPractice::OnMove() {
-	//	if (y <= SIZE_Y) {
-	//		x += 3;
-	//		y += 3;
-	//	}
-	//	else {
-	//		x = y = 0;
-	//	}
-	//}
-
-	//void CPractice::LoadBitmap() {
-	//	pic.LoadBitmap(IDB_KING);
-	//}
-
-	//void CPractice::OnShow() {
-	//	pic.SetTopLeft(x, y);
-	//	pic.ShowBitmap();
-	//}
-
-	//CGameMap::CGameMap() : X(20), Y(40), MW(120), MH(100) {
-	//	int map_init[4][5] = { {0, 0, 1, 0, 0},
-	//						   {0, 1, 2, 1, 0},
-	//						   {1, 2, 1, 2, 1},
-	//						   {2, 1, 2, 1, 2} };
-	//	for (int i = 0; i < 4; i++) {
-	//		for (int j = 0; j < 5; j++) {
-	//			map[i][j] = map_init[i][j];
-	//		}
-	//	}
-
-	//	random_num = 0;
-	//	balls = NULL;
-	//}
-
-	//void CGameMap::LoadBitmap() {
-	//	blue.LoadBitmap(IDB_BLUE);
-	//	green.LoadBitmap(IDB_GREEN);
-	//}
-
-	//void CGameMap::OnShow() {
-	//	for (int i = 0; i < 5; i++) {
-	//		for (int j = 0; j < 4; j++) {
-	//			switch (map[j][i])
-	//			{
-	//			case 0:
-	//				break;
-	//			case 1:
-	//				blue.SetTopLeft(X + (MW*i), Y + (MH*j));
-	//				blue.ShowBitmap();
-	//				break;
-	//			case 2:
-	//				green.SetTopLeft(X + (MW*i), Y + (MH*j));
-	//				green.ShowBitmap();
-	//				break;
-	//			default:
-	//				ASSERT(0);
-	//			}
-	//		}
-	//	}
-
-	//	for (int i = 0; i < random_num; i++) {
-	//		balls[i].OnShow();
-	//	}
-	//}
-
 	//void CGameMap::InitializeBouncingBall(int ini_index, int row, int col) {
 	//	const int VELOCITY = 10;
 	//	const int BALL_PIC_HEIGHT = 15;
@@ -162,16 +93,16 @@ namespace game_framework {
 	//	if (nChar == KEY_SPACE)
 	//		RandomBouncingBall();
 	//}
-	//
-	//void CGameMap::OnMove()
+	
+	//void Map::OnMove()
 	//{
-	//	for (int i = 0; i < random_num; i++) {
-	//		balls[i].OnMove();
-	//	}
+	//	//for (int i = 0; i < random_num; i++) {
+	//	//	balls[i].OnMove();
+	//	//}
 	//}
 
-	//CGameMap::~CGameMap() {
-	//	delete[] balls;
+	//Map::~Map() {
+	//	//delete[] balls;
 	//}
 
 	//void CBouncingBall::SetXY(int x, int y) {
@@ -319,13 +250,13 @@ void CGameStateOver::OnShow()
 CGameStateRun::CGameStateRun(CGame *g)
 : CGameState(g), NUMBALLS(28)
 {
-	ball = new CBall [NUMBALLS];
+	//ball = new CBall [NUMBALLS];
 	picX = picY = 0;
 }
 
 CGameStateRun::~CGameStateRun()
 {
-	delete [] ball;
+	//delete [] ball;
 }
 
 void CGameStateRun::OnBeginState()
@@ -338,21 +269,28 @@ void CGameStateRun::OnBeginState()
 	const int HITS_LEFT_Y = 0;
 	const int BACKGROUND_X = 60;
 	const int ANIMATION_SPEED = 15;
-	for (int i = 0; i < NUMBALLS; i++) {				// 設定球的起始座標
-		int x_pos = i % BALL_PER_ROW;
-		int y_pos = i / BALL_PER_ROW;
-		ball[i].SetXY(x_pos * BALL_GAP + BALL_XY_OFFSET, y_pos * BALL_GAP + BALL_XY_OFFSET);
-		ball[i].SetDelay(x_pos);
-		ball[i].SetIsAlive(true);
-	}
-	eraser.Initialize();
+
+	//for (int i = 0; i < NUMBALLS; i++) {				// 設定球的起始座標
+	//	int x_pos = i % BALL_PER_ROW;
+	//	int y_pos = i / BALL_PER_ROW;
+	//	ball[i].SetXY(x_pos * BALL_GAP + BALL_XY_OFFSET, y_pos * BALL_GAP + BALL_XY_OFFSET);
+	//	ball[i].SetDelay(x_pos);
+	//	ball[i].SetIsAlive(true);
+	//}
+	//eraser.Initialize();
+
+	maps.Initialize();
+	king.Initialize();
+
 	background.SetTopLeft(BACKGROUND_X,0);				// 設定背景的起始座標
+	midground.SetTopLeft(0, 0);
+	
 	help.SetTopLeft(0, SIZE_Y - help.Height());			// 設定說明圖的起始座標
 	hits_left.SetInteger(HITS_LEFT);					// 指定剩下的撞擊數
 	hits_left.SetTopLeft(HITS_LEFT_X,HITS_LEFT_Y);		// 指定剩下撞擊數的座標
-	CAudio::Instance()->Play(AUDIO_LAKE, true);			// 撥放 WAVE
-	CAudio::Instance()->Play(AUDIO_DING, false);		// 撥放 WAVE
-	CAudio::Instance()->Play(AUDIO_NTUT, true);			// 撥放 MIDI
+	//CAudio::Instance()->Play(AUDIO_LAKE, false);			// 撥放 WAVE
+	//CAudio::Instance()->Play(AUDIO_DING, false);		// 撥放 WAVE
+	//CAudio::Instance()->Play(AUDIO_NTUT, false);			// 撥放 MIDI
 }
 
 void CGameStateRun::OnMove()							// 移動遊戲元素
@@ -370,34 +308,38 @@ void CGameStateRun::OnMove()							// 移動遊戲元素
 	//
 	// 移動球
 	//
-	int i;
-	for (i=0; i < NUMBALLS; i++)
-		ball[i].OnMove();
+	//int i;
+	//for (i=0; i < NUMBALLS; i++)
+	//	ball[i].OnMove();
+
 	//
 	// 移動擦子
 	//
-	eraser.OnMove();
+	//eraser.OnMove();
+
 	//
 	// 判斷擦子是否碰到球
 	//
-	for (i=0; i < NUMBALLS; i++)
-		if (ball[i].IsAlive() && ball[i].HitEraser(&eraser)) {
-			ball[i].SetIsAlive(false);
-			CAudio::Instance()->Play(AUDIO_DING);
-			hits_left.Add(-1);
-			//
-			// 若剩餘碰撞次數為0，則跳到Game Over狀態
-			//
-			if (hits_left.GetInteger() <= 0) {
-				CAudio::Instance()->Stop(AUDIO_LAKE);	// 停止 WAVE
-				CAudio::Instance()->Stop(AUDIO_NTUT);	// 停止 MIDI
-				GotoGameState(GAME_STATE_OVER);
-			}
-		}
+	//for (i = 0; i < NUMBALLS; i++) {
+	//	if (ball[i].IsAlive() && ball[i].HitEraser(&eraser)) {
+	//		ball[i].SetIsAlive(false);
+	//		CAudio::Instance()->Play(AUDIO_DING);
+	//		hits_left.Add(-1);
+	//		//
+	//		// 若剩餘碰撞次數為0，則跳到Game Over狀態
+	//		//
+	//		if (hits_left.GetInteger() <= 0) {
+	//			CAudio::Instance()->Stop(AUDIO_LAKE);	// 停止 WAVE
+	//			CAudio::Instance()->Stop(AUDIO_NTUT);	// 停止 MIDI
+	//			GotoGameState(GAME_STATE_OVER);
+	//		}
+	//	}
+	//}
+		
 	//
 	// 移動彈跳的球
 	//
-	bball.OnMove();
+	//bball.OnMove();
 
 	//practice.SetTopLeft(10, 10);
 	//kings.SetTopLeft(20, 20);
@@ -411,16 +353,19 @@ void CGameStateRun::OnMove()							// 移動遊戲元素
 	//practice.SetTopLeft(picX, picY);
 	//c_practice.OnMove();
 	//gamemap.OnMove();
+
+	king.OnMove(&map);
 	
 }
 
 void CGameStateRun::OnInit()  								// 遊戲的初值及圖形設定
 {
 
+	king.LoadBitmap();
+
 	//c_practice.LoadBitmap();
 	//gamemap.LoadBitmap();
 	//practice.LoadBitmap(IDB_KID);
-	//kings.LoadBitmap(IDB_KING, RGB(255,255,255));
 
 	//
 	// 當圖很多時，OnInit載入所有的圖要花很多時間。為避免玩遊戲的人
@@ -430,10 +375,11 @@ void CGameStateRun::OnInit()  								// 遊戲的初值及圖形設定
 	//
 	// 開始載入資料
 	//
-	int i;
-	for (i = 0; i < NUMBALLS; i++)	
-		ball[i].LoadBitmap();								// 載入第i個球的圖形
-	eraser.LoadBitmap();
+	//int i;
+	//for (i = 0; i < NUMBALLS; i++)	
+	//	ball[i].LoadBitmap();								// 載入第i個球的圖形
+	//eraser.LoadBitmap();
+	midground.LoadBitmap(IDB_MIDGROUND_1);
 	background.LoadBitmap(IDB_BACKGROUND);					// 載入背景的圖形
 	//
 	// 完成部分Loading動作，提高進度
@@ -446,7 +392,9 @@ void CGameStateRun::OnInit()  								// 遊戲的初值及圖形設定
 	help.LoadBitmap(IDB_HELP,RGB(255,255,255));				// 載入說明的圖形
 	corner.LoadBitmap(IDB_CORNER);							// 載入角落圖形
 	corner.ShowBitmap(background);							// 將corner貼到background
-	bball.LoadBitmap();										// 載入圖形
+
+
+	//bball.LoadBitmap();										// 載入圖形
 	hits_left.LoadBitmap();									
 	CAudio::Instance()->Load(AUDIO_DING,  "sounds\\ding.wav");	// 載入編號0的聲音ding.wav
 	CAudio::Instance()->Load(AUDIO_LAKE,  "sounds\\lake.mp3");	// 載入編號1的聲音lake.mp3
@@ -459,46 +407,50 @@ void CGameStateRun::OnInit()  								// 遊戲的初值及圖形設定
 
 void CGameStateRun::OnKeyDown(UINT nChar, UINT nRepCnt, UINT nFlags)
 {
-	const char KEY_LEFT  = 0x25; // keyboard左箭頭
-	const char KEY_UP    = 0x26; // keyboard上箭頭
-	const char KEY_RIGHT = 0x27; // keyboard右箭頭
-	const char KEY_DOWN  = 0x28; // keyboard下箭頭
+	const char KEY_SPACEBAR = 0x20; // keyboard空白鍵
+	const char KEY_LEFT		= 0x25; // keyboard左箭頭
+	const char KEY_UP		= 0x26; // keyboard上箭頭
+	const char KEY_RIGHT	= 0x27; // keyboard右箭頭
+	const char KEY_DOWN		= 0x28; // keyboard下箭頭
 	if (nChar == KEY_LEFT)
-		eraser.SetMovingLeft(true);
+		king.SetMovingLeft(true);
 	if (nChar == KEY_RIGHT)
-		eraser.SetMovingRight(true);
+		king.SetMovingRight(true);
 	if (nChar == KEY_UP)
-		eraser.SetMovingUp(true);
+		king.SetMovingUp(true);
 	if (nChar == KEY_DOWN)
-		eraser.SetMovingDown(true);
-
-	//gamemap.OnKeyDown(nChar);
+		king.SetMovingDown(true);
+	if (nChar == KEY_SPACEBAR)
+		king.SetJumping(true);
 }
 
 void CGameStateRun::OnKeyUp(UINT nChar, UINT nRepCnt, UINT nFlags)
 {
-	const char KEY_LEFT  = 0x25; // keyboard左箭頭
-	const char KEY_UP    = 0x26; // keyboard上箭頭
-	const char KEY_RIGHT = 0x27; // keyboard右箭頭
-	const char KEY_DOWN  = 0x28; // keyboard下箭頭
+	const char KEY_SPACEBAR = 0x20; // keyboard空白鍵
+	const char KEY_LEFT		= 0x25; // keyboard左箭頭
+	const char KEY_UP		= 0x26; // keyboard上箭頭
+	const char KEY_RIGHT	= 0x27; // keyboard右箭頭
+	const char KEY_DOWN		= 0x28; // keyboard下箭頭
 	if (nChar == KEY_LEFT)
-		eraser.SetMovingLeft(false);
+		king.SetMovingLeft(false);
 	if (nChar == KEY_RIGHT)
-		eraser.SetMovingRight(false);
+		king.SetMovingRight(false);
 	if (nChar == KEY_UP)
-		eraser.SetMovingUp(false);
+		king.SetMovingUp(false);
 	if (nChar == KEY_DOWN)
-		eraser.SetMovingDown(false);
+		king.SetMovingDown(false);
+	if (nChar == KEY_SPACEBAR)
+		king.SetJumping(false);
 }
 
 void CGameStateRun::OnLButtonDown(UINT nFlags, CPoint point)  // 處理滑鼠的動作
 {
-	eraser.SetMovingLeft(true);
+	//king.SetMovingLeft(true);
 }
 
 void CGameStateRun::OnLButtonUp(UINT nFlags, CPoint point)	// 處理滑鼠的動作
 {
-	eraser.SetMovingLeft(false);
+	//king.SetMovingLeft(false);
 }
 
 void CGameStateRun::OnMouseMove(UINT nFlags, CPoint point)	// 處理滑鼠的動作
@@ -508,12 +460,12 @@ void CGameStateRun::OnMouseMove(UINT nFlags, CPoint point)	// 處理滑鼠的動作
 
 void CGameStateRun::OnRButtonDown(UINT nFlags, CPoint point)  // 處理滑鼠的動作
 {
-	eraser.SetMovingRight(true);
+	//king.SetMovingRight(true);
 }
 
 void CGameStateRun::OnRButtonUp(UINT nFlags, CPoint point)	// 處理滑鼠的動作
 {
-	eraser.SetMovingRight(false);
+	//king.SetMovingRight(false);
 }
 
 void CGameStateRun::OnShow()
@@ -528,12 +480,15 @@ void CGameStateRun::OnShow()
 	//  貼上背景圖、撞擊數、球、擦子、彈跳的球
 	//
 	background.ShowBitmap();			// 貼上背景圖
+
+	midground.ShowBitmap();
+
 	help.ShowBitmap();					// 貼上說明圖
 	hits_left.ShowBitmap();
-	for (int i=0; i < NUMBALLS; i++)
-		ball[i].OnShow();				// 貼上第i號球
-	bball.OnShow();						// 貼上彈跳的球
-	eraser.OnShow();					// 貼上擦子
+	//for (int i=0; i < NUMBALLS; i++)
+	//	ball[i].OnShow();				// 貼上第i號球
+	//bball.OnShow();						// 貼上彈跳的球
+	//eraser.OnShow();					// 貼上擦子
 	//
 	//  貼上左上及右下角落的圖
 	//
@@ -546,6 +501,7 @@ void CGameStateRun::OnShow()
 	//kings.ShowBitmap();
 	//c_practice.OnShow();
 	
+	king.OnShow();
 
 }
 }

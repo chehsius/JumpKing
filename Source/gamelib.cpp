@@ -137,9 +137,10 @@ namespace game_framework {
 
 CAnimation::CAnimation(int count)
 {
-	delay_count = count;
+	delay_count = 10;
 	delay_counter = delay_count;
 	x = y = bmp_counter = 0;
+	isLeftMovingForward = isRightMovingForward = true;
 }
 
 void CAnimation::AddBitmap(int IDB_BITMAP, COLORREF colorkey) 
@@ -233,6 +234,79 @@ int CAnimation::Width()
 	GAME_ASSERT(bmp.size() != 0,"CAnimation: Bitmaps must be loaded first.");
 	return bmp_iter->Width();
 }
+
+void CAnimation::SetBitmapNumber(int i)
+{
+	GAME_ASSERT(bmp.size() != 0, "CAnimation: Bitmaps must be loaded first.");
+	bmp_counter = i;
+	bmp_iter = next(bmp.begin(), i);
+}
+
+void CAnimation::OnMoveLeft()
+{
+	GAME_ASSERT(bmp.size() != 0, "CAnimation: Bitmaps must be loaded first.");
+	if (--delay_counter <= 0) {
+		delay_counter = delay_count;
+		if (isLeftMovingForward) {
+			bmp_counter++;
+			bmp_iter++;
+			if (bmp_counter == 4) {
+				//bmp_counter--;
+				//bmp_iter--;
+				isLeftMovingForward = false;
+			}
+		}
+		else {
+			bmp_counter--;
+			bmp_iter--;
+			if (bmp_counter == 2) {
+				//bmp_counter++;
+				//bmp_iter++;
+				isLeftMovingForward = true;
+			}
+		}
+	}
+}
+
+void CAnimation::OnMoveRight()
+{
+	GAME_ASSERT(bmp.size() != 0, "CAnimation: Bitmaps must be loaded first.");
+	if (--delay_counter <= 0) {
+		delay_counter = delay_count;
+		if (isRightMovingForward) {
+			bmp_counter++;
+			bmp_iter++;
+			if (bmp_counter == 7) {
+				//bmp_counter--;
+				//bmp_iter--;
+				isRightMovingForward = false;
+			}
+		}
+		else {
+			bmp_counter--;
+			bmp_iter--;
+			if (bmp_counter == 5) {
+				//bmp_counter++;
+				//bmp_iter++;
+				isRightMovingForward = true;
+			}
+		}
+	}
+}
+
+//CAnimeKing::CAnimeKing(int count)
+//{
+//	delay_count = count;
+//	delay_counter = delay_count;
+//	x = y = bmp_counter = 0;
+//}
+//
+//void CAnimeKing::SetBitmapNumber(int i)
+//{
+//	bmp_counter = i;
+//	bmp_iter = next(bmp.begin(), i);
+//	//bmp_iter = &(bmp[i]);
+//}
 
 /////////////////////////////////////////////////////////////////////////////
 // CInteger: 這個class提供顯示整數圖形的能力

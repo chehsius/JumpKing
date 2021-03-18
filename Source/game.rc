@@ -13,7 +13,7 @@
 #undef APSTUDIO_READONLY_SYMBOLS
 
 /////////////////////////////////////////////////////////////////////////////
-// 中文 (繁體，台灣) resources
+// Chinese (Traditional, Taiwan) resources
 
 #if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_CHT)
 LANGUAGE LANG_CHINESE, SUBLANG_CHINESE_TRADITIONAL
@@ -112,30 +112,12 @@ IDB_LOADING             BITMAP                  "..\\res\\loading.bmp"
 
 IDC_GAMECURSOR          CURSOR                  "..\\res\\gamecurs.cur"
 
-#endif    // 中文 (繁體，台灣) resources
+#endif    // Chinese (Traditional, Taiwan) resources
 /////////////////////////////////////////////////////////////////////////////
 
 
 /////////////////////////////////////////////////////////////////////////////
-// 繁體中文 (香港特別行政區) resources
-
-#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_ZHH)
-LANGUAGE LANG_CHINESE, SUBLANG_CHINESE_HONGKONG
-#pragma code_page(950)
-
-/////////////////////////////////////////////////////////////////////////////
-//
-// Bitmap
-//
-
-IDB_KING                BITMAP                  "..\\res\\kingRightStand.bmp"
-
-#endif    // 繁體中文 (香港特別行政區) resources
-/////////////////////////////////////////////////////////////////////////////
-
-
-/////////////////////////////////////////////////////////////////////////////
-// 英文 (美國) resources
+// English (United States) resources
 
 #if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_ENU)
 LANGUAGE LANG_ENGLISH, SUBLANG_ENGLISH_US
@@ -148,9 +130,25 @@ LANGUAGE LANG_ENGLISH, SUBLANG_ENGLISH_US
 
 IDR_MAINFRAME           BITMAP                  "..\\res\\Toolbar.bmp"
 
-IDB_GREEN               BITMAP                  "..\\res\\bitmap5.bmp"
+IDB_KINGCHARGE          BITMAP                  "..\\res\\KingCharge.bmp"
 
-IDB_BLUE                BITMAP                  "..\\res\\bitmap6.bmp"
+IDB_KINGLEFTSTAND       BITMAP                  "..\\res\\kingLeftStand.bmp"
+
+IDB_KINGRIGHTSTAND      BITMAP                  "..\\res\\KingRightStand.bmp"
+
+IDB_MIDGROUND_1         BITMAP                  "..\\res\\Midground_1.bmp"
+
+IDB_KINGLEFTWALK_1      BITMAP                  "..\\res\\kingLeftWalk_1.bmp"
+
+IDB_KINGLEFTWALK_2      BITMAP                  "..\\res\\KingLeftWalk_2.bmp"
+
+IDB_KINGLEFTWALK_3      BITMAP                  "..\\res\\kingLeftWalk_3.bmp"
+
+IDB_KINGRIGHTWALK_1     BITMAP                  "..\\res\\kingRightWalk_1.bmp"
+
+IDB_KINGRIGHTWALK_2     BITMAP                  "..\\res\\kingRightWalk_2.bmp"
+
+IDB_KINGRIGHTWALK_3     BITMAP                  "..\\res\\kingRightWalk_3.bmp"
 
 
 /////////////////////////////////////////////////////////////////////////////
@@ -437,7 +435,7 @@ BEGIN
     ID_BUTTON_UNITTEST      "Perform Unit Test"
 END
 
-#endif    // 英文 (美國) resources
+#endif    // English (United States) resources
 /////////////////////////////////////////////////////////////////////////////
 
 

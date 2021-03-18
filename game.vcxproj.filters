@@ -132,6 +132,9 @@
     <ClCompile Include="Source\King.cpp">
       <Filter>MyGame</Filter>
     </ClCompile>
+    <ClCompile Include="Source\Map.cpp">
+      <Filter>MyGame</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\audio.h">
@@ -173,6 +176,9 @@
     <ClInclude Include="Source\King.h">
       <Filter>MyGame</Filter>
     </ClInclude>
+    <ClInclude Include="Source\Map.h">
+      <Filter>MyGame</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Source\game.rc">
@@ -199,7 +205,34 @@
     <Image Include="res\bitmap6.bmp">
       <Filter>Resource Files</Filter>
     </Image>
-    <Image Include="RES\king.bmp">
+    <Image Include="RES\KingCharge.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="RES\KingLeftStand.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="RES\KingLeftWalk_2.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="RES\KingRightStand.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="RES\kingRightWalk_2.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="RES\Midground_1.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="RES\kingLeftWalk_1.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="RES\kingLeftWalk_3.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="RES\kingRightWalk_1.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="RES\kingRightWalk_3.bmp">
       <Filter>Resource Files</Filter>
     </Image>
   </ItemGroup>
