@@ -8,7 +8,8 @@
 
 namespace game_framework {
 
-	Map::Map() : X(20), Y(40), MW(120), MH(100) {
+	Map::Map() : X(0), Y(0), MW(0), MH(0) {
+
 		int map_init[60][80] =
 		{ {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
 		  {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
@@ -73,26 +74,51 @@ namespace game_framework {
 
 		for (int row = 0; row < 60; row++) {
 			for (int col = 0; col < 80; col++) {
-				mapGrid[row][col] = map_init[row][col];
+				mapGrid[col][row] = map_init[row][col];
 			}
 		}
 	}
 
 	void Map::LoadBitmap() {
+		//if (Y!=0) {
+		//	midground.LoadBitmap(300);
+		//}
+		//else {
+		//	midground.LoadBitmap(301);
+		//}
+		//if (mapnum==300) {
+		//	test.LoadBitmap(IDB_BITMAP9);
+		//}
+
+		midground.LoadBitmap(mapnum);
+		test.LoadBitmap(IDB_BITMAP9);
+
+		//midground.LoadBitmap(21);
+
 	}
 
 	void Map::Initialize() {
+		midground.SetTopLeft(0, 0);
 
 	}
 
 	void Map::OnShow() {
-		for (int row = 0; row < 60; row++) {
-			for (int col = 0; col < 80; col++) {
+		midground.ShowBitmap();
+		//if (Y == 0) {
+		//	midground.LoadBitmap(301);
+		//}
+
+
+		for (int row = 0; row < 80; row++) {
+			for (int col = 0; col < 60; col++) {
 				switch (mapGrid[row][col])
 				{
 				case 0:
+					
 					break;
 				case 1:
+					test.SetTopLeft(10 * row, 10 * col);
+					test.ShowBitmap();
 					break;
 				case 2:
 					break;
@@ -102,7 +128,15 @@ namespace game_framework {
 				}
 			}
 		}
+
+
 	}
+
+	void Map::inMap() {
+		mapnum = mapnum + 1;
+		//LoadBitmap(mapnum);
+	}
+
 
 	bool Map::isEmpty(int mapX, int mapY) {
 		int gridX = mapX / 10;

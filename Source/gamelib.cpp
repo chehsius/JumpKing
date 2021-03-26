@@ -137,7 +137,7 @@ namespace game_framework {
 
 CAnimation::CAnimation(int count)
 {
-	delay_count = 10;
+	delay_count = 6;
 	delay_counter = delay_count;
 	x = y = bmp_counter = 0;
 	isLeftMovingForward = isRightMovingForward = true;

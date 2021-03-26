@@ -237,7 +237,7 @@ public:
 	void  SetBitmapNumber(int);
 	void  OnMoveLeft();
 	void  OnMoveRight();
-private:
+protected:
 	list<CMovingBitmap>				bmp;			// list of CMovingBitmap
 	list<CMovingBitmap>::iterator	bmp_iter;		// list iterator
 	int								bmp_counter;	// 儲存bmp_iter為第n個bmp

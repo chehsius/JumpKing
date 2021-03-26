@@ -1,6 +1,6 @@
 namespace game_framework {
 
-	class Map {
+	class Map : public CAnimation {
 	public:
 		Map();
 		void LoadBitmap();
@@ -8,10 +8,16 @@ namespace game_framework {
 		//void OnMove();
 		bool isEmpty(int, int);
 		//~Map();
+		int getX();
+		int getY();
 		void Initialize();
+		void inMap();
+
 	protected:
-		int mapGrid[60][80];
+		CMovingBitmap midground, test;
+		int mapGrid[80][60];
 		const int X, Y;
 		const int MW, MH;
+		int mapnum=300;
 	};
 }

@@ -22,6 +22,7 @@ namespace game_framework {
 		void SetJumping(bool flag);
 		void SetXY(int nx, int ny);		// 設定擦子左上角座標
 
+
 	protected:
 		CAnimation animation;		// 擦子的動畫
 		int x, y;					// 擦子左上角座標

@@ -279,11 +279,11 @@ void CGameStateRun::OnBeginState()
 	//}
 	//eraser.Initialize();
 
-	maps.Initialize();
+	//maps.Initialize();
 	king.Initialize();
+	map.Initialize();
 
 	background.SetTopLeft(BACKGROUND_X,0);				// 設定背景的起始座標
-	midground.SetTopLeft(0, 0);
 	
 	help.SetTopLeft(0, SIZE_Y - help.Height());			// 設定說明圖的起始座標
 	hits_left.SetInteger(HITS_LEFT);					// 指定剩下的撞擊數
@@ -360,8 +360,9 @@ void CGameStateRun::OnMove()							// 移動遊戲元素
 
 void CGameStateRun::OnInit()  								// 遊戲的初值及圖形設定
 {
-
+	
 	king.LoadBitmap();
+	map.LoadBitmap();
 
 	//c_practice.LoadBitmap();
 	//gamemap.LoadBitmap();
@@ -379,7 +380,7 @@ void CGameStateRun::OnInit()  								// 遊戲的初值及圖形設定
 	//for (i = 0; i < NUMBALLS; i++)	
 	//	ball[i].LoadBitmap();								// 載入第i個球的圖形
 	//eraser.LoadBitmap();
-	midground.LoadBitmap(IDB_MIDGROUND_1);
+	//midground.LoadBitmap(IDB_MIDGROUND_1);
 	background.LoadBitmap(IDB_BACKGROUND);					// 載入背景的圖形
 	//
 	// 完成部分Loading動作，提高進度
@@ -480,8 +481,8 @@ void CGameStateRun::OnShow()
 	//  貼上背景圖、撞擊數、球、擦子、彈跳的球
 	//
 	background.ShowBitmap();			// 貼上背景圖
+	map.OnShow();
 
-	midground.ShowBitmap();
 
 	help.ShowBitmap();					// 貼上說明圖
 	hits_left.ShowBitmap();

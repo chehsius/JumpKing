@@ -42,7 +42,6 @@
 #include "CBall.h"
 #include "CBouncingBall.h"
 #include "King.h"
-#include "Map.h"
 
 namespace game_framework {
 
@@ -131,7 +130,9 @@ namespace game_framework {
 		King			king;
 		//CMovingBitmap	kings;
 		//CPractice		c_practice;
-		list<Map>		maps;
+		//list<Map>		maps;
+		Map				map;
+		//Map				newmap;
 	};
 
 	/////////////////////////////////////////////////////////////////////////////

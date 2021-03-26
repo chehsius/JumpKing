@@ -35,8 +35,8 @@ namespace game_framework {
 
 	void King::Initialize()
 	{
-		const int X_POS = 280;
-		const int Y_POS = 400;
+		const int X_POS = 400;
+		const int Y_POS = 500;
 		x = X_POS;
 		y = Y_POS;
 		isMovingLeft = isMovingRight = isMovingUp = isMovingDown = isJumping = false;
@@ -60,19 +60,37 @@ namespace game_framework {
 		const int STEP_SIZE = 3;
 		
 		if (isMovingLeft) {
-			if (m->isEmpty(x - 1, y)) {
-				animation.OnMoveLeft();
+			//animation.OnMoveLeft();
+			if (m->isEmpty(x - STEP_SIZE, y)) {
 				x -= STEP_SIZE;
 			}
 		}
 		if (isMovingRight) {
-			animation.OnMoveRight();
-			x += STEP_SIZE;
+			//animation.OnMoveRight();
+			if (m->isEmpty(GetX2() + STEP_SIZE, y)) {
+				x += STEP_SIZE;
+			}
 		}
-		if (isMovingUp)
-			y -= STEP_SIZE;
-		if (isMovingDown)
-			y += STEP_SIZE;
+		if (isMovingUp) {
+			if (m->isEmpty(x, y - STEP_SIZE)) {
+				y -= STEP_SIZE;
+				if (y <= 10) {
+					m->inMap();
+				}
+			}
+			//if (y == 10) {
+			//	m->inMap();
+			//}
+		}
+		if (isMovingDown) {
+			if (m->isEmpty(x, GetY2() + STEP_SIZE)) {
+				y += STEP_SIZE;
+			}
+			//if (y == 80) {
+			//	m->inMap();
+			//}
+		}
+			
 		if (isJumping) {
 			y += 9;
 			isJumping = false;
