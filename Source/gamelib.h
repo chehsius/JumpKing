@@ -237,6 +237,7 @@ public:
 	void  SetBitmapNumber(int);
 	void  OnMoveLeft();
 	void  OnMoveRight();
+	void  OnJump();
 protected:
 	list<CMovingBitmap>				bmp;			// list of CMovingBitmap
 	list<CMovingBitmap>::iterator	bmp_iter;		// list iterator
@@ -244,22 +245,8 @@ protected:
 	int								delay_counter;	// 延緩動畫播放速度的計數器
 	int								delay_count;	// 動畫播放速度的常數
 	int								x, y;			// 動畫的座標
-	bool							isLeftMovingForward;
-	bool							isRightMovingForward;
+	bool							isMovingForward;
 };
-
-//class CAnimeKing : public CAnimation {
-//public:
-//	CAnimeKing(int=0);
-//	void SetBitmapNumber(int);
-//private:
-//	vector<CMovingBitmap>			bmp;			// list of CMovingBitmap
-//	vector<CMovingBitmap>::iterator	bmp_iter;		// list iterator
-//	int								bmp_counter;	// 儲存bmp_iter為第n個bmp
-//	int								delay_counter;	// 延緩動畫播放速度的計數器
-//	int								delay_count;	// 動畫播放速度的常數
-//	int								x, y;			// 動畫的座標
-//};
 
 /////////////////////////////////////////////////////////////////////////////
 // 這個class提供顯示整數圖形的能力

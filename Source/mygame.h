@@ -45,24 +45,24 @@
 
 namespace game_framework {
 
-	//class Map {
+	//class CGameMap {
 	//public:
-	//	Map();
+	//	CGameMap();
 	//	void LoadBitmap();
 	//	void OnShow();
 	//	void OnMove();
-	//	bool isEmpty(int, int);
-	//	//void OnKeyDown(UINT);
-	//	//void RandomBouncingBall();
-	//	//void InitializeBouncingBall(int, int, int);
-	//	~Map();
+	//	//bool isEmpty(int, int);
+	//	void OnKeyDown(UINT);
+	//	void RandomBouncingBall();
+	//	void InitializeBouncingBall(int, int, int);
+	//	~CGameMap();
 	//protected:
 	//	//CMovingBitmap blue, green;
-	//	int mapGrid[60][80];
+	//	int map[4][5];
 	//	const int X, Y;
 	//	const int MW, MH;
-	//	//CBouncingBall* balls;
-	//	//int random_num;
+	//	CBouncingBall* balls;
+	//	int random_num;
 	//};
 
 	/////////////////////////////////////////////////////////////////////////////
@@ -90,8 +90,8 @@ namespace game_framework {
 	protected:
 		void OnShow();									// 顯示這個狀態的遊戲畫面
 	private:
-		CMovingBitmap logo;								// csie的logo
-		//CMovingBitmap logo;
+		//CMovingBitmap logo;								// csie的logo
+		CMovingBitmap logo;
 	};
 
 	/////////////////////////////////////////////////////////////////////////////
@@ -118,21 +118,19 @@ namespace game_framework {
 	private:
 		const int		NUMBALLS;	// 球的總數
 		CMovingBitmap	background;	// 背景圖
-		CMovingBitmap midground;
+		CMovingBitmap	midground;
 		CMovingBitmap	help;		// 說明圖
 		CBall			*ball;		// 球的陣列
 		CMovingBitmap	corner;		// 角落圖
 		//CEraser			eraser;		// 拍子
 		CInteger		hits_left;	// 剩下的撞擊數
 		CBouncingBall   bball;		// 反覆彈跳的球
-		CMovingBitmap	practice;
+		//CMovingBitmap	practice;
 		int				picX, picY;
 		King			king;
-		//CMovingBitmap	kings;
-		//CPractice		c_practice;
 		//list<Map>		maps;
+		//CGameMap		gamemap;
 		Map				map;
-		//Map				newmap;
 	};
 
 	/////////////////////////////////////////////////////////////////////////////

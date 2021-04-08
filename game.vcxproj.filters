@@ -241,5 +241,38 @@
     <Image Include="RES\Midground_2.bmp">
       <Filter>Resource Files</Filter>
     </Image>
+    <Image Include="RES\title_logo.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="RES\KingLeftJump_2.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="RES\KingLeftJump_3.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="RES\KingLeftSlip.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="RES\KingRightJump_2.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="RES\KingRightJump_3.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="RES\KingRightSlip.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="RES\KingLeftFall.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="RES\KingLeftRise.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="RES\KingRightFall.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="RES\KingRightRise.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
   </ItemGroup>
 </Project>

@@ -338,16 +338,27 @@
     <Image Include="res\bitmap9.bmp" />
     <Image Include="res\bmp00001.bmp" />
     <Image Include="RES\KingCharge.bmp" />
+    <Image Include="RES\KingLeftFall.bmp" />
+    <Image Include="RES\KingLeftJump_2.bmp" />
+    <Image Include="RES\KingLeftJump_3.bmp" />
+    <Image Include="RES\KingLeftRise.bmp" />
+    <Image Include="RES\KingLeftSlip.bmp" />
     <Image Include="RES\KingLeftStand.bmp" />
     <Image Include="RES\kingLeftWalk_1.bmp" />
     <Image Include="RES\KingLeftWalk_2.bmp" />
     <Image Include="RES\kingLeftWalk_3.bmp" />
+    <Image Include="RES\KingRightFall.bmp" />
+    <Image Include="RES\KingRightJump_2.bmp" />
+    <Image Include="RES\KingRightJump_3.bmp" />
+    <Image Include="RES\KingRightRise.bmp" />
+    <Image Include="RES\KingRightSlip.bmp" />
     <Image Include="RES\KingRightStand.bmp" />
     <Image Include="RES\kingRightWalk_1.bmp" />
     <Image Include="RES\kingRightWalk_2.bmp" />
     <Image Include="RES\kingRightWalk_3.bmp" />
     <Image Include="RES\Midground_1.bmp" />
     <Image Include="RES\Midground_2.bmp" />
+    <Image Include="RES\title_logo.bmp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

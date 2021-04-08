@@ -137,10 +137,10 @@ namespace game_framework {
 
 CAnimation::CAnimation(int count)
 {
-	delay_count = 6;
+	delay_count = count;
 	delay_counter = delay_count;
 	x = y = bmp_counter = 0;
-	isLeftMovingForward = isRightMovingForward = true;
+	isMovingForward = true;
 }
 
 void CAnimation::AddBitmap(int IDB_BITMAP, COLORREF colorkey) 
@@ -244,69 +244,61 @@ void CAnimation::SetBitmapNumber(int i)
 
 void CAnimation::OnMoveLeft()
 {
-	GAME_ASSERT(bmp.size() != 0, "CAnimation: Bitmaps must be loaded first.");
 	if (--delay_counter <= 0) {
 		delay_counter = delay_count;
-		if (isLeftMovingForward) {
+		if (isMovingForward) {
 			bmp_counter++;
 			bmp_iter++;
-			if (bmp_counter == 4) {
-				//bmp_counter--;
-				//bmp_iter--;
-				isLeftMovingForward = false;
+			if (bmp_counter > 3) {
+				bmp_counter--;
+				bmp_iter--;
+				isMovingForward = false;
 			}
 		}
 		else {
 			bmp_counter--;
 			bmp_iter--;
-			if (bmp_counter == 2) {
-				//bmp_counter++;
-				//bmp_iter++;
-				isLeftMovingForward = true;
+			if (bmp_counter < 1) {
+				bmp_counter++;
+				bmp_iter++;
+				isMovingForward = true;
 			}
+			
 		}
 	}
 }
 
 void CAnimation::OnMoveRight()
 {
-	GAME_ASSERT(bmp.size() != 0, "CAnimation: Bitmaps must be loaded first.");
 	if (--delay_counter <= 0) {
 		delay_counter = delay_count;
-		if (isRightMovingForward) {
+		if (isMovingForward) {
 			bmp_counter++;
 			bmp_iter++;
-			if (bmp_counter == 7) {
-				//bmp_counter--;
-				//bmp_iter--;
-				isRightMovingForward = false;
+			if (bmp_counter > 10) {
+				bmp_counter--;
+				bmp_iter--;
+				isMovingForward = false;
 			}
 		}
 		else {
 			bmp_counter--;
 			bmp_iter--;
-			if (bmp_counter == 5) {
-				//bmp_counter++;
-				//bmp_iter++;
-				isRightMovingForward = true;
+			if (bmp_counter < 8) {
+				bmp_counter++;
+				bmp_iter++;
+				isMovingForward = true;
 			}
 		}
 	}
 }
 
-//CAnimeKing::CAnimeKing(int count)
-//{
-//	delay_count = count;
-//	delay_counter = delay_count;
-//	x = y = bmp_counter = 0;
-//}
-//
-//void CAnimeKing::SetBitmapNumber(int i)
-//{
-//	bmp_counter = i;
-//	bmp_iter = next(bmp.begin(), i);
-//	//bmp_iter = &(bmp[i]);
-//}
+void CAnimation::OnJump()
+{
+	if (--delay_counter <= 0) {
+		delay_counter = delay_count;
+	}
+}
 
 /////////////////////////////////////////////////////////////////////////////
 // CInteger: 這個class提供顯示整數圖形的能力

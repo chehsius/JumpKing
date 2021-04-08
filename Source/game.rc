@@ -13,7 +13,7 @@
 #undef APSTUDIO_READONLY_SYMBOLS
 
 /////////////////////////////////////////////////////////////////////////////
-// 中文 (繁體，台灣) resources
+// Chinese (Traditional, Taiwan) resources
 
 #if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_CHT)
 LANGUAGE LANG_CHINESE, SUBLANG_CHINESE_TRADITIONAL
@@ -66,8 +66,6 @@ IDB_BALL                BITMAP                  "..\\res\\ball.bmp"
 
 IDB_ERASER1             BITMAP                  "..\\res\\eraser1.bmp"
 
-IDB_BACKGROUND          BITMAP                  "..\\res\\ntutcsie.bmp"
-
 IDB_CORNER              BITMAP                  "..\\res\\corner.bmp"
 
 IDB_0                   BITMAP                  "..\\res\\bmp0.bmp"
@@ -112,12 +110,12 @@ IDB_LOADING             BITMAP                  "..\\res\\loading.bmp"
 
 IDC_GAMECURSOR          CURSOR                  "..\\res\\gamecurs.cur"
 
-#endif    // 中文 (繁體，台灣) resources
+#endif    // Chinese (Traditional, Taiwan) resources
 /////////////////////////////////////////////////////////////////////////////
 
 
 /////////////////////////////////////////////////////////////////////////////
-// 繁體中文 (香港特別行政區) resources
+// Chinese (Traditional, Hong Kong SAR) resources
 
 #if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_ZHH)
 LANGUAGE LANG_CHINESE, SUBLANG_CHINESE_HONGKONG
@@ -128,16 +126,16 @@ LANGUAGE LANG_CHINESE, SUBLANG_CHINESE_HONGKONG
 // Bitmap
 //
 
-IDB_MIDGROUND_2         BITMAP                  "C:\\Users\\user\\Desktop\\JumpKing-master\\JumpKing\\RES\\Midground_2.bmp"
+IDB_MIDGROUND_2         BITMAP                  "..\\res\\Midground_2.bmp"
 
 IDB_BITMAP9             BITMAP                  "..\\res\\bitmap9.bmp"
 
-#endif    // 繁體中文 (香港特別行政區) resources
+#endif    // Chinese (Traditional, Hong Kong SAR) resources
 /////////////////////////////////////////////////////////////////////////////
 
 
 /////////////////////////////////////////////////////////////////////////////
-// 英文 (美國) resources
+// English (United States) resources
 
 #if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_ENU)
 LANGUAGE LANG_ENGLISH, SUBLANG_ENGLISH_US
@@ -152,23 +150,37 @@ IDR_MAINFRAME           BITMAP                  "..\\res\\Toolbar.bmp"
 
 IDB_KINGCHARGE          BITMAP                  "..\\res\\KingCharge.bmp"
 
-IDB_KINGLEFTSTAND       BITMAP                  "..\\res\\kingLeftStand.bmp"
+IDB_KINGLEFTSTAND       BITMAP                  "..\\res\\KingLeftStand.bmp"
 
 IDB_KINGRIGHTSTAND      BITMAP                  "..\\res\\KingRightStand.bmp"
 
 IDB_MIDGROUND_1         BITMAP                  "..\\res\\Midground_1.bmp"
 
-IDB_KINGLEFTWALK_1      BITMAP                  "..\\res\\kingLeftWalk_1.bmp"
+IDB_KINGLEFTWALK_1      BITMAP                  "..\\res\\KingLeftWalk_1.bmp"
 
 IDB_KINGLEFTWALK_2      BITMAP                  "..\\res\\KingLeftWalk_2.bmp"
 
-IDB_KINGLEFTWALK_3      BITMAP                  "..\\res\\kingLeftWalk_3.bmp"
+IDB_KINGLEFTWALK_3      BITMAP                  "..\\res\\KingLeftWalk_3.bmp"
 
-IDB_KINGRIGHTWALK_1     BITMAP                  "..\\res\\kingRightWalk_1.bmp"
+IDB_KINGRIGHTWALK_1     BITMAP                  "..\\res\\KingRightWalk_1.bmp"
 
-IDB_KINGRIGHTWALK_2     BITMAP                  "..\\res\\kingRightWalk_2.bmp"
+IDB_KINGRIGHTWALK_2     BITMAP                  "..\\res\\KingRightWalk_2.bmp"
 
-IDB_KINGRIGHTWALK_3     BITMAP                  "..\\res\\kingRightWalk_3.bmp"
+IDB_KINGRIGHTWALK_3     BITMAP                  "..\\res\\KingRightWalk_3.bmp"
+
+IDB_TITLE_LOGO          BITMAP                  "C:\\Users\\chehs\\Desktop\\JumpKing\\RES\\title_logo.bmp"
+
+IDB_KINGLEFTSLIP        BITMAP                  "C:\\Users\\chehs\\Desktop\\JumpKing\\RES\\KingLeftSlip.bmp"
+
+IDB_KINGRIGHTSLIP       BITMAP                  "C:\\Users\\chehs\\Desktop\\JumpKing\\RES\\KingRightSlip.bmp"
+
+IDB_KINGLEFTFALL        BITMAP                  "C:\\Users\\chehs\\Desktop\\JumpKing\\RES\\KingLeftFall.bmp"
+
+IDB_KINGLEFTRISE        BITMAP                  "C:\\Users\\chehs\\Desktop\\JumpKing\\RES\\KingLeftRise.bmp"
+
+IDB_KINGRIGHTFALL       BITMAP                  "C:\\Users\\chehs\\Desktop\\JumpKing\\RES\\KingRightFall.bmp"
+
+IDB_KINGRIGHTRISE       BITMAP                  "C:\\Users\\chehs\\Desktop\\JumpKing\\RES\\KingRightRise.bmp"
 
 
 /////////////////////////////////////////////////////////////////////////////
@@ -455,7 +467,7 @@ BEGIN
     ID_BUTTON_UNITTEST      "Perform Unit Test"
 END
 
-#endif    // 英文 (美國) resources
+#endif    // English (United States) resources
 /////////////////////////////////////////////////////////////////////////////
 
 

@@ -5,9 +5,7 @@ namespace game_framework {
 		Map();
 		void LoadBitmap();
 		void OnShow();
-		//void OnMove();
 		bool isEmpty(int, int);
-		//~Map();
 		int getX();
 		int getY();
 		void Initialize();

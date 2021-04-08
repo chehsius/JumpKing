@@ -1,6 +1,6 @@
 //{{NO_DEPENDENCIES}}
-// Microsoft Visual C++ 產生的 Include 檔案。
-// 由 game.rc 使用
+// Microsoft Visual C++ generated include file.
+// Used by game.rc
 //
 #define IDD_ABOUTBOX                    100
 #define IDP_SOCKETS_INIT_FAILED         104
@@ -10,7 +10,6 @@
 #define IDB_RACKET                      131
 #define IDB_ERASER1                     131
 #define IDB_BITMAP1                     132
-#define IDB_BACKGROUND                  132
 #define IDB_CORNER                      133
 #define IDB_BALL1                       134
 #define IDB_BALL2                       135
@@ -53,6 +52,14 @@
 #define IDB_BITMAP8                     219
 #define IDB_KINGRIGHTWALK_3             219
 #define IDB_BITMAP9                     223
+#define IDB_TITLE_LOGO                  224
+#define IDB_KINGLEFTSLIP                227
+#define IDB_KINGRIGHTSLIP               230
+#define IDB_KINGLEFTFALL                231
+#define IDB_KINGLEFTRISE                232
+#define IDB_KINGRIGHTFALL               233
+#define IDB_BITMAP13                    234
+#define IDB_KINGRIGHTRISE               234
 #define IDB_MIDGROUND_1                 300
 #define IDB_MIDGROUND_2                 301
 #define IDC_README                      1001
@@ -67,7 +74,7 @@
 #ifdef APSTUDIO_INVOKED
 #ifndef APSTUDIO_READONLY_SYMBOLS
 #define _APS_3D_CONTROLS                     1
-#define _APS_NEXT_RESOURCE_VALUE        224
+#define _APS_NEXT_RESOURCE_VALUE        235
 #define _APS_NEXT_COMMAND_VALUE         32776
 #define _APS_NEXT_CONTROL_VALUE         1003
 #define _APS_NEXT_SYMED_VALUE           101

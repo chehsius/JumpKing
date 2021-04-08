@@ -6,31 +6,36 @@ namespace game_framework {
 	{
 	public:
 		King();
-		int  GetX1();					// 擦子左上角 x 座標
-		int  GetY1();					// 擦子左上角 y 座標
-		int  GetX2();					// 擦子右下角 x 座標
-		int  GetY2();					// 擦子右下角 y 座標
-		void Initialize();				// 設定擦子為初始值
-		void LoadBitmap();				// 載入圖形
-		void OnMove(Map *m);			// 移動擦子
-		//void OnMove();
-		void OnShow();					// 將擦子圖形貼到畫面
-		void SetMovingDown(bool flag);	// 設定是否正在往下移動
-		void SetMovingLeft(bool flag);	// 設定是否正在往左移動
-		void SetMovingRight(bool flag); // 設定是否正在往右移動
-		void SetMovingUp(bool flag);	// 設定是否正在往上移動
-		void SetJumping(bool flag);
-		void SetXY(int nx, int ny);		// 設定擦子左上角座標
-
-
+		int  GetX1();
+		int  GetY1();
+		int  GetX2();
+		int  GetY2();
+		void Initialize();
+		void LoadBitmap();
+		void OnMove(Map *m);
+		void OnShow();
+		void SetMovingDown(bool flag);
+		void SetMovingLeft(bool flag);
+		void SetMovingRight(bool flag);
+		void SetMovingUp(bool flag);
+		void SetCharging(bool flag);
+		void SetXY(int nx, int ny);
+		void SetVelocity(int);
+		void SetFloor(int);
 	protected:
-		CAnimation animation;		// 擦子的動畫
-		int x, y;					// 擦子左上角座標
-		bool isMovingDown;			// 是否正在往下移動
-		bool isMovingLeft;			// 是否正在往左移動
-		bool isMovingRight;			// 是否正在往右移動
-		bool isMovingUp;			// 是否正在往上移動
-		bool isStanding;
-		bool isJumping;
+		CAnimation character;
+		//CAnimation leftCharacter;
+		//CAnimation rightCharacter;
+		int x, y;
+		int floor;
+		bool isMovingDown;
+		bool isMovingLeft;
+		bool isMovingRight;
+		bool isMovingUp;
+		bool isCharging;
+		bool rising;
+		bool isFacingLeft;
+		int initial_velocity;
+		int velocity;
 	};
 }

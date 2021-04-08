@@ -96,9 +96,9 @@ namespace game_framework {
 	
 	//void Map::OnMove()
 	//{
-	//	//for (int i = 0; i < random_num; i++) {
-	//	//	balls[i].OnMove();
-	//	//}
+	//	for (int i = 0; i < random_num; i++) {
+	//		balls[i].OnMove();
+	//	}
 	//}
 
 	//Map::~Map() {
@@ -139,7 +139,7 @@ void CGameStateInit::OnInit()
 	//
 	// 開始載入資料
 	//
-	logo.LoadBitmap(IDB_BACKGROUND);
+	logo.LoadBitmap(IDB_TITLE_LOGO);
 	Sleep(300);				// 放慢，以便看清楚進度，實際遊戲請刪除此Sleep
 	//
 	// 此OnInit動作會接到CGameStaterRun::OnInit()，所以進度還沒到100%
@@ -267,7 +267,7 @@ void CGameStateRun::OnBeginState()
 	const int HITS_LEFT = 10;
 	const int HITS_LEFT_X = 590;
 	const int HITS_LEFT_Y = 0;
-	const int BACKGROUND_X = 60;
+	//const int BACKGROUND_X = 60;
 	const int ANIMATION_SPEED = 15;
 
 	//for (int i = 0; i < NUMBALLS; i++) {				// 設定球的起始座標
@@ -283,7 +283,7 @@ void CGameStateRun::OnBeginState()
 	king.Initialize();
 	map.Initialize();
 
-	background.SetTopLeft(BACKGROUND_X,0);				// 設定背景的起始座標
+	//background.SetTopLeft(BACKGROUND_X,0);				// 設定背景的起始座標
 	
 	help.SetTopLeft(0, SIZE_Y - help.Height());			// 設定說明圖的起始座標
 	hits_left.SetInteger(HITS_LEFT);					// 指定剩下的撞擊數
@@ -302,9 +302,9 @@ void CGameStateRun::OnMove()							// 移動遊戲元素
 	//
 	// 移動背景圖的座標
 	//
-	if (background.Top() > SIZE_Y)
-		background.SetTopLeft(60 ,-background.Height());
-	background.SetTopLeft(background.Left(),background.Top()+1);
+	//if (background.Top() > SIZE_Y)
+	//	background.SetTopLeft(60 ,-background.Height());
+	//background.SetTopLeft(background.Left(),background.Top()+1);
 	//
 	// 移動球
 	//
@@ -355,12 +355,10 @@ void CGameStateRun::OnMove()							// 移動遊戲元素
 	//gamemap.OnMove();
 
 	king.OnMove(&map);
-	
 }
 
 void CGameStateRun::OnInit()  								// 遊戲的初值及圖形設定
 {
-	
 	king.LoadBitmap();
 	map.LoadBitmap();
 
@@ -381,7 +379,7 @@ void CGameStateRun::OnInit()  								// 遊戲的初值及圖形設定
 	//	ball[i].LoadBitmap();								// 載入第i個球的圖形
 	//eraser.LoadBitmap();
 	//midground.LoadBitmap(IDB_MIDGROUND_1);
-	background.LoadBitmap(IDB_BACKGROUND);					// 載入背景的圖形
+	//background.LoadBitmap(IDB_TITLE_LOGO);					// 載入背景的圖形
 	//
 	// 完成部分Loading動作，提高進度
 	//
@@ -392,7 +390,7 @@ void CGameStateRun::OnInit()  								// 遊戲的初值及圖形設定
 	//
 	help.LoadBitmap(IDB_HELP,RGB(255,255,255));				// 載入說明的圖形
 	corner.LoadBitmap(IDB_CORNER);							// 載入角落圖形
-	corner.ShowBitmap(background);							// 將corner貼到background
+	//corner.ShowBitmap(background);							// 將corner貼到background
 
 
 	//bball.LoadBitmap();										// 載入圖形
@@ -422,7 +420,7 @@ void CGameStateRun::OnKeyDown(UINT nChar, UINT nRepCnt, UINT nFlags)
 	if (nChar == KEY_DOWN)
 		king.SetMovingDown(true);
 	if (nChar == KEY_SPACEBAR)
-		king.SetJumping(true);
+		king.SetCharging(true);
 }
 
 void CGameStateRun::OnKeyUp(UINT nChar, UINT nRepCnt, UINT nFlags)
@@ -441,32 +439,27 @@ void CGameStateRun::OnKeyUp(UINT nChar, UINT nRepCnt, UINT nFlags)
 	if (nChar == KEY_DOWN)
 		king.SetMovingDown(false);
 	if (nChar == KEY_SPACEBAR)
-		king.SetJumping(false);
+		king.SetCharging(false);
 }
 
 void CGameStateRun::OnLButtonDown(UINT nFlags, CPoint point)  // 處理滑鼠的動作
 {
-	//king.SetMovingLeft(true);
 }
 
 void CGameStateRun::OnLButtonUp(UINT nFlags, CPoint point)	// 處理滑鼠的動作
 {
-	//king.SetMovingLeft(false);
 }
 
 void CGameStateRun::OnMouseMove(UINT nFlags, CPoint point)	// 處理滑鼠的動作
 {
-	// 沒事。如果需要處理滑鼠移動的話，寫code在這裡
 }
 
 void CGameStateRun::OnRButtonDown(UINT nFlags, CPoint point)  // 處理滑鼠的動作
 {
-	//king.SetMovingRight(true);
 }
 
 void CGameStateRun::OnRButtonUp(UINT nFlags, CPoint point)	// 處理滑鼠的動作
 {
-	//king.SetMovingRight(false);
 }
 
 void CGameStateRun::OnShow()
@@ -480,7 +473,7 @@ void CGameStateRun::OnShow()
 	//
 	//  貼上背景圖、撞擊數、球、擦子、彈跳的球
 	//
-	background.ShowBitmap();			// 貼上背景圖
+	//background.ShowBitmap();			// 貼上背景圖
 	map.OnShow();
 
 
