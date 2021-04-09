@@ -47,33 +47,17 @@ namespace game_framework {
 
 	void King::LoadBitmap()
 	{
-		int leftMovement[] = { IDB_KINGLEFTSTAND, IDB_KINGLEFTWALK_1, IDB_KINGLEFTWALK_2, IDB_KINGLEFTWALK_3, 
-							   IDB_KINGLEFTRISE, IDB_KINGLEFTFALL, IDB_KINGLEFTSLIP };
-		int rightMovement[] = { IDB_KINGRIGHTSTAND, IDB_KINGRIGHTWALK_1, IDB_KINGRIGHTWALK_2, IDB_KINGRIGHTWALK_3,
-								IDB_KINGRIGHTRISE, IDB_KINGRIGHTFALL, IDB_KINGRIGHTSLIP };
+		int leftAction[] = { IDB_LEFTSTAND, IDB_LEFTWALK1, IDB_LEFTWALK2, IDB_LEFTWALK3,
+							   IDB_LEFTRISE, IDB_LEFTFALL, IDB_LEFTSLIP };
+		int rightAction[] = { IDB_RIGHTSTAND, IDB_RIGHTWALK1, IDB_RIGHTWALK2, IDB_RIGHTWALK3,
+								IDB_RIGHTRISE, IDB_RIGHTFALL, IDB_RIGHTSLIP };
 		for (int i = 0; i < 7; i++) {
-			character.AddBitmap(leftMovement[i], RGB(255, 255, 255));
+			character.AddBitmap(leftAction[i], RGB(255, 255, 255));
 		}
 		for (int i = 0; i < 7; i++) {
-			character.AddBitmap(rightMovement[i], RGB(255, 255, 255));
+			character.AddBitmap(rightAction[i], RGB(255, 255, 255));
 		}
-		character.AddBitmap(IDB_KINGCHARGE, RGB(255, 255, 255));
-
-		//character.AddBitmap(IDB_KINGLEFTSTAND, RGB(255, 255, 255));
-		//character.AddBitmap(IDB_KINGLEFTWALK_1, RGB(255, 255, 255));
-		//character.AddBitmap(IDB_KINGLEFTWALK_2, RGB(255, 255, 255));
-		//character.AddBitmap(IDB_KINGLEFTWALK_3, RGB(255, 255, 255));
-		//character.AddBitmap(IDB_KINGLEFTRISE, RGB(255, 255, 255));
-		//character.AddBitmap(IDB_KINGLEFTFALL, RGB(255, 255, 255));
-		//character.AddBitmap(IDB_KINGLEFTSLIP, RGB(255, 255, 255));
-
-		//character.AddBitmap(IDB_KINGRIGHTSTAND, RGB(255, 255, 255));
-		//character.AddBitmap(IDB_KINGRIGHTWALK_1, RGB(255, 255, 255));
-		//character.AddBitmap(IDB_KINGRIGHTWALK_2, RGB(255, 255, 255));
-		//character.AddBitmap(IDB_KINGRIGHTWALK_3, RGB(255, 255, 255));
-		//character.AddBitmap(IDB_KINGRIGHTRISE, RGB(255, 255, 255));
-		//character.AddBitmap(IDB_KINGRIGHTFALL, RGB(255, 255, 255));
-		//character.AddBitmap(IDB_KINGRIGHTSLIP, RGB(255, 255, 255));
+		character.AddBitmap(IDB_CHARGE, RGB(255, 255, 255));
 	}
 
 	void King::OnMove(Map *m)

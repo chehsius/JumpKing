@@ -80,7 +80,7 @@ namespace game_framework {
 	}
 
 	void Map::LoadBitmap() {
-		midground.LoadBitmap(mapnum);
+		midground.LoadBitmap(IDB_MIDGROUND1);
 		test.LoadBitmap(IDB_BITMAP9);
 	}
 

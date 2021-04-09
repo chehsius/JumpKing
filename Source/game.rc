@@ -126,8 +126,6 @@ LANGUAGE LANG_CHINESE, SUBLANG_CHINESE_HONGKONG
 // Bitmap
 //
 
-IDB_MIDGROUND_2         BITMAP                  "..\\res\\Midground_2.bmp"
-
 IDB_BITMAP9             BITMAP                  "..\\res\\bitmap9.bmp"
 
 #endif    // Chinese (Traditional, Hong Kong SAR) resources
@@ -148,39 +146,237 @@ LANGUAGE LANG_ENGLISH, SUBLANG_ENGLISH_US
 
 IDR_MAINFRAME           BITMAP                  "..\\res\\Toolbar.bmp"
 
-IDB_KINGCHARGE          BITMAP                  "..\\res\\KingCharge.bmp"
+IDB_CHARGE              BITMAP                  "..\\res\\king\\charge.bmp"
 
-IDB_KINGLEFTSTAND       BITMAP                  "..\\res\\KingLeftStand.bmp"
+IDB_LEFTSTAND           BITMAP                  "..\\res\\king\\left_stand.bmp"
 
-IDB_KINGRIGHTSTAND      BITMAP                  "..\\res\\KingRightStand.bmp"
+IDB_RIGHTSTAND          BITMAP                  "..\\res\\king\\right_stand.bmp"
 
-IDB_MIDGROUND_1         BITMAP                  "..\\res\\Midground_1.bmp"
+IDB_MIDGROUND1          BITMAP                  "..\\res\\midground\\mg1.bmp"
 
-IDB_KINGLEFTWALK_1      BITMAP                  "..\\res\\KingLeftWalk_1.bmp"
+IDB_LEFTWALK1           BITMAP                  "..\\res\\king\\left_walk1.bmp"
 
-IDB_KINGLEFTWALK_2      BITMAP                  "..\\res\\KingLeftWalk_2.bmp"
+IDB_LEFTWALK2           BITMAP                  "..\\res\\king\\left_walk2.bmp"
 
-IDB_KINGLEFTWALK_3      BITMAP                  "..\\res\\KingLeftWalk_3.bmp"
+IDB_LEFTWALK3           BITMAP                  "..\\res\\king\\left_walk3.bmp"
 
-IDB_KINGRIGHTWALK_1     BITMAP                  "..\\res\\KingRightWalk_1.bmp"
+IDB_RIGHTWALK1          BITMAP                  "..\\res\\king\\right_walk1.bmp"
 
-IDB_KINGRIGHTWALK_2     BITMAP                  "..\\res\\KingRightWalk_2.bmp"
+IDB_RIGHTWALK2          BITMAP                  "..\\res\\king\\right_walk2.bmp"
 
-IDB_KINGRIGHTWALK_3     BITMAP                  "..\\res\\KingRightWalk_3.bmp"
+IDB_RIGHTWALK3          BITMAP                  "..\\res\\king\\right_walk3.bmp"
 
-IDB_TITLE_LOGO          BITMAP                  "C:\\Users\\chehs\\Desktop\\JumpKing\\RES\\title_logo.bmp"
+IDB_TITLE_LOGO          BITMAP                  "..\\res\\title_logo.bmp"
 
-IDB_KINGLEFTSLIP        BITMAP                  "C:\\Users\\chehs\\Desktop\\JumpKing\\RES\\KingLeftSlip.bmp"
+IDB_LEFTSLIP            BITMAP                  "..\\res\\king\\left_slip.bmp"
 
-IDB_KINGRIGHTSLIP       BITMAP                  "C:\\Users\\chehs\\Desktop\\JumpKing\\RES\\KingRightSlip.bmp"
+IDB_RIGHTSLIP           BITMAP                  "..\\res\\king\\right_slip.bmp"
 
-IDB_KINGLEFTFALL        BITMAP                  "C:\\Users\\chehs\\Desktop\\JumpKing\\RES\\KingLeftFall.bmp"
+IDB_LEFTFALL            BITMAP                  "..\\res\\king\\left_fall.bmp"
 
-IDB_KINGLEFTRISE        BITMAP                  "C:\\Users\\chehs\\Desktop\\JumpKing\\RES\\KingLeftRise.bmp"
+IDB_LEFTRISE            BITMAP                  "..\\res\\king\\left_rise.bmp"
 
-IDB_KINGRIGHTFALL       BITMAP                  "C:\\Users\\chehs\\Desktop\\JumpKing\\RES\\KingRightFall.bmp"
+IDB_RIGHTFALL           BITMAP                  "..\\res\\king\\right_fall.bmp"
 
-IDB_KINGRIGHTRISE       BITMAP                  "C:\\Users\\chehs\\Desktop\\JumpKing\\RES\\KingRightRise.bmp"
+IDB_RIGHTRISE           BITMAP                  "..\\res\\king\\right_rise.bmp"
+
+IDB_MIDGROUND2          BITMAP                  "C:\\Users\\chehs\\Desktop\\JumpKing\\RES\\midground\\mg2.bmp"
+
+IDB_MIDGROUND3          BITMAP                  "C:\\Users\\chehs\\Desktop\\JumpKing\\RES\\midground\\mg3.bmp"
+
+IDB_MIDGROUND4          BITMAP                  "C:\\Users\\chehs\\Desktop\\JumpKing\\RES\\midground\\mg4.bmp"
+
+IDB_MIDGROUND5          BITMAP                  "C:\\Users\\chehs\\Desktop\\JumpKing\\RES\\midground\\mg5.bmp"
+
+IDB_MIDGROUND6          BITMAP                  "C:\\Users\\chehs\\Desktop\\JumpKing\\RES\\midground\\mg6.bmp"
+
+IDB_MIDGROUND7          BITMAP                  "C:\\Users\\chehs\\Desktop\\JumpKing\\RES\\midground\\mg7.bmp"
+
+IDB_MIDGROUND8          BITMAP                  "C:\\Users\\chehs\\Desktop\\JumpKing\\RES\\midground\\mg8.bmp"
+
+IDB_MIDGROUND9          BITMAP                  "C:\\Users\\chehs\\Desktop\\JumpKing\\RES\\midground\\mg9.bmp"
+
+IDB_MIDGROUND10         BITMAP                  "C:\\Users\\chehs\\Desktop\\JumpKing\\RES\\midground\\mg10.bmp"
+
+IDB_MIDGROUND11         BITMAP                  "C:\\Users\\chehs\\Desktop\\JumpKing\\RES\\midground\\mg11.bmp"
+
+IDB_MIDGROUND12         BITMAP                  "C:\\Users\\chehs\\Desktop\\JumpKing\\RES\\midground\\mg12.bmp"
+
+IDB_MIDGROUND13         BITMAP                  "C:\\Users\\chehs\\Desktop\\JumpKing\\RES\\midground\\mg13.bmp"
+
+IDB_MIDGROUND14         BITMAP                  "C:\\Users\\chehs\\Desktop\\JumpKing\\RES\\midground\\mg14.bmp"
+
+IDB_MIDGROUND15         BITMAP                  "C:\\Users\\chehs\\Desktop\\JumpKing\\RES\\midground\\mg15.bmp"
+
+IDB_MIDGROUND16         BITMAP                  "C:\\Users\\chehs\\Desktop\\JumpKing\\RES\\midground\\mg16.bmp"
+
+IDB_MIDGROUND17         BITMAP                  "C:\\Users\\chehs\\Desktop\\JumpKing\\RES\\midground\\mg17.bmp"
+
+IDB_MIDGROUND18         BITMAP                  "C:\\Users\\chehs\\Desktop\\JumpKing\\RES\\midground\\mg18.bmp"
+
+IDB_MIDGROUND19         BITMAP                  "C:\\Users\\chehs\\Desktop\\JumpKing\\RES\\midground\\mg19.bmp"
+
+IDB_MIDGROUND20         BITMAP                  "C:\\Users\\chehs\\Desktop\\JumpKing\\RES\\midground\\mg20.bmp"
+
+IDB_MIDGROUND21         BITMAP                  "C:\\Users\\chehs\\Desktop\\JumpKing\\RES\\midground\\mg21.bmp"
+
+IDB_MIDGROUND22         BITMAP                  "C:\\Users\\chehs\\Desktop\\JumpKing\\RES\\midground\\mg22.bmp"
+
+IDB_MIDGROUND23         BITMAP                  "C:\\Users\\chehs\\Desktop\\JumpKing\\RES\\midground\\mg23.bmp"
+
+IDB_MIDGROUND24         BITMAP                  "C:\\Users\\chehs\\Desktop\\JumpKing\\RES\\midground\\mg24.bmp"
+
+IDB_MIDGROUND25         BITMAP                  "C:\\Users\\chehs\\Desktop\\JumpKing\\RES\\midground\\mg25.bmp"
+
+IDB_MIDGROUND26         BITMAP                  "C:\\Users\\chehs\\Desktop\\JumpKing\\RES\\midground\\mg26.bmp"
+
+IDB_MIDGROUND27         BITMAP                  "C:\\Users\\chehs\\Desktop\\JumpKing\\RES\\midground\\mg27.bmp"
+
+IDB_MIDGROUND28         BITMAP                  "C:\\Users\\chehs\\Desktop\\JumpKing\\RES\\midground\\mg28.bmp"
+
+IDB_MIDGROUND29         BITMAP                  "C:\\Users\\chehs\\Desktop\\JumpKing\\RES\\midground\\mg29.bmp"
+
+IDB_MIDGROUND30         BITMAP                  "C:\\Users\\chehs\\Desktop\\JumpKing\\RES\\midground\\mg30.bmp"
+
+IDB_MIDGROUND31         BITMAP                  "C:\\Users\\chehs\\Desktop\\JumpKing\\RES\\midground\\mg31.bmp"
+
+IDB_MIDGROUND32         BITMAP                  "C:\\Users\\chehs\\Desktop\\JumpKing\\RES\\midground\\mg32.bmp"
+
+IDB_MIDGROUND33         BITMAP                  "C:\\Users\\chehs\\Desktop\\JumpKing\\RES\\midground\\mg33.bmp"
+
+IDB_MIDGROUND34         BITMAP                  "C:\\Users\\chehs\\Desktop\\JumpKing\\RES\\midground\\mg34.bmp"
+
+IDB_MIDGROUND35         BITMAP                  "C:\\Users\\chehs\\Desktop\\JumpKing\\RES\\midground\\mg35.bmp"
+
+IDB_MIDGROUND36         BITMAP                  "C:\\Users\\chehs\\Desktop\\JumpKing\\RES\\midground\\mg36.bmp"
+
+IDB_MIDGROUND37         BITMAP                  "C:\\Users\\chehs\\Desktop\\JumpKing\\RES\\midground\\mg37.bmp"
+
+IDB_MIDGROUND38         BITMAP                  "C:\\Users\\chehs\\Desktop\\JumpKing\\RES\\midground\\mg38.bmp"
+
+IDB_MIDGROUND39         BITMAP                  "C:\\Users\\chehs\\Desktop\\JumpKing\\RES\\midground\\mg39.bmp"
+
+IDB_MIDGROUND40         BITMAP                  "C:\\Users\\chehs\\Desktop\\JumpKing\\RES\\midground\\mg40.bmp"
+
+IDB_MIDGROUND41         BITMAP                  "C:\\Users\\chehs\\Desktop\\JumpKing\\RES\\midground\\mg41.bmp"
+
+IDB_MIDGROUND42         BITMAP                  "C:\\Users\\chehs\\Desktop\\JumpKing\\RES\\midground\\mg42.bmp"
+
+IDB_MIDGROUND43         BITMAP                  "C:\\Users\\chehs\\Desktop\\JumpKing\\RES\\midground\\mg43.bmp"
+
+IDB_FOREGROUND1         BITMAP                  "C:\\Users\\chehs\\Desktop\\JumpKing\\RES\\foreground\\fg1.bmp"
+
+IDB_FOREGROUND2         BITMAP                  "C:\\Users\\chehs\\Desktop\\JumpKing\\RES\\foreground\\fg2.bmp"
+
+IDB_FOREGROUND3         BITMAP                  "C:\\Users\\chehs\\Desktop\\JumpKing\\RES\\foreground\\fg3.bmp"
+
+IDB_FOREGROUND4         BITMAP                  "C:\\Users\\chehs\\Desktop\\JumpKing\\RES\\foreground\\fg4.bmp"
+
+IDB_FOREGROUND5         BITMAP                  "C:\\Users\\chehs\\Desktop\\JumpKing\\RES\\foreground\\fg5.bmp"
+
+IDB_FOREGROUND6         BITMAP                  "C:\\Users\\chehs\\Desktop\\JumpKing\\RES\\foreground\\fg6.bmp"
+
+IDB_FOREGROUND9         BITMAP                  "C:\\Users\\chehs\\Desktop\\JumpKing\\RES\\foreground\\fg9.bmp"
+
+IDB_FOREGROUND10        BITMAP                  "C:\\Users\\chehs\\Desktop\\JumpKing\\RES\\foreground\\fg10.bmp"
+
+IDB_FOREGROUND16        BITMAP                  "C:\\Users\\chehs\\Desktop\\JumpKing\\RES\\foreground\\fg16.bmp"
+
+IDB_FOREGROUND17        BITMAP                  "C:\\Users\\chehs\\Desktop\\JumpKing\\RES\\foreground\\fg17.bmp"
+
+IDB_FOREGROUND18        BITMAP                  "C:\\Users\\chehs\\Desktop\\JumpKing\\RES\\foreground\\fg18.bmp"
+
+IDB_FOREGROUND21        BITMAP                  "C:\\Users\\chehs\\Desktop\\JumpKing\\RES\\foreground\\fg21.bmp"
+
+IDB_FOREGROUND22        BITMAP                  "C:\\Users\\chehs\\Desktop\\JumpKing\\RES\\foreground\\fg22.bmp"
+
+IDB_FOREGROUND25        BITMAP                  "C:\\Users\\chehs\\Desktop\\JumpKing\\RES\\foreground\\fg25.bmp"
+
+IDB_FOREGROUND26        BITMAP                  "C:\\Users\\chehs\\Desktop\\JumpKing\\RES\\foreground\\fg26.bmp"
+
+IDB_FOREGROUND27        BITMAP                  "C:\\Users\\chehs\\Desktop\\JumpKing\\RES\\foreground\\fg27.bmp"
+
+IDB_FOREGROUND28        BITMAP                  "C:\\Users\\chehs\\Desktop\\JumpKing\\RES\\foreground\\fg28.bmp"
+
+IDB_FOREGROUND29        BITMAP                  "C:\\Users\\chehs\\Desktop\\JumpKing\\RES\\foreground\\fg29.bmp"
+
+IDB_FOREGROUND30        BITMAP                  "C:\\Users\\chehs\\Desktop\\JumpKing\\RES\\foreground\\fg30.bmp"
+
+IDB_FOREGROUND31        BITMAP                  "C:\\Users\\chehs\\Desktop\\JumpKing\\RES\\foreground\\fg31.bmp"
+
+IDB_FOREGROUND32        BITMAP                  "C:\\Users\\chehs\\Desktop\\JumpKing\\RES\\foreground\\fg32.bmp"
+
+IDB_FOREGROUND36        BITMAP                  "C:\\Users\\chehs\\Desktop\\JumpKing\\RES\\foreground\\fg36.bmp"
+
+IDB_FOREGROUND37        BITMAP                  "C:\\Users\\chehs\\Desktop\\JumpKing\\RES\\foreground\\fg37.bmp"
+
+IDB_FOREGROUND38        BITMAP                  "C:\\Users\\chehs\\Desktop\\JumpKing\\RES\\foreground\\fg38.bmp"
+
+IDB_FOREGROUND39        BITMAP                  "C:\\Users\\chehs\\Desktop\\JumpKing\\RES\\foreground\\fg39.bmp"
+
+IDB_FOREGROUND40        BITMAP                  "C:\\Users\\chehs\\Desktop\\JumpKing\\RES\\foreground\\fg40.bmp"
+
+IDB_FOREGROUND43        BITMAP                  "C:\\Users\\chehs\\Desktop\\JumpKing\\RES\\foreground\\fg43.bmp"
+
+IDB_BACKGROUND4         BITMAP                  "C:\\Users\\chehs\\Desktop\\JumpKing\\RES\\background\\bg4.bmp"
+
+IDB_BACKGROUND5         BITMAP                  "C:\\Users\\chehs\\Desktop\\JumpKing\\RES\\background\\bg5.bmp"
+
+IDB_BACKGROUND6         BITMAP                  "C:\\Users\\chehs\\Desktop\\JumpKing\\RES\\background\\bg6.bmp"
+
+IDB_BACKGROUND14        BITMAP                  "C:\\Users\\chehs\\Desktop\\JumpKing\\RES\\background\\bg14.bmp"
+
+IDB_BACKGROUND15        BITMAP                  "C:\\Users\\chehs\\Desktop\\JumpKing\\RES\\background\\bg15.bmp"
+
+IDB_BACKGROUND16        BITMAP                  "C:\\Users\\chehs\\Desktop\\JumpKing\\RES\\background\\bg16.bmp"
+
+IDB_BACKGROUND17        BITMAP                  "C:\\Users\\chehs\\Desktop\\JumpKing\\RES\\background\\bg17.bmp"
+
+IDB_BACKGROUND18        BITMAP                  "C:\\Users\\chehs\\Desktop\\JumpKing\\RES\\background\\bg18.bmp"
+
+IDB_BACKGROUND19        BITMAP                  "C:\\Users\\chehs\\Desktop\\JumpKing\\RES\\background\\bg19.bmp"
+
+IDB_BACKGROUND20        BITMAP                  "C:\\Users\\chehs\\Desktop\\JumpKing\\RES\\background\\bg20.bmp"
+
+IDB_BACKGROUND21        BITMAP                  "C:\\Users\\chehs\\Desktop\\JumpKing\\RES\\background\\bg21.bmp"
+
+IDB_BACKGROUND22        BITMAP                  "C:\\Users\\chehs\\Desktop\\JumpKing\\RES\\background\\bg22.bmp"
+
+IDB_BACKGROUND23        BITMAP                  "C:\\Users\\chehs\\Desktop\\JumpKing\\RES\\background\\bg23.bmp"
+
+IDB_BACKGROUND24        BITMAP                  "C:\\Users\\chehs\\Desktop\\JumpKing\\RES\\background\\bg24.bmp"
+
+IDB_BACKGROUND25        BITMAP                  "C:\\Users\\chehs\\Desktop\\JumpKing\\RES\\background\\bg25.bmp"
+
+IDB_BACKGROUND26        BITMAP                  "C:\\Users\\chehs\\Desktop\\JumpKing\\RES\\background\\bg26.bmp"
+
+IDB_BACKGROUND27        BITMAP                  "C:\\Users\\chehs\\Desktop\\JumpKing\\RES\\background\\bg27.bmp"
+
+IDB_BACKGROUND28        BITMAP                  "C:\\Users\\chehs\\Desktop\\JumpKing\\RES\\background\\bg28.bmp"
+
+IDB_BACKGROUND29        BITMAP                  "C:\\Users\\chehs\\Desktop\\JumpKing\\RES\\background\\bg29.bmp"
+
+IDB_BACKGROUND30        BITMAP                  "C:\\Users\\chehs\\Desktop\\JumpKing\\RES\\background\\bg30.bmp"
+
+IDB_BACKGROUND31        BITMAP                  "C:\\Users\\chehs\\Desktop\\JumpKing\\RES\\background\\bg31.bmp"
+
+IDB_BACKGROUND32        BITMAP                  "C:\\Users\\chehs\\Desktop\\JumpKing\\RES\\background\\bg32.bmp"
+
+IDB_BACKGROUND36        BITMAP                  "C:\\Users\\chehs\\Desktop\\JumpKing\\RES\\background\\bg36.bmp"
+
+IDB_BACKGROUND37        BITMAP                  "C:\\Users\\chehs\\Desktop\\JumpKing\\RES\\background\\bg37.bmp"
+
+IDB_BACKGROUND38        BITMAP                  "C:\\Users\\chehs\\Desktop\\JumpKing\\RES\\background\\bg38.bmp"
+
+IDB_BACKGROUND39        BITMAP                  "C:\\Users\\chehs\\Desktop\\JumpKing\\RES\\background\\bg39.bmp"
+
+IDB_BACKGROUND40        BITMAP                  "C:\\Users\\chehs\\Desktop\\JumpKing\\RES\\background\\bg40.bmp"
+
+IDB_BACKGROUND41        BITMAP                  "C:\\Users\\chehs\\Desktop\\JumpKing\\RES\\background\\bg41.bmp"
+
+IDB_BACKGROUND42        BITMAP                  "C:\\Users\\chehs\\Desktop\\JumpKing\\RES\\background\\bg42.bmp"
+
+IDB_BACKGROUND43        BITMAP                  "C:\\Users\\chehs\\Desktop\\JumpKing\\RES\\background\\bg43.bmp"
 
 
 /////////////////////////////////////////////////////////////////////////////
