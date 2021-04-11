@@ -86,20 +86,36 @@ namespace game_framework {
 			if (isMovingUp) {
 				if (m->isEmpty(x, y - STEP_SIZE))
 					y -= STEP_SIZE;
+					if (y <= 1) {
+						m->inMap();
+						y = y + 573;
+					}
 			}
 			if (isMovingDown) {
 				if (m->isEmpty(x, GetY2() + STEP_SIZE))
 					y += STEP_SIZE;
+					if (y >= 575) {
+						m->deMap();
+						y = y - 574;
+					}
 			}
 			initial_velocity = 0;
 			if (rising) {
 				if (velocity > 0) {
 					y -= velocity;
 					velocity--;
+					if (y <= 1) {
+						m->inMap();
+						y = y + 573;
+					}
 				}
 				else {
 					rising = false;
 					velocity = 1;
+					//if (y <= 1) {
+					//	m->inMap();
+					//	y = y + 579;
+					//}
 				}
 			}
 			else {
@@ -107,11 +123,19 @@ namespace game_framework {
 					if (m->isEmpty(x, GetY2() + velocity)) {
 						y += velocity;
 						velocity++;
+						if (y >= 575) {
+							m->deMap();
+							y = y - 574;
+						}
 					}
 				}
 				else {
 					y = floor - 1;
 					velocity = initial_velocity;
+					//if (y >= 575) {
+					//	m->deMap();
+					//	y = y - 574;
+					//}
 				}
 			}
 		}
