@@ -66,7 +66,7 @@
 // 定義遊戲可設定的環境與條件
 /////////////////////////////////////////////////////////////////////////////
 
-#define SIZE_X				 800		// 設定遊戲畫面的解析度為640x480
+#define SIZE_X				 800		// 設定遊戲畫面的解析度為800x600
 #define SIZE_Y				 600		// 註：若不使用標準的解析度，則不能切換到全螢幕
 #define OPEN_AS_FULLSCREEN	 false		// 是否以全螢幕方式開啟遊戲
 #define SHOW_LOAD_PROGRESS   true		// 是否顯示loading(OnInit)的進度
@@ -82,6 +82,7 @@
 
 enum GAME_STATES {
 	GAME_STATE_INIT,
+	GAME_STATE_MENU,
 	GAME_STATE_RUN,
 	GAME_STATE_OVER
 };
@@ -276,6 +277,7 @@ private:
 
 class CGame;
 class CGameStateInit;
+class CGameStateMenu;
 class CGameStateRun;
 class CGameStateOver;
 
@@ -344,9 +346,9 @@ public:
 private:
 	bool			running;			// 遊戲是否正在進行中(未被Pause)
 	bool            suspended;			// 遊戲是否被suspended
-	const int		NUM_GAME_STATES;	// 遊戲的狀態數(3個狀態)
+	const int		NUM_GAME_STATES;	// 遊戲的狀態數(4個狀態)
 	CGameState		*gameState;			// pointer指向目前的遊戲狀態
-	CGameState		*gameStateTable[3];	// 遊戲狀態物件的pointer
+	CGameState		*gameStateTable[4];	// 遊戲狀態物件的pointer
 	static CGame	instance;			// 遊戲唯一的instance
 };
 

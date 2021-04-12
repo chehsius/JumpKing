@@ -619,5 +619,35 @@
     <Image Include="RES\background\bg43.bmp">
       <Filter>Resource Files</Filter>
     </Image>
+    <Image Include="RES\king\left_down.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="RES\king\right_down.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="RES\menu\press_space.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\menu\title_logo.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="RES\menu\press_space_blank.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="RES\menu\menu_frame.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="RES\menu\menu_extras.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="RES\menu\menu_newgame.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="RES\menu\menu_options.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="RES\menu\menu_quit.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
   </ItemGroup>
 </Project>
