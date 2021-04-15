@@ -649,5 +649,20 @@
     <Image Include="RES\menu\menu_quit.bmp">
       <Filter>Resource Files</Filter>
     </Image>
+    <Image Include="RES\menu\confirm.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="RES\menu\cursor.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="RES\menu\progress_saved.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="RES\menu\record.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="RES\menu\menu_continue.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
   </ItemGroup>
 </Project>

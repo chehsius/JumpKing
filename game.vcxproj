@@ -430,6 +430,9 @@
     <Image Include="res\king\right_walk1.bmp" />
     <Image Include="res\king\right_walk2.bmp" />
     <Image Include="res\king\right_walk3.bmp" />
+    <Image Include="RES\menu\confirm.bmp" />
+    <Image Include="RES\menu\cursor.bmp" />
+    <Image Include="RES\menu\menu_continue.bmp" />
     <Image Include="RES\menu\menu_extras.bmp" />
     <Image Include="RES\menu\menu_frame.bmp" />
     <Image Include="RES\menu\menu_newgame.bmp" />
@@ -437,6 +440,8 @@
     <Image Include="RES\menu\menu_quit.bmp" />
     <Image Include="RES\menu\press_space.bmp" />
     <Image Include="RES\menu\press_space_blank.bmp" />
+    <Image Include="RES\menu\progress_saved.bmp" />
+    <Image Include="RES\menu\record.bmp" />
     <Image Include="res\menu\title_logo.bmp" />
     <Image Include="res\midground\mg1.bmp" />
     <Image Include="RES\midground\mg10.bmp" />

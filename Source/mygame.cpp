@@ -135,7 +135,7 @@ void CGameStateInit::OnInit()
 	title_logo.LoadBitmap(IDB_TITLELOGO);
 	press_space.AddBitmap(IDB_PRESSSPACE);
 	press_space.AddBitmap(IDB_PRESSSPACE_BLANK);
-	title_logo.SetTopLeft((SIZE_X - title_logo.Width()) / 2, SIZE_Y / 8);
+	title_logo.SetTopLeft((SIZE_X - title_logo.Width()) / 2, SIZE_Y / 10);
 	press_space.SetTopLeft((SIZE_X - press_space.Width()) / 2, SIZE_Y / 2 + 30);
 	
 	//Sleep(300);				// 放慢，以便看清楚進度，實際遊戲請刪除此Sleep
@@ -150,6 +150,7 @@ void CGameStateInit::OnInit()
 void CGameStateInit::OnBeginState()
 {
 	press_space.SetDelayCount(15);
+	
 }
 
 void CGameStateInit::OnKeyDown(UINT nChar, UINT nRepCnt, UINT nFlags)
@@ -157,18 +158,19 @@ void CGameStateInit::OnKeyDown(UINT nChar, UINT nRepCnt, UINT nFlags)
 	const char KEY_ESC   = 0x27;
 	const char KEY_SPACE = 0x20;
 	if (nChar == KEY_SPACE) {
-		CAudio::Instance()->Play(PRESS_START, false);
+		CAudio::Instance()->Play(PRESS_START);
 		press_space.SetDelayCount(6);
-		for (int repeat = 0; repeat < 10; repeat++) {
-			press_space.OnMove();
-			press_space.OnShow();
-		}
+		//for (int repeat = 0; repeat < 100; repeat++) {
+		//	press_space.OnMove();
+		//	press_space.OnShow();
+		//	Sleep(100);
+		//}
 		GotoGameState(GAME_STATE_MENU);
 	}
-	else if (nChar == KEY_ESC) {								// Demo 關閉遊戲的方法
-		CAudio::Instance()->Stop(MENU_INTRO);
-		PostMessage(AfxGetMainWnd()->m_hWnd, WM_CLOSE, 0, 0);	// 關閉遊戲
-	}
+	//else if (nChar == KEY_ESC) {								// Demo 關閉遊戲的方法
+	//	CAudio::Instance()->Stop(MENU_INTRO);
+	//	PostMessage(AfxGetMainWnd()->m_hWnd, WM_CLOSE, 0, 0);	// 關閉遊戲
+	//}
 }
 
 void CGameStateInit::OnMove()
@@ -210,32 +212,139 @@ CGameStateMenu::CGameStateMenu(CGame *g)
 void CGameStateMenu::OnInit()
 {
 	title_logo.LoadBitmap(IDB_TITLELOGO);
+	cursor.LoadBitmap(IDB_CURSOR);
 	menu_frame.LoadBitmap(IDB_MENUFRAME);
-	menu_newgame.LoadBitmap(IDB_MENUNEWGAME);
-	menu_options.LoadBitmap(IDB_MENUOPTIONS);
-	menu_extras.LoadBitmap(IDB_MENUEXTRAS);
-	menu_quit.LoadBitmap(IDB_MENUQUIT);
-	title_logo.SetTopLeft((SIZE_X - title_logo.Width()) / 2, SIZE_Y / 8);
+
+	int action_figure[ACTION_AMOUNT] = { IDB_MENUCONTINUE, IDB_MENUNEWGAME, IDB_MENUOPTIONS, IDB_MENUEXTRAS, IDB_MENUQUIT };
+	for (int i = 0; i < ACTION_AMOUNT; i++) {
+		action[i].isSelected = false;
+		action[i].figure.LoadBitmap(action_figure[i]);
+	}
+	action[CONTINUE].isSelected = true;
+	record.LoadBitmap(IDB_RECORD, RGB(255, 255, 255));
+	progress_saved.LoadBitmap(IDB_PROGRESSSAVED);
+
+	title_logo.SetTopLeft((SIZE_X - title_logo.Width()) / 2, SIZE_Y / 10);
 	menu_frame.SetTopLeft((SIZE_X - title_logo.Width()) / 2 - 30, SIZE_Y / 2 - 15);
-	
+	updateCursorActionFigure();
+	record.SetTopLeft((SIZE_X - title_logo.Width()) + 220, SIZE_Y / 2 - 15);
+	progress_saved.SetTopLeft((SIZE_X - title_logo.Width()) + 150, SIZE_Y / 2 + 250);
+
+	CAudio::Instance()->Load(SELECT, "sounds\\select.wav");
 	CAudio::Instance()->Load(OPENING_THEME, "sounds\\opening_theme.wav");
+	CAudio::Instance()->Load(MENU_FAIL, "sounds\\menu_fail.wav");
 }
 
 void CGameStateMenu::OnBeginState()
 {
 }
 
+void CGameStateMenu::updateCursorActionFigure() {
+	for (int i = 0; i < ACTION_AMOUNT; i++) {
+		if (action[i].isSelected) {
+			cursor.SetTopLeft((SIZE_X - title_logo.Width()) / 2 - 15, SIZE_Y / 2 + 25 + 45 * i);
+			action[i].figure.SetTopLeft((SIZE_X - title_logo.Width()) / 2 + 5, SIZE_Y / 2 + 25 + 45 * i);
+		}
+		else {
+			action[i].figure.SetTopLeft((SIZE_X - title_logo.Width()) / 2 - 5, SIZE_Y / 2 + 25 + 45 * i);
+		}
+	}
+}
+
 void CGameStateMenu::OnKeyDown(UINT nChar, UINT nRepCnt, UINT nFlags)
 {
 	const char KEY_ESC   = 0x27;
 	const char KEY_SPACE = 0x20;
-	if (nChar == KEY_SPACE) {
-		CAudio::Instance()->Stop(MENU_INTRO);
-		CAudio::Instance()->Play(OPENING_THEME, false);
-		GotoGameState(GAME_STATE_RUN);							// 切換至GAME_STATE_RUN
+	const char KEY_UP	 = 0x26;
+	const char KEY_DOWN  = 0x28;
+
+	if (action[CONTINUE].isSelected) {
+		if (nChar == KEY_SPACE) {
+			//CAudio::Instance()->Stop(MENU_INTRO);
+			CAudio::Instance()->Play(SELECT);
+			//CAudio::Instance()->Play(OPENING_THEME);
+			//GotoGameState(GAME_STATE_RUN);							// 切換至GAME_STATE_RUN
+		}
+		else if (nChar == KEY_UP)
+			CAudio::Instance()->Play(MENU_FAIL);
+		else if (nChar == KEY_DOWN) {
+			CAudio::Instance()->Play(SELECT);
+			action[CONTINUE].isSelected = false;
+			action[NEW_GAME].isSelected = true;
+			updateCursorActionFigure();
+		}
 	}
-	else if (nChar == KEY_ESC) {
-		PostMessage(AfxGetMainWnd()->m_hWnd, WM_CLOSE, 0, 0);
+	else if (action[NEW_GAME].isSelected) {
+		if (nChar == KEY_SPACE) {
+			CAudio::Instance()->Stop(MENU_INTRO);
+			CAudio::Instance()->Play(SELECT);
+			CAudio::Instance()->Play(OPENING_THEME);
+			GotoGameState(GAME_STATE_RUN);							// 切換至GAME_STATE_RUN
+		}
+		//else if (nChar == KEY_UP)
+		//	CAudio::Instance()->Play(MENU_FAIL);
+		else if (nChar == KEY_UP) {
+			CAudio::Instance()->Play(SELECT);
+			action[NEW_GAME].isSelected = false;
+			action[CONTINUE].isSelected = true;
+			updateCursorActionFigure();
+		}
+		else if (nChar == KEY_DOWN) {
+			CAudio::Instance()->Play(SELECT);
+			action[NEW_GAME].isSelected = false;
+			action[OPTIONS].isSelected = true;
+			updateCursorActionFigure();
+		}
+	}
+	else if (action[OPTIONS].isSelected) {
+		if (nChar == KEY_SPACE) {
+			CAudio::Instance()->Play(SELECT);
+
+		}
+		else if (nChar == KEY_UP) {
+			CAudio::Instance()->Play(SELECT);
+			action[OPTIONS].isSelected = false;
+			action[NEW_GAME].isSelected = true;
+			updateCursorActionFigure();
+		}
+		else if (nChar == KEY_DOWN) {
+			CAudio::Instance()->Play(SELECT);
+			action[OPTIONS].isSelected = false;
+			action[EXTRAS].isSelected = true;
+			updateCursorActionFigure();
+		}
+	}
+	else if (action[EXTRAS].isSelected) {
+		if (nChar == KEY_SPACE) {
+			CAudio::Instance()->Play(SELECT);
+
+		}
+		else if (nChar == KEY_UP) {
+			CAudio::Instance()->Play(SELECT);
+			action[EXTRAS].isSelected = false;
+			action[OPTIONS].isSelected = true;
+			updateCursorActionFigure();
+		}
+		else if (nChar == KEY_DOWN) {
+			CAudio::Instance()->Play(SELECT);
+			action[EXTRAS].isSelected = false;
+			action[QUIT].isSelected = true;
+			updateCursorActionFigure();
+		}
+	}
+	else if (action[QUIT].isSelected) {
+		if (nChar == KEY_SPACE) {
+			CAudio::Instance()->Play(SELECT);
+
+		}
+		else if (nChar == KEY_UP) {
+			CAudio::Instance()->Play(SELECT);
+			action[QUIT].isSelected = false;
+			action[EXTRAS].isSelected = true;
+			updateCursorActionFigure();
+		}
+		else if (nChar == KEY_DOWN)
+			CAudio::Instance()->Play(MENU_FAIL);
 	}
 }
 
@@ -243,6 +352,12 @@ void CGameStateMenu::OnShow()
 {
 	title_logo.ShowBitmap();
 	menu_frame.ShowBitmap();
+	for (int i = 0; i < ACTION_AMOUNT; i++) {
+		action[i].figure.ShowBitmap();
+	}
+	cursor.ShowBitmap();
+	record.ShowBitmap();
+	progress_saved.ShowBitmap();
 }
 
 /////////////////////////////////////////////////////////////////////////////

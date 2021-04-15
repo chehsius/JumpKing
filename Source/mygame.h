@@ -54,6 +54,8 @@ namespace game_framework {
 		//AUDIO_NTUT				// 2
 		MENU_INTRO,
 		PRESS_START,
+		SELECT,
+		MENU_FAIL,
 		OPENING_THEME,
 	};
 
@@ -76,17 +78,41 @@ namespace game_framework {
 		CAnimation	  press_space;
 	};
 
+	enum ACTION_ID
+	{
+		CONTINUE,
+		NEW_GAME,
+		OPTIONS,
+		EXTRAS,
+		QUIT,
+		ACTION_AMOUNT = 5
+	};
+
+	struct MenuAction
+	{
+		bool isSelected;
+		CMovingBitmap figure;
+	};
+
 	class CGameStateMenu : public CGameState {
 	public:
 		CGameStateMenu(CGame *g);
 		void OnInit();  								// 遊戲的初值及圖形設定
 		void OnBeginState();							// 設定每次重玩所需的變數
 		void OnKeyDown(UINT, UINT, UINT); 				// 處理鍵盤Up的動作
+		void updateCursorActionFigure();
 	protected:
 		void OnShow();									// 顯示這個狀態的遊戲畫面
 	private:
+		//bool current_action[ACTION_AMOUNT];
+		MenuAction action[ACTION_AMOUNT];
 		CMovingBitmap title_logo;
-		CMovingBitmap menu_frame, menu_newgame, menu_options, menu_extras, menu_quit;
+		CMovingBitmap cursor;
+		CMovingBitmap menu_frame;
+		//CMovingBitmap menu_actions[ACTION_AMOUNT];
+		//CMovingBitmap menu_continue, menu_newgame, menu_options, menu_extras, menu_quit;
+		CMovingBitmap record;
+		CMovingBitmap progress_saved;
 	};
 
 	/////////////////////////////////////////////////////////////////////////////

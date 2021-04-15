@@ -67,7 +67,6 @@ namespace game_framework {
 			if ((isMovingLeft || isMovingRight) && init_velocityX < 12) {
 				init_velocityX++;
 			}
-<<<<<<< HEAD
 			if (init_velocityY > 21) {
 				charging = false;
 			}
@@ -97,95 +96,93 @@ namespace game_framework {
 						y += STEP_SIZE;
 				}
 				init_velocityY = init_velocityX = 0;
-=======
-			if (isMovingUp) {
-				if (m->isEmpty(x, y - STEP_SIZE))
-					y -= STEP_SIZE;
+				if (isMovingUp) {
+					if (m->isEmpty(x, y - STEP_SIZE))
+						y -= STEP_SIZE;
 					if (y <= 1) {
 						m->inMap();
 						y = y + 573;
 					}
-			}
-			if (isMovingDown) {
-				if (m->isEmpty(x, GetY2() + STEP_SIZE))
-					y += STEP_SIZE;
+				}
+				if (isMovingDown) {
+					if (m->isEmpty(x, GetY2() + STEP_SIZE))
+						y += STEP_SIZE;
 					if (y >= 575) {
 						m->deMap();
 						y = y - 574;
 					}
->>>>>>> ba1e239c85a30b38e3a584a85f3a5b1209669c6c
-			}
-			if (rising) {
-<<<<<<< HEAD
-				if (velocityY > 0) {
-					y -= velocityY;
-					velocityY--;
-					if (isMovingLeft) {
-						x -= velocityX;
-					}
-					if (isMovingRight) {
-						x += velocityX;
-=======
-				if (velocity > 0) {
-					y -= velocity;
-					velocity--;
-					if (y <= 1) {
-						m->inMap();
-						y = y + 573;
->>>>>>> ba1e239c85a30b38e3a584a85f3a5b1209669c6c
-					}
 				}
-				else {
-					rising = false;
-<<<<<<< HEAD
-					velocityY = 1;
-				}
-			}
-			else {
-				if (y < floor) {
-					if (m->isEmpty(x, GetY2() + velocityY)) {
-						y += velocityY;
-						velocityY++;
-						
-					}
-				}
-				else {
-					//floor = GetY2();
-					y = floor;
-					velocityY = init_velocityY;
-					velocityX = init_velocityX;
-					jumping = false;
-=======
-					velocity = 1;
-					//if (y <= 1) {
-					//	m->inMap();
-					//	y = y + 579;
-					//}
-				}
-			}
-			else {
-				if (y < floor - 1) {
-					if (m->isEmpty(x, GetY2() + velocity)) {
-						y += velocity;
-						velocity++;
-						if (y >= 575) {
-							m->deMap();
-							y = y - 574;
+				if (rising) {
+					if (velocityY > 0) {
+						y -= velocityY;
+						velocityY--;
+						if (isMovingLeft) {
+							x -= velocityX;
+						}
+						if (isMovingRight) {
+							x += velocityX;
+							//=======
+											//if (velocity > 0) {
+											//	y -= velocity;
+											//	velocity--;
+											//	if (y <= 1) {
+											//		m->inMap();
+											//		y = y + 573;
+							//>>>>>>> ba1e239c85a30b38e3a584a85f3a5b1209669c6c
+												//}
+											//}
+											//else {
+											//	rising = false;
+							//<<<<<<< HEAD
+											//	velocityY = 1;
+											//}
+						}
+						else {
+							if (y < floor) {
+								if (m->isEmpty(x, GetY2() + velocityY)) {
+									y += velocityY;
+									velocityY++;
+								}
+							}
+							else {
+								//floor = GetY2();
+								y = floor;
+								velocityY = init_velocityY;
+								velocityX = init_velocityX;
+								jumping = false;
+								//=======
+													//velocity = 1;
+													//if (y <= 1) {
+													//	m->inMap();
+													//	y = y + 579;
+													//}
+							}
 						}
 					}
 				}
-				else {
-					y = floor - 1;
-					velocity = initial_velocity;
+			}
+		}
+			//else {
+			//	if (y < floor - 1) {
+			//		if (m->isEmpty(x, GetY2() + velocity)) {
+			//			y += velocity;
+			//			velocity++;
+			//			if (y >= 575) {
+			//				m->deMap();
+			//				y = y - 574;
+			//			}
+			//		}
+			//	}
+			//	else {
+			//		y = floor - 1;
+			//		velocity = initial_velocity;
 					//if (y >= 575) {
 					//	m->deMap();
 					//	y = y - 574;
 					//}
->>>>>>> ba1e239c85a30b38e3a584a85f3a5b1209669c6c
-				}
-			}
-		}
-		
+//>>>>>>> ba1e239c85a30b38e3a584a85f3a5b1209669c6c
+				//}
+			//}
 	}
 
 	void King::SetMovingDown(bool flag)
