@@ -138,7 +138,6 @@ void CGameStateInit::OnInit()
 	title_logo.SetTopLeft((SIZE_X - title_logo.Width()) / 2, SIZE_Y / 10);
 	press_space.SetTopLeft((SIZE_X - press_space.Width()) / 2, SIZE_Y / 2 + 30);
 	
-	//Sleep(300);				// 放慢，以便看清楚進度，實際遊戲請刪除此Sleep
 	CAudio::Instance()->Load(MENU_INTRO, "sounds\\menu_intro.wav");
 	CAudio::Instance()->Load(PRESS_START, "sounds\\press_start.wav");
 	CAudio::Instance()->Play(MENU_INTRO, true);
@@ -150,21 +149,17 @@ void CGameStateInit::OnInit()
 void CGameStateInit::OnBeginState()
 {
 	press_space.SetDelayCount(15);
-	
 }
 
 void CGameStateInit::OnKeyDown(UINT nChar, UINT nRepCnt, UINT nFlags)
 {
 	const char KEY_ESC   = 0x27;
 	const char KEY_SPACE = 0x20;
+
 	if (nChar == KEY_SPACE) {
 		CAudio::Instance()->Play(PRESS_START);
-		press_space.SetDelayCount(6);
-		//for (int repeat = 0; repeat < 100; repeat++) {
-		//	press_space.OnMove();
-		//	press_space.OnShow();
-		//	Sleep(100);
-		//}
+		press_space.SetDelayCount(2);
+
 		GotoGameState(GAME_STATE_MENU);
 	}
 	//else if (nChar == KEY_ESC) {								// Demo 關閉遊戲的方法
@@ -221,12 +216,12 @@ void CGameStateMenu::OnInit()
 		action[i].figure.LoadBitmap(action_figure[i]);
 	}
 	action[CONTINUE].isSelected = true;
+	updateCursorActionFigure();
 	record.LoadBitmap(IDB_RECORD, RGB(255, 255, 255));
 	progress_saved.LoadBitmap(IDB_PROGRESSSAVED);
 
 	title_logo.SetTopLeft((SIZE_X - title_logo.Width()) / 2, SIZE_Y / 10);
 	menu_frame.SetTopLeft((SIZE_X - title_logo.Width()) / 2 - 30, SIZE_Y / 2 - 15);
-	updateCursorActionFigure();
 	record.SetTopLeft((SIZE_X - title_logo.Width()) + 220, SIZE_Y / 2 - 15);
 	progress_saved.SetTopLeft((SIZE_X - title_logo.Width()) + 150, SIZE_Y / 2 + 250);
 
@@ -258,8 +253,10 @@ void CGameStateMenu::OnKeyDown(UINT nChar, UINT nRepCnt, UINT nFlags)
 	const char KEY_UP	 = 0x26;
 	const char KEY_DOWN  = 0x28;
 
+
 	if (action[CONTINUE].isSelected) {
 		if (nChar == KEY_SPACE) {
+
 			//CAudio::Instance()->Stop(MENU_INTRO);
 			CAudio::Instance()->Play(SELECT);
 			//CAudio::Instance()->Play(OPENING_THEME);
@@ -391,7 +388,7 @@ void CGameStateOver::OnInit()
 	//
 	// 開始載入資料
 	//
-	Sleep(300);				// 放慢，以便看清楚進度，實際遊戲請刪除此Sleep
+	// Sleep(300);				// 放慢，以便看清楚進度，實際遊戲請刪除此Sleep
 	//
 	// 最終進度為100%
 	//
@@ -552,7 +549,7 @@ void CGameStateRun::OnInit()  								// 遊戲的初值及圖形設定
 	// 完成部分Loading動作，提高進度
 	//
 	ShowInitProgress(50);
-	Sleep(300); // 放慢，以便看清楚進度，實際遊戲請刪除此Sleep
+	// Sleep(300); // 放慢，以便看清楚進度，實際遊戲請刪除此Sleep
 	//
 	// 繼續載入其他資料
 	//

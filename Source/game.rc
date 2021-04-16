@@ -372,31 +372,31 @@ IDB_BACKGROUND42        BITMAP                  "..\\res\\background\\bg42.bmp"
 
 IDB_BACKGROUND43        BITMAP                  "..\\res\\background\\bg43.bmp"
 
-IDB_LEFTDOWN            BITMAP                  "C:\\Users\\chehs\\Desktop\\JumpKing\\RES\\king\\left_down.bmp"
+IDB_LEFTDOWN            BITMAP                  "..\\res\\king\\left_down.bmp"
 
-IDB_RIGHTDOWN           BITMAP                  "C:\\Users\\chehs\\Desktop\\JumpKing\\RES\\king\\right_down.bmp"
+IDB_RIGHTDOWN           BITMAP                  "..\\res\\king\\right_down.bmp"
 
-IDB_PRESSSPACE          BITMAP                  "C:\\Users\\chehs\\Desktop\\JumpKing\\RES\\menu\\press_space.bmp"
+IDB_PRESSSPACE          BITMAP                  "..\\res\\menu\\press_space.bmp"
 
-IDB_PRESSSPACE_BLANK    BITMAP                  "C:\\Users\\chehs\\Desktop\\JumpKing\\RES\\menu\\press_space_blank.bmp"
+IDB_PRESSSPACE_BLANK    BITMAP                  "..\\res\\menu\\press_space_blank.bmp"
 
-IDB_MENUFRAME           BITMAP                  "C:\\Users\\chehs\\Desktop\\JumpKing\\RES\\menu\\menu_frame.bmp"
+IDB_MENUFRAME           BITMAP                  "..\\res\\menu\\menu_frame.bmp"
 
-IDB_MENUEXTRAS          BITMAP                  "C:\\Users\\chehs\\Desktop\\JumpKing\\RES\\menu\\menu_extras.bmp"
+IDB_MENUEXTRAS          BITMAP                  "..\\res\\menu\\menu_extras.bmp"
 
-IDB_MENUNEWGAME         BITMAP                  "C:\\Users\\chehs\\Desktop\\JumpKing\\RES\\menu\\menu_newgame.bmp"
+IDB_MENUNEWGAME         BITMAP                  "..\\res\\menu\\menu_newgame.bmp"
 
-IDB_MENUOPTIONS         BITMAP                  "C:\\Users\\chehs\\Desktop\\JumpKing\\RES\\menu\\menu_options.bmp"
+IDB_MENUOPTIONS         BITMAP                  "..\\res\\menu\\menu_options.bmp"
 
-IDB_MENUQUIT            BITMAP                  "C:\\Users\\chehs\\Desktop\\JumpKing\\RES\\menu\\menu_quit.bmp"
+IDB_MENUQUIT            BITMAP                  "..\\res\\menu\\menu_quit.bmp"
 
-IDB_CURSOR              BITMAP                  "C:\\Users\\chehs\\Desktop\\JumpKing\\RES\\menu\\cursor.bmp"
+IDB_CURSOR              BITMAP                  "..\\res\\menu\\cursor.bmp"
 
-IDB_PROGRESSSAVED       BITMAP                  "C:\\Users\\chehs\\Desktop\\JumpKing\\RES\\menu\\progress_saved.bmp"
+IDB_PROGRESSSAVED       BITMAP                  "..\\res\\menu\\progress_saved.bmp"
 
-IDB_RECORD              BITMAP                  "C:\\Users\\chehs\\Desktop\\JumpKing\\RES\\menu\\record.bmp"
+IDB_RECORD              BITMAP                  "..\\res\\menu\\record.bmp"
 
-IDB_MENUCONTINUE        BITMAP                  "C:\\Users\\chehs\\Desktop\\JumpKing\\RES\\menu\\menu_continue.bmp"
+IDB_MENUCONTINUE        BITMAP                  "..\\res\\menu\\menu_continue.bmp"
 
 
 /////////////////////////////////////////////////////////////////////////////

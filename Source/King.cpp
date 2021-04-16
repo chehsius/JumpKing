@@ -121,19 +121,16 @@ namespace game_framework {
 						}
 						if (isMovingRight) {
 							x += velocityX;
-							//=======
 											//if (velocity > 0) {
 											//	y -= velocity;
 											//	velocity--;
 											//	if (y <= 1) {
 											//		m->inMap();
 											//		y = y + 573;
-							//>>>>>>> ba1e239c85a30b38e3a584a85f3a5b1209669c6c
 												//}
 											//}
 											//else {
 											//	rising = false;
-							//<<<<<<< HEAD
 											//	velocityY = 1;
 											//}
 						}
@@ -150,7 +147,6 @@ namespace game_framework {
 								velocityY = init_velocityY;
 								velocityX = init_velocityX;
 								jumping = false;
-								//=======
 													//velocity = 1;
 													//if (y <= 1) {
 													//	m->inMap();
@@ -180,7 +176,6 @@ namespace game_framework {
 					//	m->deMap();
 					//	y = y - 574;
 					//}
-//>>>>>>> ba1e239c85a30b38e3a584a85f3a5b1209669c6c
 				//}
 			//}
 	}

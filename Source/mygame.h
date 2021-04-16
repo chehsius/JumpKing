@@ -49,9 +49,6 @@ namespace game_framework {
 	/////////////////////////////////////////////////////////////////////////////
 
 	enum AUDIO_ID {				// 定義各種音效的編號
-		//AUDIO_DING,				// 0
-		//AUDIO_LAKE,				// 1
-		//AUDIO_NTUT				// 2
 		MENU_INTRO,
 		PRESS_START,
 		SELECT,
@@ -76,6 +73,7 @@ namespace game_framework {
 	private:
 		CMovingBitmap title_logo;
 		CAnimation	  press_space;
+		
 	};
 
 	enum ACTION_ID
@@ -86,6 +84,36 @@ namespace game_framework {
 		EXTRAS,
 		QUIT,
 		ACTION_AMOUNT = 5
+	};
+
+	enum NEW_GAME_ID
+	{
+		NO,
+		DELETE_SAVE
+	};
+
+	enum OPTIONS_ID
+	{
+		GRAPHICS,
+		CONTROLS,
+		AUDIO,
+		OPTIONS_CANCEL,
+		OPTIONS_AMOUNT = 4
+	};
+
+	enum GRAPHICS_ID
+	{
+		FULLSCREEN,
+		GRAPHICS_CANCEL
+	};
+
+	enum EXTRAS_ID
+	{
+		CREDITS,
+		ATTRIBUTION,
+		TOTAL_STATS,
+		EXTRAS_CANCEL,
+		EXTRAS_AMOUNT = 4
 	};
 
 	struct MenuAction
@@ -101,16 +129,15 @@ namespace game_framework {
 		void OnBeginState();							// 設定每次重玩所需的變數
 		void OnKeyDown(UINT, UINT, UINT); 				// 處理鍵盤Up的動作
 		void updateCursorActionFigure();
+		void handleMenuContinue();
 	protected:
 		void OnShow();									// 顯示這個狀態的遊戲畫面
 	private:
-		//bool current_action[ACTION_AMOUNT];
 		MenuAction action[ACTION_AMOUNT];
+		MenuAction extras[EXTRAS_AMOUNT];
 		CMovingBitmap title_logo;
 		CMovingBitmap cursor;
 		CMovingBitmap menu_frame;
-		//CMovingBitmap menu_actions[ACTION_AMOUNT];
-		//CMovingBitmap menu_continue, menu_newgame, menu_options, menu_extras, menu_quit;
 		CMovingBitmap record;
 		CMovingBitmap progress_saved;
 	};
