@@ -13,7 +13,7 @@
 #undef APSTUDIO_READONLY_SYMBOLS
 
 /////////////////////////////////////////////////////////////////////////////
-// Chinese (Traditional, Taiwan) resources
+// 中文 (繁體，台灣) resources
 
 #if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_CHT)
 LANGUAGE LANG_CHINESE, SUBLANG_CHINESE_TRADITIONAL
@@ -110,12 +110,12 @@ IDB_LOADING             BITMAP                  "..\\res\\loading.bmp"
 
 IDC_GAMECURSOR          CURSOR                  "..\\res\\gamecurs.cur"
 
-#endif    // Chinese (Traditional, Taiwan) resources
+#endif    // 中文 (繁體，台灣) resources
 /////////////////////////////////////////////////////////////////////////////
 
 
 /////////////////////////////////////////////////////////////////////////////
-// Chinese (Traditional, Hong Kong SAR) resources
+// 繁體中文 (香港特別行政區) resources
 
 #if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_ZHH)
 LANGUAGE LANG_CHINESE, SUBLANG_CHINESE_HONGKONG
@@ -128,12 +128,18 @@ LANGUAGE LANG_CHINESE, SUBLANG_CHINESE_HONGKONG
 
 IDB_BITMAP9             BITMAP                  "..\\res\\bitmap9.bmp"
 
-#endif    // Chinese (Traditional, Hong Kong SAR) resources
+IDB_FOREGROUND0         BITMAP                  "C:\\Users\\user\\Desktop\\JumpKing\\RES\\foreground\\w.bmp"
+
+IDB_BACKGROUND0         BITMAP                  "C:\\Users\\user\\Desktop\\JumpKing\\RES\\background\\w.bmp"
+
+IDB_PRINCESS1           BITMAP                  "C:\\Users\\user\\Desktop\\JumpKing\\RES\\princess\\angel_1.bmp"
+
+#endif    // 繁體中文 (香港特別行政區) resources
 /////////////////////////////////////////////////////////////////////////////
 
 
 /////////////////////////////////////////////////////////////////////////////
-// English (United States) resources
+// 英文 (美國) resources
 
 #if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_ENU)
 LANGUAGE LANG_ENGLISH, SUBLANG_ENGLISH_US
@@ -181,201 +187,201 @@ IDB_RIGHTFALL           BITMAP                  "..\\res\\king\\right_fall.bmp"
 IDB_RIGHTRISE           BITMAP                  "..\\res\\king\\right_rise.bmp"
 
 IDB_MIDGROUND2          BITMAP                  "..\\res\\midground\\mg2.bmp"
-											
+
 IDB_MIDGROUND3          BITMAP                  "..\\res\\midground\\mg3.bmp"
-											
+
 IDB_MIDGROUND4          BITMAP                  "..\\res\\midground\\mg4.bmp"
-											
+
 IDB_MIDGROUND5          BITMAP                  "..\\res\\midground\\mg5.bmp"
-											
+
 IDB_MIDGROUND6          BITMAP                  "..\\res\\midground\\mg6.bmp"
-											
+
 IDB_MIDGROUND7          BITMAP                  "..\\res\\midground\\mg7.bmp"
-											
+
 IDB_MIDGROUND8          BITMAP                  "..\\res\\midground\\mg8.bmp"
-											
+
 IDB_MIDGROUND9          BITMAP                  "..\\res\\midground\\mg9.bmp"
-											
+
 IDB_MIDGROUND10         BITMAP                  "..\\res\\midground\\mg10.bmp"
-											
+
 IDB_MIDGROUND11         BITMAP                  "..\\res\\midground\\mg11.bmp"
-											
+
 IDB_MIDGROUND12         BITMAP                  "..\\res\\midground\\mg12.bmp"
-												
+
 IDB_MIDGROUND13         BITMAP                  "..\\res\\midground\\mg13.bmp"
-											
+
 IDB_MIDGROUND14         BITMAP                  "..\\res\\midground\\mg14.bmp"
-												 
+
 IDB_MIDGROUND15         BITMAP                  "..\\res\\midground\\mg15.bmp"
-												 
+
 IDB_MIDGROUND16         BITMAP                  "..\\res\\midground\\mg16.bmp"
-												
+
 IDB_MIDGROUND17         BITMAP                  "..\\res\\midground\\mg17.bmp"
-												 
+
 IDB_MIDGROUND18         BITMAP                  "..\\res\\midground\\mg18.bmp"
-												
+
 IDB_MIDGROUND19         BITMAP                  "..\\res\\midground\\mg19.bmp"
-												
+
 IDB_MIDGROUND20         BITMAP                  "..\\res\\midground\\mg20.bmp"
-												
+
 IDB_MIDGROUND21         BITMAP                  "..\\res\\midground\\mg21.bmp"
-												
+
 IDB_MIDGROUND22         BITMAP                  "..\\res\\midground\\mg22.bmp"
-												
+
 IDB_MIDGROUND23         BITMAP                  "..\\res\\midground\\mg23.bmp"
-												 
+
 IDB_MIDGROUND24         BITMAP                  "..\\res\\midground\\mg24.bmp"
-												
+
 IDB_MIDGROUND25         BITMAP                  "..\\res\\midground\\mg25.bmp"
-												
+
 IDB_MIDGROUND26         BITMAP                  "..\\res\\midground\\mg26.bmp"
-												
+
 IDB_MIDGROUND27         BITMAP                  "..\\res\\midground\\mg27.bmp"
-												
+
 IDB_MIDGROUND28         BITMAP                  "..\\res\\midground\\mg28.bmp"
-												
+
 IDB_MIDGROUND29         BITMAP                  "..\\res\\midground\\mg29.bmp"
-												
+
 IDB_MIDGROUND30         BITMAP                  "..\\res\\midground\\mg30.bmp"
-												
+
 IDB_MIDGROUND31         BITMAP                  "..\\res\\midground\\mg31.bmp"
-												
+
 IDB_MIDGROUND32         BITMAP                  "..\\res\\midground\\mg32.bmp"
-												
+
 IDB_MIDGROUND33         BITMAP                  "..\\res\\midground\\mg33.bmp"
-											
+
 IDB_MIDGROUND34         BITMAP                  "..\\res\\midground\\mg34.bmp"
-									
+
 IDB_MIDGROUND35         BITMAP                  "..\\res\\midground\\mg35.bmp"
-												
+
 IDB_MIDGROUND36         BITMAP                  "..\\res\\midground\\mg36.bmp"
-												
+
 IDB_MIDGROUND37         BITMAP                  "..\\res\\midground\\mg37.bmp"
-												
+
 IDB_MIDGROUND38         BITMAP                  "..\\res\\midground\\mg38.bmp"
-												
+
 IDB_MIDGROUND39         BITMAP                  "..\\res\\midground\\mg39.bmp"
-												
+
 IDB_MIDGROUND40         BITMAP                  "..\\res\\midground\\mg40.bmp"
-												
+
 IDB_MIDGROUND41         BITMAP                  "..\\res\\midground\\mg41.bmp"
-												 
+
 IDB_MIDGROUND42         BITMAP                  "..\\res\\midground\\mg42.bmp"
-												 
+
 IDB_MIDGROUND43         BITMAP                  "..\\res\\midground\\mg43.bmp"
-											
+
 IDB_FOREGROUND1         BITMAP                  "..\\res\\foreground\\fg1.bmp"
-												
+
 IDB_FOREGROUND2         BITMAP                  "..\\res\\foreground\\fg2.bmp"
-												
+
 IDB_FOREGROUND3         BITMAP                  "..\\res\\foreground\\fg3.bmp"
-												
+
 IDB_FOREGROUND4         BITMAP                  "..\\res\\foreground\\fg4.bmp"
-												
+
 IDB_FOREGROUND5         BITMAP                  "..\\res\\foreground\\fg5.bmp"
-												
+
 IDB_FOREGROUND6         BITMAP                  "..\\res\\foreground\\fg6.bmp"
-												 
+
 IDB_FOREGROUND9         BITMAP                  "..\\res\\foreground\\fg9.bmp"
-												 
+
 IDB_FOREGROUND10        BITMAP                  "..\\res\\foreground\\fg10.bmp"
-												
+
 IDB_FOREGROUND16        BITMAP                  "..\\res\\foreground\\fg16.bmp"
-												 
+
 IDB_FOREGROUND17        BITMAP                  "..\\res\\foreground\\fg17.bmp"
-												
+
 IDB_FOREGROUND18        BITMAP                  "..\\res\\foreground\\fg18.bmp"
-												 
+
 IDB_FOREGROUND21        BITMAP                  "..\\res\\foreground\\fg21.bmp"
-												 
+
 IDB_FOREGROUND22        BITMAP                  "..\\res\\foreground\\fg22.bmp"
-												 
+
 IDB_FOREGROUND25        BITMAP                  "..\\res\\foreground\\fg25.bmp"
-												
+
 IDB_FOREGROUND26        BITMAP                  "..\\res\\foreground\\fg26.bmp"
-												
+
 IDB_FOREGROUND27        BITMAP                  "..\\res\\foreground\\fg27.bmp"
-												
+
 IDB_FOREGROUND28        BITMAP                  "..\\res\\foreground\\fg28.bmp"
-												
+
 IDB_FOREGROUND29        BITMAP                  "..\\res\\foreground\\fg29.bmp"
-												
+
 IDB_FOREGROUND30        BITMAP                  "..\\res\\foreground\\fg30.bmp"
-												
+
 IDB_FOREGROUND31        BITMAP                  "..\\res\\foreground\\fg31.bmp"
-												
+
 IDB_FOREGROUND32        BITMAP                  "..\\res\\foreground\\fg32.bmp"
-												
+
 IDB_FOREGROUND36        BITMAP                  "..\\res\\foreground\\fg36.bmp"
-												
+
 IDB_FOREGROUND37        BITMAP                  "..\\res\\foreground\\fg37.bmp"
-												 
+
 IDB_FOREGROUND38        BITMAP                  "..\\res\\foreground\\fg38.bmp"
-												
+
 IDB_FOREGROUND39        BITMAP                  "..\\res\\foreground\\fg39.bmp"
-											
+
 IDB_FOREGROUND40        BITMAP                  "..\\res\\foreground\\fg40.bmp"
-												
+
 IDB_FOREGROUND43        BITMAP                  "..\\res\\foreground\\fg43.bmp"
-												
+
 IDB_BACKGROUND4         BITMAP                  "..\\res\\background\\bg4.bmp"
-												
+
 IDB_BACKGROUND5         BITMAP                  "..\\res\\background\\bg5.bmp"
-												
+
 IDB_BACKGROUND6         BITMAP                  "..\\res\\background\\bg6.bmp"
-												
+
 IDB_BACKGROUND14        BITMAP                  "..\\res\\background\\bg14.bmp"
-												
+
 IDB_BACKGROUND15        BITMAP                  "..\\res\\background\\bg15.bmp"
-												 
+
 IDB_BACKGROUND16        BITMAP                  "..\\res\\background\\bg16.bmp"
-												
+
 IDB_BACKGROUND17        BITMAP                  "..\\res\\background\\bg17.bmp"
-												
+
 IDB_BACKGROUND18        BITMAP                  "..\\res\\background\\bg18.bmp"
-												
+
 IDB_BACKGROUND19        BITMAP                  "..\\res\\background\\bg19.bmp"
-												 
+
 IDB_BACKGROUND20        BITMAP                  "..\\res\\background\\bg20.bmp"
-												
+
 IDB_BACKGROUND21        BITMAP                  "..\\res\\background\\bg21.bmp"
-												
+
 IDB_BACKGROUND22        BITMAP                  "..\\res\\background\\bg22.bmp"
-											
+
 IDB_BACKGROUND23        BITMAP                  "..\\res\\background\\bg23.bmp"
-											
+
 IDB_BACKGROUND24        BITMAP                  "..\\res\\background\\bg24.bmp"
-											
+
 IDB_BACKGROUND25        BITMAP                  "..\\res\\background\\bg25.bmp"
-											
+
 IDB_BACKGROUND26        BITMAP                  "..\\res\\background\\bg26.bmp"
-										
+
 IDB_BACKGROUND27        BITMAP                  "..\\res\\background\\bg27.bmp"
-												
+
 IDB_BACKGROUND28        BITMAP                  "..\\res\\background\\bg28.bmp"
-												 
+
 IDB_BACKGROUND29        BITMAP                  "..\\res\\background\\bg29.bmp"
-											
+
 IDB_BACKGROUND30        BITMAP                  "..\\res\\background\\bg30.bmp"
-											
+
 IDB_BACKGROUND31        BITMAP                  "..\\res\\background\\bg31.bmp"
-											
+
 IDB_BACKGROUND32        BITMAP                  "..\\res\\background\\bg32.bmp"
-											
+
 IDB_BACKGROUND36        BITMAP                  "..\\res\\background\\bg36.bmp"
-											
+
 IDB_BACKGROUND37        BITMAP                  "..\\res\\background\\bg37.bmp"
-											
+
 IDB_BACKGROUND38        BITMAP                  "..\\res\\background\\bg38.bmp"
-												
+
 IDB_BACKGROUND39        BITMAP                  "..\\res\\background\\bg39.bmp"
-												
+
 IDB_BACKGROUND40        BITMAP                  "..\\res\\background\\bg40.bmp"
-												
+
 IDB_BACKGROUND41        BITMAP                  "..\\res\\background\\bg41.bmp"
-												 
+
 IDB_BACKGROUND42        BITMAP                  "..\\res\\background\\bg42.bmp"
-												
+
 IDB_BACKGROUND43        BITMAP                  "..\\res\\background\\bg43.bmp"
 
 
@@ -663,7 +669,7 @@ BEGIN
     ID_BUTTON_UNITTEST      "Perform Unit Test"
 END
 
-#endif    // English (United States) resources
+#endif    // 英文 (美國) resources
 /////////////////////////////////////////////////////////////////////////////
 
 
