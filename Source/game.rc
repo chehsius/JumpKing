@@ -64,8 +64,6 @@ END
 
 IDB_BALL                BITMAP                  "..\\res\\ball.bmp"
 
-IDB_ERASER1             BITMAP                  "..\\res\\eraser1.bmp"
-
 IDB_CORNER              BITMAP                  "..\\res\\corner.bmp"
 
 IDB_0                   BITMAP                  "..\\res\\bmp0.bmp"
@@ -91,10 +89,6 @@ IDB_9                   BITMAP                  "..\\res\\bmp9.bmp"
 IDB_MINUS               BITMAP                  "..\\res\\bmp10.bmp"
 
 IDB_CENTER              BITMAP                  "..\\res\\center.bmp"
-
-IDB_ERASER2             BITMAP                  "..\\res\\eraser2.bmp"
-
-IDB_ERASER3             BITMAP                  "..\\res\\eraser3.bmp"
 
 IDB_CONTINUE            BITMAP                  "..\\res\\continue.bmp"
 
@@ -172,7 +166,7 @@ IDB_RIGHTWALK2          BITMAP                  "..\\res\\king\\right_walk2.bmp"
 
 IDB_RIGHTWALK3          BITMAP                  "..\\res\\king\\right_walk3.bmp"
 
-IDB_TITLE_LOGO          BITMAP                  "..\\res\\title_logo.bmp"
+IDB_TITLELOGO           BITMAP                  "..\\res\\menu\\title_logo.bmp"
 
 IDB_LEFTSLIP            BITMAP                  "..\\res\\king\\left_slip.bmp"
 
@@ -383,6 +377,32 @@ IDB_BACKGROUND41        BITMAP                  "..\\res\\background\\bg41.bmp"
 IDB_BACKGROUND42        BITMAP                  "..\\res\\background\\bg42.bmp"
 
 IDB_BACKGROUND43        BITMAP                  "..\\res\\background\\bg43.bmp"
+
+IDB_LEFTDOWN            BITMAP                  "..\\res\\king\\left_down.bmp"
+
+IDB_RIGHTDOWN           BITMAP                  "..\\res\\king\\right_down.bmp"
+
+IDB_PRESSSPACE          BITMAP                  "..\\res\\menu\\press_space.bmp"
+
+IDB_PRESSSPACE_BLANK    BITMAP                  "..\\res\\menu\\press_space_blank.bmp"
+
+IDB_MENUFRAME           BITMAP                  "..\\res\\menu\\menu_frame.bmp"
+
+IDB_MENUEXTRAS          BITMAP                  "..\\res\\menu\\menu_extras.bmp"
+
+IDB_MENUNEWGAME         BITMAP                  "..\\res\\menu\\menu_newgame.bmp"
+
+IDB_MENUOPTIONS         BITMAP                  "..\\res\\menu\\menu_options.bmp"
+
+IDB_MENUQUIT            BITMAP                  "..\\res\\menu\\menu_quit.bmp"
+
+IDB_CURSOR              BITMAP                  "..\\res\\menu\\cursor.bmp"
+
+IDB_PROGRESSSAVED       BITMAP                  "..\\res\\menu\\progress_saved.bmp"
+
+IDB_RECORD              BITMAP                  "..\\res\\menu\\record.bmp"
+
+IDB_MENUCONTINUE        BITMAP                  "..\\res\\menu\\menu_continue.bmp"
 
 
 /////////////////////////////////////////////////////////////////////////////

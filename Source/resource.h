@@ -8,7 +8,6 @@
 #define IDR_GAMETYPE                    129
 #define IDB_BALL                        130
 #define IDB_RACKET                      131
-#define IDB_ERASER1                     131
 #define IDB_BITMAP1                     132
 #define IDB_CORNER                      133
 #define IDB_BALL1                       134
@@ -27,8 +26,6 @@
 #define IDB_9                           147
 #define IDB_MINUS                       148
 #define IDB_CENTER                      149
-#define IDB_ERASER2                     150
-#define IDB_ERASER3                     151
 #define IDB_CONTINUE                    152
 #define IDC_GAMECURSOR                  153
 #define IDB_HELP                        155
@@ -130,7 +127,6 @@
 #define IDB_FOREGROUND39                318
 #define IDB_FOREGROUND40                319
 #define IDB_FOREGROUND43                320
-#define IDB_BITMAP8                     321
 #define IDB_BACKGROUND4                 321
 #define IDB_BACKGROUND5                 322
 #define IDB_BACKGROUND6                 323
@@ -161,10 +157,29 @@
 #define IDB_BACKGROUND41                348
 #define IDB_BACKGROUND42                349
 #define IDB_BACKGROUND43                350
+<<<<<<< HEAD
 #define IDB_FOREGROUND0                 351
 #define IDB_BACKGROUND0                 352
 #define IDB_FINALLY1                    353
 #define IDB_PRINCESS1                   353
+=======
+#define IDB_BITMAP8                     351
+#define IDB_LEFTDOWN                    351
+#define IDB_RIGHTDOWN                   352
+#define IDB_PRESSSPACE                  353
+#define IDB_PRESSSPACE_BLANK            354
+#define IDB_MENUFRAME                   355
+#define IDB_MENUEXTRAS                  356
+#define IDB_MENUNEWGAME                 357
+#define IDB_MENUOPTIONS                 358
+#define IDB_BITMAP15                    359
+#define IDB_MENUQUIT                    359
+#define IDB_CURSOR                      361
+#define IDB_PROGRESSSAVED               362
+#define IDB_RECORD                      363
+#define IDB_BITMAP10                    364
+#define IDB_MENUCONTINUE                364
+>>>>>>> 9a9cd840307505339f35a0499298807941d8c601
 #define IDC_README                      1001
 #define ID_FILE_PAUSE                   32771
 #define ID_TOGGLE_FULLSCREEN            32772
@@ -177,7 +192,11 @@
 #ifdef APSTUDIO_INVOKED
 #ifndef APSTUDIO_READONLY_SYMBOLS
 #define _APS_3D_CONTROLS                     1
+<<<<<<< HEAD
 #define _APS_NEXT_RESOURCE_VALUE        354
+=======
+#define _APS_NEXT_RESOURCE_VALUE        365
+>>>>>>> 9a9cd840307505339f35a0499298807941d8c601
 #define _APS_NEXT_COMMAND_VALUE         32776
 #define _APS_NEXT_CONTROL_VALUE         1003
 #define _APS_NEXT_SYMED_VALUE           101
