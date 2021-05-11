@@ -359,6 +359,7 @@
     <Image Include="RES\background\bg43.bmp" />
     <Image Include="RES\background\bg5.bmp" />
     <Image Include="RES\background\bg6.bmp" />
+    <Image Include="RES\background\w.bmp" />
     <Image Include="RES\base.bmp" />
     <Image Include="RES\base.png" />
     <Image Include="res\bitmap3.bmp" />
@@ -394,6 +395,7 @@
     <Image Include="RES\foreground\fg5.bmp" />
     <Image Include="RES\foreground\fg6.bmp" />
     <Image Include="RES\foreground\fg9.bmp" />
+    <Image Include="RES\foreground\w.bmp" />
     <Image Include="RES\KingCharge.bmp" />
     <Image Include="RES\KingLeftFall.bmp" />
     <Image Include="RES\KingLeftJump_2.bmp" />
@@ -473,6 +475,7 @@
     <Image Include="RES\midground\mg9.bmp" />
     <Image Include="RES\Midground_1.bmp" />
     <Image Include="RES\Midground_2.bmp" />
+    <Image Include="RES\princess\angel_1.bmp" />
     <Image Include="RES\title_logo.bmp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

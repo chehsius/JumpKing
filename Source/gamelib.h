@@ -237,6 +237,7 @@ public:
 	void  SetBitmapNumber(int);
 	void  OnMoveLeft();
 	void  OnMoveRight();
+	void  OnWalk();
 	void  OnJump();
 protected:
 	list<CMovingBitmap>				bmp;			// list of CMovingBitmap

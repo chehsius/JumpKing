@@ -619,5 +619,14 @@
     <Image Include="RES\background\bg43.bmp">
       <Filter>Resource Files</Filter>
     </Image>
+    <Image Include="RES\foreground\w.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="RES\background\w.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="RES\princess\angel_1.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
   </ItemGroup>
 </Project>

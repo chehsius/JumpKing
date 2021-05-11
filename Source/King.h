@@ -12,7 +12,7 @@ namespace game_framework {
 		int  GetY2();
 		void Initialize();
 		void LoadBitmap();
-		void OnMove(Map *m);
+		void OnMove(Map *map);
 		void OnShow();
 		void SetMovingDown(bool flag);
 		void SetMovingLeft(bool flag);
@@ -23,9 +23,8 @@ namespace game_framework {
 		void SetVelocity(int);
 		void SetFloor(int);
 	protected:
-		CAnimation character;
-		//CAnimation leftCharacter;
-		//CAnimation rightCharacter;
+		CAnimation leftCharacter;
+		CAnimation rightCharacter;
 		int x, y;
 		int floor;
 		bool isMovingDown;
@@ -35,7 +34,10 @@ namespace game_framework {
 		bool isCharging;
 		bool rising;
 		bool isFacingLeft;
-		int initial_velocity;
-		int velocity;
+		bool isJumping;
+		int initialVelocity_x, initialVelocity_y;
+		int velocity_x, velocity_y;
+		int collisionCon;
+		int mapEdgeY;
 	};
 }
