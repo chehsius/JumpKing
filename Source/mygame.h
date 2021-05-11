@@ -44,35 +44,16 @@
 #include "King.h"
 
 namespace game_framework {
-
-	//class CGameMap {
-	//public:
-	//	CGameMap();
-	//	void LoadBitmap();
-	//	void OnShow();
-	//	void OnMove();
-	//	//bool isEmpty(int, int);
-	//	void OnKeyDown(UINT);
-	//	void RandomBouncingBall();
-	//	void InitializeBouncingBall(int, int, int);
-	//	~CGameMap();
-	//protected:
-	//	//CMovingBitmap blue, green;
-	//	int map[4][5];
-	//	const int X, Y;
-	//	const int MW, MH;
-	//	CBouncingBall* balls;
-	//	int random_num;
-	//};
-
 	/////////////////////////////////////////////////////////////////////////////
 	// Constants
 	/////////////////////////////////////////////////////////////////////////////
 
 	enum AUDIO_ID {				// 定義各種音效的編號
-		AUDIO_DING,				// 0
-		AUDIO_LAKE,				// 1
-		AUDIO_NTUT				// 2
+		MENU_INTRO,
+		PRESS_START,
+		SELECT,
+		MENU_FAIL,
+		OPENING_THEME,
 	};
 
 	/////////////////////////////////////////////////////////////////////////////
@@ -85,13 +66,80 @@ namespace game_framework {
 		CGameStateInit(CGame *g);
 		void OnInit();  								// 遊戲的初值及圖形設定
 		void OnBeginState();							// 設定每次重玩所需的變數
-		void OnKeyUp(UINT, UINT, UINT); 				// 處理鍵盤Up的動作
-		void OnLButtonDown(UINT nFlags, CPoint point);  // 處理滑鼠的動作
+		void OnKeyDown(UINT, UINT, UINT); 				// 處理鍵盤Down的動作
+	protected:
+		void OnMove();
+		void OnShow();									// 顯示這個狀態的遊戲畫面
+	private:
+		CMovingBitmap title_logo;
+		CAnimation	  press_space;
+		
+	};
+
+	enum ACTION_ID
+	{
+		CONTINUE,
+		NEW_GAME,
+		OPTIONS,
+		EXTRAS,
+		QUIT,
+		ACTION_AMOUNT = 5
+	};
+
+	enum NEW_GAME_ID
+	{
+		NO,
+		DELETE_SAVE
+	};
+
+	enum OPTIONS_ID
+	{
+		GRAPHICS,
+		CONTROLS,
+		AUDIO,
+		OPTIONS_CANCEL,
+		OPTIONS_AMOUNT = 4
+	};
+
+	enum GRAPHICS_ID
+	{
+		FULLSCREEN,
+		GRAPHICS_CANCEL
+	};
+
+	enum EXTRAS_ID
+	{
+		CREDITS,
+		ATTRIBUTION,
+		TOTAL_STATS,
+		EXTRAS_CANCEL,
+		EXTRAS_AMOUNT = 4
+	};
+
+	struct MenuAction
+	{
+		bool isSelected;
+		CMovingBitmap figure;
+	};
+
+	class CGameStateMenu : public CGameState {
+	public:
+		CGameStateMenu(CGame *g);
+		void OnInit();  								// 遊戲的初值及圖形設定
+		void OnBeginState();							// 設定每次重玩所需的變數
+		void OnKeyDown(UINT, UINT, UINT); 				// 處理鍵盤Up的動作
+		void updateCursorActionFigure();
+		void handleMenuContinue();
 	protected:
 		void OnShow();									// 顯示這個狀態的遊戲畫面
 	private:
-		//CMovingBitmap logo;								// csie的logo
-		CMovingBitmap logo;
+		MenuAction action[ACTION_AMOUNT];
+		MenuAction extras[EXTRAS_AMOUNT];
+		CMovingBitmap title_logo;
+		CMovingBitmap cursor;
+		CMovingBitmap menu_frame;
+		CMovingBitmap record;
+		CMovingBitmap progress_saved;
 	};
 
 	/////////////////////////////////////////////////////////////////////////////
@@ -124,11 +172,8 @@ namespace game_framework {
 		//CEraser			eraser;		// 拍子
 		CInteger		hits_left;	// 剩下的撞擊數
 		CBouncingBall   bball;		// 反覆彈跳的球
-		//CMovingBitmap	practice;
 		int				picX, picY;
 		King			king;
-		//list<Map>		maps;
-		//CGameMap		gamemap;
 		Map				map;
 	};
 
