@@ -12,7 +12,7 @@ namespace game_framework {
 		int  GetY2();
 		void Initialize();
 		void LoadBitmap();
-		void OnMove(Map *m);
+		void OnMove(Map *map);
 		void OnShow();
 		void SetMovingDown(bool flag);
 		void SetMovingLeft(bool flag);
@@ -21,9 +21,8 @@ namespace game_framework {
 		void SetCharging(bool flag);
 		void SetXY(int nx, int ny);
 	protected:
-		CAnimation character;
-		//CAnimation leftCharacter;
-		//CAnimation rightCharacter;
+		//CAnimation character;
+		CAnimation leftCharacter, rightCharacter;
 		int x, y;
 		int floor;
 		bool isMovingLeft;

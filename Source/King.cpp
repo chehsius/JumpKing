@@ -24,21 +24,21 @@ namespace game_framework {
 
 	int King::GetX2()
 	{
-		return x + character.Width();
+		return x + leftCharacter.Width();
 	}
 
 	int King::GetY2()
 	{
-		return y + character.Height();
+		return y + leftCharacter.Height();
 	}
 
 	void King::Initialize()
 	{
 		const int X_POS = SIZE_X / 2;
-		const int Y_POS = SIZE_Y / 2 + 250 - character.Height();
+		const int Y_POS = SIZE_Y / 2 + 250 - leftCharacter.Height();
 		x = X_POS;
 		y = Y_POS;
-		floor = Y_POS + character.Height();
+		floor = Y_POS + leftCharacter.Height();
 		isMovingLeft = isMovingRight = isMovingUp = isMovingDown = charging = false;
 		facingLeft = rising = jumping = false;
 		init_velocityY = init_velocityX = velocityX = velocityY = 0;
@@ -46,18 +46,24 @@ namespace game_framework {
 
 	void King::LoadBitmap()
 	{
-		int leftAction[] = { IDB_LEFTSTAND, IDB_LEFTWALK1, IDB_LEFTWALK2, IDB_LEFTWALK3,
-							 IDB_LEFTRISE, IDB_LEFTFALL, IDB_LEFTSLIP, IDB_LEFTDOWN };
+		char path[100] = "";
+		for (int i = 1; i <= 3; i++) {
+			strcpy(path, ("..\\res\\king\\left_walk" + to_string(i) + ".bmp").c_str());
+			leftCharacter
+		}
+		int leftAction[] = { IDB_LEFTSTAND, 
+							 IDB_CHARGE, IDB_LEFTRISE, IDB_LEFTFALL, IDB_LEFTSLIP, IDB_LEFTDOWN };
 		int rightAction[] = { IDB_RIGHTSTAND, IDB_RIGHTWALK1, IDB_RIGHTWALK2, IDB_RIGHTWALK3,
-							  IDB_RIGHTRISE, IDB_RIGHTFALL, IDB_RIGHTSLIP, IDB_RIGHTDOWN };
-		for (int i = 0; i < 8; i++)
-			character.AddBitmap(leftAction[i], RGB(255, 255, 255));
-		for (int i = 0; i < 8; i++)
-			character.AddBitmap(rightAction[i], RGB(255, 255, 255));
-		character.AddBitmap(IDB_CHARGE, RGB(255, 255, 255));
+							  IDB_CHARGE, IDB_RIGHTRISE, IDB_RIGHTFALL, IDB_RIGHTSLIP, IDB_RIGHTDOWN };
+
+		for (int i = 0; i < 9; i++)
+			leftCharacter.AddBitmap(leftAction[i], RGB(255, 255, 255));
+		for (int i = 0; i < 9; i++)
+			rightCharacter.AddBitmap(rightAction[i], RGB(255, 255, 255));
+		//character.AddBitmap(IDB_CHARGE, RGB(255, 255, 255));
 	}
 
-	void King::OnMove(Map *m)
+	void King::OnMove(Map *map)
 	{
 		const int STEP_SIZE = 6;
 		
@@ -76,109 +82,77 @@ namespace game_framework {
 		else {
 			if (!jumping) {
 				if (isMovingLeft) {
-					//facingLeft = true;
-					character.OnMoveLeft();
-					if (m->isEmpty(x - STEP_SIZE, y))
+					facingLeft = true;
+					leftCharacter.OnMoveLeft();
+					if (map->isEmpty(x - STEP_SIZE, y))
 						x -= STEP_SIZE;
 				}
 				if (isMovingRight) {
-					//facingLeft = false;
-					character.OnMoveRight();
-					if (m->isEmpty(GetX2() + STEP_SIZE, y))
+					facingLeft = false;
+					rightCharacter.OnMoveRight();
+					if (map->isEmpty(GetX2() + STEP_SIZE, y))
 						x += STEP_SIZE;
 				}
 				if (isMovingUp) {
-					if (m->isEmpty(x, y - STEP_SIZE))
-						y -= STEP_SIZE;
-				}
-				if (isMovingDown) {
-					if (m->isEmpty(x, GetY2() + STEP_SIZE))
-						y += STEP_SIZE;
-				}
-				init_velocityY = init_velocityX = 0;
-				if (isMovingUp) {
-					if (m->isEmpty(x, y - STEP_SIZE))
+					if (map->isEmpty(x, y - STEP_SIZE))
 						y -= STEP_SIZE;
 					if (y <= 1) {
-						m->inMap();
+						map->NextStage();
 						y = y + 573;
 					}
 				}
 				if (isMovingDown) {
-					if (m->isEmpty(x, GetY2() + STEP_SIZE))
+					if (map->isEmpty(x, GetY2() + STEP_SIZE))
 						y += STEP_SIZE;
 					if (y >= 575) {
-						m->deMap();
+						map->BackStage();
 						y = y - 574;
 					}
 				}
+				init_velocityY = init_velocityX = 0;
+				
 				if (rising) {
 					if (velocityY > 0) {
 						y -= velocityY;
 						velocityY--;
-						if (isMovingLeft) {
-							x -= velocityX;
-						}
-						if (isMovingRight) {
-							x += velocityX;
-											//if (velocity > 0) {
-											//	y -= velocity;
-											//	velocity--;
-											//	if (y <= 1) {
-											//		m->inMap();
-											//		y = y + 573;
-												//}
-											//}
-											//else {
-											//	rising = false;
-											//	velocityY = 1;
-											//}
+						if (y < floor) {
+							if (map->isEmpty(x, GetY2() + velocityY)) {
+								y += velocityY;
+								velocityY++;
+							}
 						}
 						else {
-							if (y < floor) {
-								if (m->isEmpty(x, GetY2() + velocityY)) {
-									y += velocityY;
-									velocityY++;
-								}
+							y = floor;
+							velocityY = init_velocityY;
+							velocityX = init_velocityX;
+							jumping = false;
+						}
+					}
+				}
+				else {
+					if (y < floor - 1) {
+						if (map->isEmpty(x, GetY2() + velocityY)) {
+							y += velocityY;
+							velocityY++;
+							if (y >= 575) {
+								map->BackStage();
+								y = y - 574;
 							}
-							else {
-								//floor = GetY2();
-								y = floor;
-								velocityY = init_velocityY;
-								velocityX = init_velocityX;
-								jumping = false;
-													//velocity = 1;
-													//if (y <= 1) {
-													//	m->inMap();
-													//	y = y + 579;
-													//}
-							}
+						}
+					}
+					else {
+						y = floor - 1;
+						velocityY = init_velocityY;
+						if (y >= 575) {
+							map->BackStage();
+							y = y - 574;
 						}
 					}
 				}
 			}
 		}
-			//else {
-			//	if (y < floor - 1) {
-			//		if (m->isEmpty(x, GetY2() + velocity)) {
-			//			y += velocity;
-			//			velocity++;
-			//			if (y >= 575) {
-			//				m->deMap();
-			//				y = y - 574;
-			//			}
-			//		}
-			//	}
-			//	else {
-			//		y = floor - 1;
-			//		velocity = initial_velocity;
-					//if (y >= 575) {
-					//	m->deMap();
-					//	y = y - 574;
-					//}
-				//}
-			//}
 	}
+			
 
 	void King::SetMovingDown(bool flag)
 	{
@@ -190,7 +164,7 @@ namespace game_framework {
 		if (!jumping) {
 			isMovingLeft = flag;
 			if (isMovingLeft) {
-				character.SetBitmapNumber(1);
+				leftCharacter.SetBitmapNumber(0);
 			}
 		}
 		//if (isMovingLeft && isMovingRight) {
@@ -209,7 +183,7 @@ namespace game_framework {
 		if (!jumping) {
 			isMovingRight = flag;
 			if (isMovingRight) {
-				character.SetBitmapNumber(8);
+				rightCharacter.SetBitmapNumber(0);
 			}
 		}
 		//if (isMovingRight && isMovingLeft) {
@@ -232,7 +206,12 @@ namespace game_framework {
 		if (!jumping) {
 			charging = flag;
 			if (charging) {
-				character.SetBitmapNumber(8);
+				if (facingLeft) {
+					leftCharacter.SetBitmapNumber(4);
+				}
+				else {
+					rightCharacter.SetBitmapNumber(4);
+				}
 			}
 		}
 	}
@@ -244,7 +223,13 @@ namespace game_framework {
 
 	void King::OnShow()
 	{
-		character.SetTopLeft(x, y);
-		character.OnShow();
+		if (facingLeft) {
+			leftCharacter.SetTopLeft(x, y);
+			leftCharacter.OnShow();
+		}
+		else {
+			rightCharacter.SetTopLeft(x, y);
+			rightCharacter.OnShow();
+		}
 	}
 }
