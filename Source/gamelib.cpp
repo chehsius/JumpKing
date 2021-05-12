@@ -242,7 +242,7 @@ void CAnimation::SetBitmapNumber(int i)
 	bmp_iter = next(bmp.begin(), i);
 }
 
-void CAnimation::OnMoveLeft()
+void CAnimation::OnWalk()
 {
 	if (--delay_counter <= 0) {
 		delay_counter = delay_count;
@@ -263,35 +263,61 @@ void CAnimation::OnMoveLeft()
 				bmp_iter++;
 				isMovingForward = true;
 			}
-			
+
 		}
 	}
 }
 
-void CAnimation::OnMoveRight()
-{
-	if (--delay_counter <= 0) {
-		delay_counter = delay_count;
-		if (isMovingForward) {
-			bmp_counter++;
-			bmp_iter++;
-			if (bmp_counter > 10) {
-				bmp_counter--;
-				bmp_iter--;
-				isMovingForward = false;
-			}
-		}
-		else {
-			bmp_counter--;
-			bmp_iter--;
-			if (bmp_counter < 8) {
-				bmp_counter++;
-				bmp_iter++;
-				isMovingForward = true;
-			}
-		}
-	}
-}
+//void CAnimation::OnMoveLeft()
+//{
+//	if (--delay_counter <= 0) {
+//		delay_counter = delay_count;
+//		if (isMovingForward) {
+//			bmp_counter++;
+//			bmp_iter++;
+//			if (bmp_counter > 3) {
+//				bmp_counter--;
+//				bmp_iter--;
+//				isMovingForward = false;
+//			}
+//		}
+//		else {
+//			bmp_counter--;
+//			bmp_iter--;
+//			if (bmp_counter < 1) {
+//				bmp_counter++;
+//				bmp_iter++;
+//				isMovingForward = true;
+//			}
+//			
+//		}
+//	}
+//}
+
+//void CAnimation::OnMoveRight()
+//{
+//	if (--delay_counter <= 0) {
+//		delay_counter = delay_count;
+//		if (isMovingForward) {
+//			bmp_counter++;
+//			bmp_iter++;
+//			if (bmp_counter > 10) {
+//				bmp_counter--;
+//				bmp_iter--;
+//				isMovingForward = false;
+//			}
+//		}
+//		else {
+//			bmp_counter--;
+//			bmp_iter--;
+//			if (bmp_counter < 8) {
+//				bmp_counter++;
+//				bmp_iter++;
+//				isMovingForward = true;
+//			}
+//		}
+//	}
+//}
 
 void CAnimation::OnJump()
 {
@@ -559,12 +585,11 @@ void CGameState::OnCycle() // Template Method
 CGame CGame::instance;
 
 CGame::CGame()
-: NUM_GAME_STATES(4)
+: NUM_GAME_STATES(3)
 {
 	running = true;
 	suspended = false;
 	gameStateTable[GAME_STATE_INIT] = new CGameStateInit(this);
-	gameStateTable[GAME_STATE_MENU] = new CGameStateMenu(this);
 	gameStateTable[GAME_STATE_RUN]  = new CGameStateRun(this);
 	gameStateTable[GAME_STATE_OVER] = new CGameStateOver(this);
 	gameState = NULL;

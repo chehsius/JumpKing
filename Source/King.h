@@ -20,20 +20,29 @@ namespace game_framework {
 		void SetMovingUp(bool flag);
 		void SetCharging(bool flag);
 		void SetXY(int nx, int ny);
+		void SetVelocity(int);
+		void SetFloor(int);
 	protected:
+<<<<<<< HEAD
 		//CAnimation character;
 		CAnimation leftCharacter, rightCharacter;
+=======
+		CAnimation leftCharacter;
+		CAnimation rightCharacter;
+>>>>>>> ccfac054a1396589328e29e29031aa4fd7b4c8c7
 		int x, y;
 		int floor;
-		bool isMovingLeft;
 		bool isMovingDown;
+		bool isMovingLeft;
 		bool isMovingRight;
 		bool isMovingUp;
-		bool charging;
+		bool isCharging;
 		bool rising;
-		bool facingLeft;
-		bool jumping;
-		int init_velocityX, init_velocityY;
-		int velocityX, velocityY;
+		bool isFacingLeft;
+		bool isJumping;
+		int initialVelocity_x, initialVelocity_y;
+		int velocity_x, velocity_y;
+		int collisionCon;
+		int mapEdgeY;
 	};
 }
