@@ -82,6 +82,7 @@
 
 enum GAME_STATES {
 	GAME_STATE_INIT,
+	GAME_STATE_MENU,
 	GAME_STATE_RUN,
 	GAME_STATE_OVER
 };
@@ -278,6 +279,7 @@ private:
 
 class CGame;
 class CGameStateInit;
+class CGameStateMenu;
 class CGameStateRun;
 class CGameStateOver;
 

@@ -6,10 +6,13 @@ namespace game_framework {
 	{
 	public:
 		King();
-		int  GetX1();
-		int  GetY1();
-		int  GetX2();
-		int  GetY2();
+		~King();
+
+		int GetX1();
+		int GetY1();
+		int GetX2();
+		int GetY2();
+
 		void Initialize();
 		void LoadBitmap();
 		void OnMove(Map *map);
@@ -23,13 +26,9 @@ namespace game_framework {
 		void SetVelocity(int);
 		void SetFloor(int);
 	protected:
-<<<<<<< HEAD
-		//CAnimation character;
-		CAnimation leftCharacter, rightCharacter;
-=======
-		CAnimation leftCharacter;
-		CAnimation rightCharacter;
->>>>>>> ccfac054a1396589328e29e29031aa4fd7b4c8c7
+		CAnimation walkLeft, walkRight;
+		CMovingBitmap standLeft, standRight;
+		CAnimation jumpLeft, jumpRight;
 		int x, y;
 		int floor;
 		bool isMovingDown;
@@ -37,11 +36,11 @@ namespace game_framework {
 		bool isMovingRight;
 		bool isMovingUp;
 		bool isCharging;
-		bool rising;
 		bool isFacingLeft;
-		bool isJumping;
-		int initialVelocity_x, initialVelocity_y;
-		int velocity_x, velocity_y;
+		bool rising;
+		bool jumping;
+		int initialVelocityX, initialVelocityY;
+		int velocityX, velocityY;
 		int collisionCon;
 		int mapEdgeY;
 	};
