@@ -29,8 +29,13 @@ namespace game_framework {
 		CAnimation walkLeft, walkRight;
 		CMovingBitmap standLeft, standRight;
 		CAnimation jumpLeft, jumpRight;
+		CMovingBitmap slipLeft, slipRight;
+		CMovingBitmap charge;
 		int x, y;
 		int floor;
+		bool standing;
+		bool isFall;
+		bool decidedJumpLeft;
 		bool isMovingDown;
 		bool isMovingLeft;
 		bool isMovingRight;
@@ -41,6 +46,7 @@ namespace game_framework {
 		bool jumping;
 		int initialVelocityX, initialVelocityY;
 		int velocityX, velocityY;
+
 		int collisionCon;
 		int mapEdgeY;
 	};
