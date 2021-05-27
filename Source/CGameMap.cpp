@@ -8,8 +8,20 @@
 
 namespace game_framework {
 
+<<<<<<< HEAD:Source/CGameMap.cpp
 	CGameMap::CGameMap()
 	{
+=======
+	//Map::Map() {
+	Map::Map() : X(0), Y(0), MW(0), MH(0) {
+		//Initialize();
+		mapIndex = 0;
+		for (int row = 0; row < 60; row++) {
+			for (int col = 0; col < 80; col++) {
+				mapGrid[col][row] = mapInit[mapIndex][row][col];
+			}
+		}
+>>>>>>> d5f1981790f8f42dee4727883b47620c7587b32a:Source/Map.cpp
 	}
 
 	CGameMap::~CGameMap()
@@ -37,6 +49,7 @@ namespace game_framework {
 		}
 	}
 
+<<<<<<< HEAD:Source/CGameMap.cpp
 	void CGameMap::Initialize()
 	{
 		sectionIndex = 0;
@@ -2616,6 +2629,20 @@ namespace game_framework {
 			}
 		}
 	}
+=======
+	void Map::Initialize() {
+		mapIndex = 0;
+		//OnLoad();
+	}
+
+	//void Map::OnLoad() {
+	//	for (int row = 0; row < 60; row++) {
+	//		for (int col = 0; col < 80; col++) {
+	//			mapGrid[col][row] = mapInit[mapIndex][row][col];
+	//		}
+	//	}
+	//}
+>>>>>>> d5f1981790f8f42dee4727883b47620c7587b32a:Source/Map.cpp
 
 	void CGameMap::OnShow()
 	{
@@ -2628,6 +2655,7 @@ namespace game_framework {
 		foreground.OnShow();
 	}
 
+<<<<<<< HEAD:Source/CGameMap.cpp
 	void CGameMap::NextStage()
 	{
 		sectionIndex++;
@@ -2646,6 +2674,40 @@ namespace game_framework {
 		foreground.SetBitmapNumber(sectionIndex);
 		this->OnShow();
 		this->OnLoad();
+=======
+	void Map::NextStage() {
+		mapIndex++;
+		background.SetBitmapNumber(mapIndex);
+		midground.SetBitmapNumber(mapIndex);
+		foreground.SetBitmapNumber(mapIndex);
+		background.OnShow();
+		midground.OnShow();
+		foreground.OnShow();
+		for (int row = 0; row < 60; row++) {
+			for (int col = 0; col < 80; col++) {
+				mapGrid[col][row] = mapInit[mapIndex][row][col];
+			}
+		}
+		//this->OnShow();
+		//this->OnLoad();
+	}
+
+	void Map::BackStage() {
+		mapIndex--;
+		background.SetBitmapNumber(mapIndex);
+		midground.SetBitmapNumber(mapIndex);
+		foreground.SetBitmapNumber(mapIndex);
+		background.OnShow();
+		midground.OnShow();
+		foreground.OnShow();
+		for (int row = 0; row < 60; row++) {
+			for (int col = 0; col < 80; col++) {
+				mapGrid[col][row] = mapInit[mapIndex][row][col];
+			}
+		}
+		//this->OnShow();
+		//this->OnLoad();
+>>>>>>> d5f1981790f8f42dee4727883b47620c7587b32a:Source/Map.cpp
 	}
 
 	bool CGameMap::isEmpty(int mapX, int mapY)
