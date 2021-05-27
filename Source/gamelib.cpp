@@ -123,7 +123,11 @@
 #include <string.h>
 #include "audio.h"
 #include "gamelib.h"
-#include "mygame.h"
+#include "CGameStateInit.h"
+#include "CGameStateMenu.h"
+#include "CGameStateRun.h"
+#include "CGameStatePause.h"
+#include "CGameStateOver.h"
 
 namespace game_framework {
 
@@ -242,31 +246,31 @@ void CAnimation::SetBitmapNumber(int i)
 	bmp_iter = next(bmp.begin(), i);
 }
 
-void CAnimation::OnWalk()
-{
-	if (--delay_counter <= 0) {
-		delay_counter = delay_count;
-		if (isMovingForward) {
-			bmp_counter++;
-			bmp_iter++;
-			if (bmp_counter > 3) {
-				bmp_counter--;
-				bmp_iter--;
-				isMovingForward = false;
-			}
-		}
-		else {
-			bmp_counter--;
-			bmp_iter--;
-			if (bmp_counter < 1) {
-				bmp_counter++;
-				bmp_iter++;
-				isMovingForward = true;
-			}
-
-		}
-	}
-}
+//void CAnimation::OnWalk()
+//{
+//	if (--delay_counter <= 0) {
+//		delay_counter = delay_count;
+//		if (isMovingForward) {
+//			bmp_counter++;
+//			bmp_iter++;
+//			if (bmp_counter > 3) {
+//				bmp_counter--;
+//				bmp_iter--;
+//				isMovingForward = false;
+//			}
+//		}
+//		else {
+//			bmp_counter--;
+//			bmp_iter--;
+//			if (bmp_counter < 1) {
+//				bmp_counter++;
+//				bmp_iter++;
+//				isMovingForward = true;
+//			}
+//
+//		}
+//	}
+//}
 
 //void CAnimation::OnMoveLeft()
 //{
@@ -585,13 +589,14 @@ void CGameState::OnCycle() // Template Method
 CGame CGame::instance;
 
 CGame::CGame()
-: NUM_GAME_STATES(3)
+: NUM_GAME_STATES(5)
 {
 	running = true;
 	suspended = false;
 	gameStateTable[GAME_STATE_INIT] = new CGameStateInit(this);
 	gameStateTable[GAME_STATE_MENU] = new CGameStateMenu(this);
 	gameStateTable[GAME_STATE_RUN]  = new CGameStateRun(this);
+	gameStateTable[GAME_STATE_PAUSE] = new CGameStatePause(this);
 	gameStateTable[GAME_STATE_OVER] = new CGameStateOver(this);
 	gameState = NULL;
 }
@@ -618,12 +623,14 @@ void CGame::OnDraw()
 	gameState->OnDraw();					// 顯示遊戲中的每個元素
 	if (!running) {
 		//
-		// 如果在暫停狀態，則顯示Ctrl-Q...
+		// 暫停狀態
 		//
-		CMovingBitmap bmp;
-		bmp.LoadBitmap(IDB_CONTINUE);
-		bmp.SetTopLeft(0,0);
-		bmp.ShowBitmap();
+		//if (gameState == gameStateTable[GAME_STATE_RUN]) {
+		//	gameState = gameStateTable[GAME_STATE_PAUSE];
+		//	gameState->OnBeginState();
+		//	gameState->OnDraw();
+		//	CSpecialEffect::SetCurrentTime();
+		//}
 	}
 	CDDraw::BltBackToPrimary();				// 將 Back Plain 貼到螢幕
 }
@@ -636,6 +643,8 @@ void  CGame::OnFilePause()
 		else
 			CAudio::Instance()->Resume();
 		running = !running;
+		//if (gameState == gameStateTable[GAME_STATE_RUN]) {
+		//}
 	} else {
 		CAudio::Instance()->Resume();
 		running = true;

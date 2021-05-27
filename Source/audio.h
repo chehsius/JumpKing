@@ -67,6 +67,14 @@
 #include <map>
 using namespace std;
 
+enum AUDIO_ID {
+	MENU_INTRO,
+	PRESS_START,
+	SELECT,
+	MENU_FAIL,
+	OPENING_THEME,
+};
+
 /////////////////////////////////////////////////////////////////////////////
 // 這個class會建立DirectX Audio物件，以提供音效
 // 每個Public Interface的用法都要懂，Implementation可以不懂

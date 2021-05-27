@@ -117,12 +117,6 @@
     <ClCompile Include="Source\StdAfx.cpp">
       <Filter>MFC</Filter>
     </ClCompile>
-    <ClCompile Include="Source\mygame.cpp">
-      <Filter>MyGame</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\CEraser.cpp">
-      <Filter>MyGame</Filter>
-    </ClCompile>
     <ClCompile Include="Source\CBall.cpp">
       <Filter>MyGame</Filter>
     </ClCompile>
@@ -132,7 +126,22 @@
     <ClCompile Include="Source\King.cpp">
       <Filter>MyGame</Filter>
     </ClCompile>
-    <ClCompile Include="Source\Map.cpp">
+    <ClCompile Include="Source\CGameStateRun.cpp">
+      <Filter>MyGame</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\CGameStateInit.cpp">
+      <Filter>MyGame</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\CGameStateMenu.cpp">
+      <Filter>MyGame</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\CGameStateOver.cpp">
+      <Filter>MyGame</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\CGameMap.cpp">
+      <Filter>MyGame</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\CGameStatePause.cpp">
       <Filter>MyGame</Filter>
     </ClCompile>
   </ItemGroup>
@@ -161,12 +170,6 @@
     <ClInclude Include="Source\StdAfx.h">
       <Filter>MFC</Filter>
     </ClInclude>
-    <ClInclude Include="Source\mygame.h">
-      <Filter>MyGame</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\CEraser.h">
-      <Filter>MyGame</Filter>
-    </ClInclude>
     <ClInclude Include="Source\CBall.h">
       <Filter>MyGame</Filter>
     </ClInclude>
@@ -176,7 +179,22 @@
     <ClInclude Include="Source\King.h">
       <Filter>MyGame</Filter>
     </ClInclude>
-    <ClInclude Include="Source\Map.h">
+    <ClInclude Include="Source\CGameStateRun.h">
+      <Filter>MyGame</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\CGameStateInit.h">
+      <Filter>MyGame</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\CGameStateMenu.h">
+      <Filter>MyGame</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\CGameStateOver.h">
+      <Filter>MyGame</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\CGameMap.h">
+      <Filter>MyGame</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\CGameStatePause.h">
       <Filter>MyGame</Filter>
     </ClInclude>
   </ItemGroup>
@@ -626,6 +644,9 @@
       <Filter>Resource Files</Filter>
     </Image>
     <Image Include="RES\princess\angel_1.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\jumpKing.ico">
       <Filter>Resource Files</Filter>
     </Image>
   </ItemGroup>

@@ -66,7 +66,7 @@
 // 定義遊戲可設定的環境與條件
 /////////////////////////////////////////////////////////////////////////////
 
-#define SIZE_X				 800		// 設定遊戲畫面的解析度為640x480
+#define SIZE_X				 800		// 設定遊戲畫面的解析度為800x600
 #define SIZE_Y				 600		// 註：若不使用標準的解析度，則不能切換到全螢幕
 #define OPEN_AS_FULLSCREEN	 false		// 是否以全螢幕方式開啟遊戲
 #define SHOW_LOAD_PROGRESS   true		// 是否顯示loading(OnInit)的進度
@@ -77,13 +77,15 @@
 #define ENABLE_AUDIO		 true		// 啟動音效介面
 
 /////////////////////////////////////////////////////////////////////////////
-// 定義CGame及CGameState所使用的三個狀態常數
+// 定義CGame及CGameState所使用的四個狀態常數
 /////////////////////////////////////////////////////////////////////////////
 
-enum GAME_STATES {
+enum GAME_STATES
+{
 	GAME_STATE_INIT,
 	GAME_STATE_MENU,
 	GAME_STATE_RUN,
+	GAME_STATE_PAUSE,
 	GAME_STATE_OVER
 };
 
@@ -281,7 +283,87 @@ class CGame;
 class CGameStateInit;
 class CGameStateMenu;
 class CGameStateRun;
+class CGameStatePause;
 class CGameStateOver;
+
+#define A(x) static_cast<int>(x)
+
+/////////////////////////////////////////////////////////////////////////////
+// EXIST ON BOTH MAIN & PAUSE MENU
+/////////////////////////////////////////////////////////////////////////////
+
+enum class OPTIONS
+{
+	GRAPHICS, CONTROLS, AUDIO, BACK,
+	AMOUNT
+};
+
+enum class GRAPHICS
+{
+	MODE, X2, BACK,
+	AMOUNT
+};
+
+enum class AUDIO
+{
+	SLIDER, MUSIC, SFX, AMBIENCE, BACK,
+	AMOUNT
+};
+
+/////////////////////////////////////////////////////////////////////////////
+// MAIN MENU
+/////////////////////////////////////////////////////////////////////////////
+
+enum class MAIN
+{
+	CONTINUE, NEW_GAME, OPTIONS, EXTRAS, QUIT,
+	AMOUNT
+};
+
+enum class NEW_GAME
+{
+	NO, DELETE_SAVE,
+	AMOUNT
+};
+
+enum class EXTRAS
+{
+	CREDITS, ATTRIBUTION, TOTAL_STATS, DISPLAY_TIMER, BACK,
+	AMOUNT
+};
+
+enum class QUIT
+{
+	NO, YES,
+	AMOUNT
+};
+
+/////////////////////////////////////////////////////////////////////////////
+// PAUSE MENU
+/////////////////////////////////////////////////////////////////////////////
+
+enum class PAUSE
+{
+	RESUME, INVENTORY, OPTIONS, SAVE_EXIT, GIVE_UP,
+	AMOUNT
+};
+
+enum class SAVE_EXIT
+{
+	NO, YES,
+	AMOUNT
+};
+
+enum class GIVE_UP
+{
+	NO, DELETE_SAVE,
+	AMOUNT
+};
+
+typedef struct {
+	bool selected;
+	CMovingBitmap figure;
+} MenuAction;
 
 /////////////////////////////////////////////////////////////////////////////
 // 這個class為遊戲的各種狀態之Base class(是一個abstract class)
@@ -348,9 +430,9 @@ public:
 private:
 	bool			running;			// 遊戲是否正在進行中(未被Pause)
 	bool            suspended;			// 遊戲是否被suspended
-	const int		NUM_GAME_STATES;	// 遊戲的狀態數(3個狀態)
+	const int		NUM_GAME_STATES;	// 遊戲的狀態數(5個狀態)
 	CGameState		*gameState;			// pointer指向目前的遊戲狀態
-	CGameState		*gameStateTable[3];	// 遊戲狀態物件的pointer
+	CGameState		*gameStateTable[5];	// 遊戲狀態物件的pointer
 	static CGame	instance;			// 遊戲唯一的instance
 };
 

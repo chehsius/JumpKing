@@ -13,7 +13,7 @@
 #undef APSTUDIO_READONLY_SYMBOLS
 
 /////////////////////////////////////////////////////////////////////////////
-// 中文 (繁體，台灣) resources
+// Chinese (Traditional, Taiwan) resources
 
 #if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_CHT)
 LANGUAGE LANG_CHINESE, SUBLANG_CHINESE_TRADITIONAL
@@ -64,10 +64,6 @@ END
 
 IDB_BALL                BITMAP                  "..\\res\\ball.bmp"
 
-IDB_ERASER1             BITMAP                  "..\\res\\eraser1.bmp"
-
-IDB_CORNER              BITMAP                  "..\\res\\corner.bmp"
-
 IDB_0                   BITMAP                  "..\\res\\bmp0.bmp"
 
 IDB_1                   BITMAP                  "..\\res\\bmp1.bmp"
@@ -92,10 +88,6 @@ IDB_MINUS               BITMAP                  "..\\res\\bmp10.bmp"
 
 IDB_CENTER              BITMAP                  "..\\res\\center.bmp"
 
-IDB_ERASER2             BITMAP                  "..\\res\\eraser2.bmp"
-
-IDB_ERASER3             BITMAP                  "..\\res\\eraser3.bmp"
-
 IDB_CONTINUE            BITMAP                  "..\\res\\continue.bmp"
 
 IDB_HELP                BITMAP                  "..\\res\\help.bmp"
@@ -110,12 +102,12 @@ IDB_LOADING             BITMAP                  "..\\res\\loading.bmp"
 
 IDC_GAMECURSOR          CURSOR                  "..\\res\\gamecurs.cur"
 
-#endif    // 中文 (繁體，台灣) resources
+#endif    // Chinese (Traditional, Taiwan) resources
 /////////////////////////////////////////////////////////////////////////////
 
 
 /////////////////////////////////////////////////////////////////////////////
-// 繁體中文 (香港特別行政區) resources
+// Chinese (Traditional, Hong Kong SAR) resources
 
 #if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_ZHH)
 LANGUAGE LANG_CHINESE, SUBLANG_CHINESE_HONGKONG
@@ -128,13 +120,12 @@ LANGUAGE LANG_CHINESE, SUBLANG_CHINESE_HONGKONG
 
 IDB_BITMAP9             BITMAP                  "..\\res\\bitmap9.bmp"
 
-
-#endif    // 繁體中文 (香港特別行政區) resources
+#endif    // Chinese (Traditional, Hong Kong SAR) resources
 /////////////////////////////////////////////////////////////////////////////
 
 
 /////////////////////////////////////////////////////////////////////////////
-// 英文 (美國) resources
+// English (United States) resources
 
 #if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_ENU)
 LANGUAGE LANG_ENGLISH, SUBLANG_ENGLISH_US
@@ -155,9 +146,7 @@ IDR_MAINFRAME           BITMAP                  "..\\res\\Toolbar.bmp"
 
 // Icon with lowest ID value placed first to ensure application icon
 // remains consistent on all systems.
-IDR_MAINFRAME           ICON                    "..\\res\\game.ico"
-
-IDR_GAMETYPE            ICON                    "..\\res\\gameDoc.ico"
+IDR_GAMETYPE            ICON                    "..\\res\\jumpKing.ico"
 
 
 /////////////////////////////////////////////////////////////////////////////
@@ -185,7 +174,7 @@ BEGIN
     POPUP "&File"
     BEGIN
         MENUITEM "&New",                        ID_FILE_NEW
-        MENUITEM "Pause\tCtrl+Q",               ID_FILE_PAUSE
+        MENUITEM "Pause\tCtrl+P",               ID_FILE_PAUSE
         MENUITEM "&Open...",                    ID_FILE_OPEN
         MENUITEM "&Save",                       ID_FILE_SAVE
         MENUITEM "Save &As...",                 ID_FILE_SAVE_AS
@@ -218,8 +207,8 @@ END
 
 IDR_MAINFRAME ACCELERATORS
 BEGIN
+    "P",            ID_FILE_PAUSE,          VIRTKEY, CONTROL, NOINVERT
     "F",            ID_TOGGLE_FULLSCREEN,   VIRTKEY, CONTROL, NOINVERT
-    "Q",            ID_FILE_PAUSE,          VIRTKEY, CONTROL, NOINVERT
 END
 
 
@@ -432,7 +421,7 @@ BEGIN
     ID_BUTTON_UNITTEST      "Perform Unit Test"
 END
 
-#endif    // 英文 (美國) resources
+#endif    // English (United States) resources
 /////////////////////////////////////////////////////////////////////////////
 
 

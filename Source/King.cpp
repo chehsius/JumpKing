@@ -4,8 +4,8 @@
 #include <ddraw.h>
 #include "audio.h"
 #include "gamelib.h"
-#include "King.h"
 #include <windows.h>
+#include "King.h"
 
 namespace game_framework {
 
@@ -57,30 +57,22 @@ namespace game_framework {
 	void King::LoadBitmap()
 	{
 		char path[100] = "";
-
+		
 		standLeft.LoadBitmap("RES/king/left/stand.bmp", RGB(255, 255, 255));
 		standRight.LoadBitmap("RES/king/right/stand.bmp", RGB(255, 255, 255));
-		for (int i = 1; i <= 3; i++) {
+		for (int i = 1; i <= 3; i++)
+		{
 			strcpy(path, ("RES/king/left/walk" + to_string(i) + ".bmp").c_str());
 			walkLeft.AddBitmap(path, RGB(255, 255, 255));
 		}
-		for (int i = 1; i <= 3; i++) {
+		for (int i = 1; i <= 3; i++)
+		{
 			strcpy(path, ("RES/king/right/walk" + to_string(i) + ".bmp").c_str());
 			walkRight.AddBitmap(path, RGB(255, 255, 255));
 		}
-
-		//for (int i = 0; i < 9; i++)
-		//	leftCharacter.AddBitmap(leftAction[i], RGB(255, 255, 255));
-		//for (int i = 0; i < 9; i++)
-		//	rightCharacter.AddBitmap(rightAction[i], RGB(255, 255, 255));
-
-		//int leftAction[] = { IDB_LEFTSTAND, IDB_LEFTWALK1, IDB_LEFTWALK2, IDB_LEFTWALK3,
-		//					   IDB_CHARGE, IDB_LEFTRISE, IDB_LEFTFALL, IDB_LEFTSLIP };
-		//int rightAction[] = { IDB_RIGHTSTAND, IDB_RIGHTWALK1, IDB_RIGHTWALK2, IDB_RIGHTWALK3,
-		//						IDB_CHARGE, IDB_RIGHTRISE, IDB_RIGHTFALL, IDB_RIGHTSLIP };
 	}
 
-	void King::OnMove(Map *map)
+	void King::OnMove(CGameMap *map)
 	{
 		//const int STEP_SIZE = 6;
 		//

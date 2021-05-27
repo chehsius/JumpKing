@@ -35,7 +35,6 @@
 #include <direct.h>
 #include <string.h>
 #include "gamelib.h"
-#include "mygame.h"
 #include "gameView.h"
 
 #ifdef _DEBUG
