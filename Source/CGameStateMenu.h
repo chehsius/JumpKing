@@ -16,6 +16,7 @@ namespace game_framework {
 		void InitNewGame();
 		void InitOptions();
 		void InitGraphics();
+		void InitMode();
 		void InitControls();
 		void InitAudio();
 		void InitExtras();
@@ -30,6 +31,7 @@ namespace game_framework {
 		void CtrlNewGame(UINT);
 		void CtrlOptions(UINT);
 		void CtrlGraphics(UINT);
+		void CtrlMode(UINT);
 		void CtrlControls(UINT);
 		void CtrlAudio(UINT);
 		void CtrlExtras(UINT);
@@ -43,6 +45,7 @@ namespace game_framework {
 		MenuAction newGame[A(NEW_GAME::AMOUNT)];
 		MenuAction options[A(OPTIONS::AMOUNT)];
 		MenuAction graphics[A(GRAPHICS::AMOUNT)];
+		MenuAction mode[A(MODE::AMOUNT)];
 		MenuAction audio[A(AUDIO::AMOUNT)];
 		MenuAction extras[A(EXTRAS::AMOUNT)];
 		MenuAction quit[A(QUIT::AMOUNT)];
@@ -52,18 +55,17 @@ namespace game_framework {
 		CMovingBitmap frameNewGame, titleNewGame, cursorNewGame;
 		CMovingBitmap frameOptions, cursorOptions;
 		CMovingBitmap frameGraphics, cursorGraphics;
+		CMovingBitmap frameMode, cursorMode;
 		CMovingBitmap controls, backControls, cursorControls;
 		CMovingBitmap frameAudio, cursorAudio;
-		CAnimation checkBoxMusic, checkBoxSFX, checkBoxAmbience;
 		CMovingBitmap frameExtras, cursorExtras;
-		CAnimation displayTimer;
 		CMovingBitmap credits, backCredits, cursorCredits;
 		CMovingBitmap attribution, backAttribution, cursorAttribution;
 		CMovingBitmap totalStats, backTotalStats, cursorTotalStats;
 		CMovingBitmap frameQuit, titleQuit, cursorQuit;
 		bool transitioning;
 		bool ctrllingNewGame;
-		bool ctrllingOptions, ctrllingGraphics, ctrllingControls, ctrllingAudio;
+		bool ctrllingOptions, ctrllingGraphics, ctrllingMode, ctrllingControls, ctrllingAudio;
 		bool ctrllingExtras, ctrllingCredits, ctrllingAttribution, ctrllingTotalStats;
 		bool ctrllingQuit;
 	};

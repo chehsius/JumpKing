@@ -11,8 +11,6 @@ namespace game_framework {
 		void OnLoad();
 		void OnShow();
 		bool isEmpty(int, int);
-		//int getX();
-		//int getY();
 		void NextLevel();
 		void BackLevel();
 	protected:

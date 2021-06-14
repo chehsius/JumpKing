@@ -82,7 +82,7 @@ namespace game_framework {
 		frameOptions.LoadBitmap("RES/esc_menu/options/frame.bmp", RGB(255, 255, 255));
 		cursorOptions.LoadBitmap("RES/esc_menu/cursor.bmp");
 
-		frameOptions.SetTopLeft(SIZE_X / 2 + 38, 25);
+		frameOptions.SetTopLeft(SIZE_X / 2 + 100, 25);
 
 		char *path[A(OPTIONS::AMOUNT)] =
 		{
@@ -104,7 +104,7 @@ namespace game_framework {
 		frameGraphics.LoadBitmap("RES/esc_menu/options/graphics/frame.bmp", RGB(255, 255, 255));
 		cursorGraphics.LoadBitmap("RES/esc_menu/cursor.bmp");
 
-		frameGraphics.SetTopLeft(SIZE_X + 110, SIZE_Y / 2 - 15);
+		frameGraphics.SetTopLeft(SIZE_X / 2 - 20, 25);
 
 		char *path[A(GRAPHICS::AMOUNT)] =
 		{
@@ -122,9 +122,9 @@ namespace game_framework {
 		backControls.LoadBitmap("RES/esc_menu/options/back.bmp");
 		cursorControls.LoadBitmap("RES/esc_menu/cursor.bmp");
 
-		controls.SetTopLeft(SIZE_X + 110, SIZE_Y / 4 - 15);
-		backControls.SetTopLeft(SIZE_X + 150, SIZE_Y / 2 + 130);
-		cursorControls.SetTopLeft(SIZE_X + 125, SIZE_Y / 2 + 130);
+		controls.SetTopLeft(SIZE_X / 3 - 30, 25);
+		backControls.SetTopLeft(SIZE_X / 3 + 15, SIZE_Y / 2 + 25);
+		cursorControls.SetTopLeft(SIZE_X / 3 - 10, SIZE_Y / 2 + 25);
 	}
 
 	void CGameStatePause::InitAudio()
@@ -132,7 +132,7 @@ namespace game_framework {
 		frameAudio.LoadBitmap("RES/esc_menu/options/audio/frame.bmp", RGB(255, 255, 255));
 		cursorAudio.LoadBitmap("RES/esc_menu/cursor.bmp");
 
-		frameAudio.SetTopLeft(SIZE_X + 110, SIZE_Y / 2 - 15);
+		frameAudio.SetTopLeft(SIZE_X / 2 - 15, 25);
 
 		char *path[A(AUDIO::AMOUNT)] =
 		{
@@ -251,6 +251,10 @@ namespace game_framework {
 		{
 			if (nChar == KEY_SPACE)
 			{
+
+
+
+
 			}
 			SelectAction(nChar, A(PAUSE::INVENTORY), A(PAUSE::AMOUNT), pause);
 		}
@@ -260,7 +264,7 @@ namespace game_framework {
 			{
 				ctrllingOptions = true;
 				options[A(OPTIONS::GRAPHICS)].selected = true;
-				MoveCursorOnMenu(A(OPTIONS::AMOUNT), &cursorOptions, options, 50, 60);
+				MoveCursorOnMenu(A(OPTIONS::AMOUNT), &cursorOptions, options, 110, 15);
 			}
 			SelectAction(nChar, A(PAUSE::OPTIONS), A(PAUSE::AMOUNT), pause);
 		}
@@ -300,7 +304,7 @@ namespace game_framework {
 			{
 				ctrllingGraphics = true;
 				graphics[A(GRAPHICS::MODE)].selected = true;
-				MoveCursorOnMenu(A(GRAPHICS::AMOUNT), &cursorGraphics, graphics, 50, 60);
+				MoveCursorOnMenu(A(GRAPHICS::AMOUNT), &cursorGraphics, graphics, -10, 15);
 			}
 			SelectAction(nChar, A(OPTIONS::GRAPHICS), A(OPTIONS::AMOUNT), options);
 		}
@@ -316,7 +320,7 @@ namespace game_framework {
 			{
 				ctrllingAudio = true;
 				audio[A(AUDIO::SLIDER)].selected = true;
-				MoveCursorOnMenu(A(AUDIO::AMOUNT), &cursorAudio, audio, 50, 60);
+				MoveCursorOnMenu(A(AUDIO::AMOUNT), &cursorAudio, audio, -5, 5);
 			}
 			SelectAction(nChar, A(OPTIONS::AUDIO), A(OPTIONS::AMOUNT), options);
 		}
@@ -329,7 +333,7 @@ namespace game_framework {
 			}
 			SelectAction(nChar, A(OPTIONS::BACK), A(OPTIONS::AMOUNT), options);
 		}
-		MoveCursorOnMenu(A(OPTIONS::AMOUNT), &cursorOptions, options, 10, 15);
+		MoveCursorOnMenu(A(OPTIONS::AMOUNT), &cursorOptions, options, 110, 15);
 	}
 
 	void CGameStatePause::CtrlGraphics(UINT nChar)
@@ -363,7 +367,7 @@ namespace game_framework {
 			}
 			SelectAction(nChar, A(GRAPHICS::BACK), A(GRAPHICS::AMOUNT), graphics);
 		}
-		MoveCursorOnMenu(A(GRAPHICS::AMOUNT), &cursorGraphics, graphics, 120, 15);
+		MoveCursorOnMenu(A(GRAPHICS::AMOUNT), &cursorGraphics, graphics, -10, 15);
 	}
 
 	void CGameStatePause::CtrlControls(UINT nChar)
@@ -396,6 +400,12 @@ namespace game_framework {
 				{
 					audio[A(AUDIO::MUSIC)].figure.SetBitmapNumber(1);
 					//CAudio::Instance()->Pause();
+
+
+
+
+
+
 				}
 				else
 				{
@@ -412,6 +422,12 @@ namespace game_framework {
 				{
 					audio[A(AUDIO::SFX)].figure.SetBitmapNumber(1);
 					//CAudio::Instance()->Pause();
+
+
+
+
+
+
 				}
 				else
 				{
@@ -445,7 +461,7 @@ namespace game_framework {
 			}
 			SelectAction(nChar, A(AUDIO::BACK), A(AUDIO::AMOUNT), audio);
 		}
-		MoveCursorOnMenu(A(AUDIO::AMOUNT), &cursorAudio, audio, 120, 5);
+		MoveCursorOnMenu(A(AUDIO::AMOUNT), &cursorAudio, audio, -5, 5);
 	}
 
 	void CGameStatePause::CtrlSaveExit(UINT nChar)

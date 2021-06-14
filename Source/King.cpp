@@ -185,7 +185,8 @@ namespace game_framework {
 				foreground->NextLevel();
 				texture->NextLevel();
 				//y += 573;
-				y += MAP_EDGE;
+				//y += MAP_EDGE;
+				y += SIZE_Y - 1;
 			}
 		}
 		if (isMovingDown)
@@ -200,7 +201,8 @@ namespace game_framework {
 				foreground->BackLevel();
 				texture->BackLevel();
 				//y -= 574;
-				y -= MAP_EDGE;
+				//y -= MAP_EDGE;
+				y -= SIZE_Y - 1;
 			}
 		}
 
@@ -500,6 +502,7 @@ namespace game_framework {
 				rising = true;
 			}
 		}
+
 		//if (!jumping)
 		//{
 		//	charging = flag;

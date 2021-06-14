@@ -37,6 +37,7 @@ namespace game_framework {
 		ctrllingNewGame = false;
 		ctrllingOptions = false;
 		ctrllingGraphics = false;
+		ctrllingMode = false;
 		ctrllingControls = false;
 		ctrllingAudio = false;
 		ctrllingExtras = false;
@@ -49,6 +50,7 @@ namespace game_framework {
 		InitAction(A(NEW_GAME::AMOUNT), newGame);
 		InitAction(A(OPTIONS::AMOUNT), options);
 		InitAction(A(GRAPHICS::AMOUNT), graphics);
+		InitAction(A(MODE::AMOUNT), mode);
 		InitAction(A(AUDIO::AMOUNT), audio);
 		InitAction(A(EXTRAS::AMOUNT), extras);
 		InitAction(A(QUIT::AMOUNT), quit);
@@ -112,10 +114,10 @@ namespace game_framework {
 		for (int i = 0; i < A(MAIN::AMOUNT); i++)
 			main[i].figure.AddBitmap(path[i]);
 
-		InitNewGame();
-		InitOptions();
-		InitExtras();
-		InitQuit();
+		this->InitNewGame();
+		this->InitOptions();
+		this->InitExtras();
+		this->InitQuit();
 	}
 
 	void CGameStateMenu::InitNewGame()
@@ -153,9 +155,9 @@ namespace game_framework {
 		for (int i = 0; i < A(OPTIONS::AMOUNT); i++)
 			options[i].figure.AddBitmap(path[i]);
 
-		InitGraphics();
-		InitControls();
-		InitAudio();
+		this->InitGraphics();
+		this->InitControls();
+		this->InitAudio();
 	}
 
 	void CGameStateMenu::InitGraphics()
@@ -167,12 +169,31 @@ namespace game_framework {
 
 		char *path[A(GRAPHICS::AMOUNT)] =
 		{
-			"RES/opening_menu/options/graphics/fullscreen.bmp",
+			"RES/opening_menu/options/graphics/mode/fullscreen.bmp",
 			"RES/opening_menu/options/graphics/x2.bmp",
 			"RES/opening_menu/back.bmp"
 		};
 		for (int i = 0; i < A(GRAPHICS::AMOUNT); i++)
 			graphics[i].figure.AddBitmap(path[i]);
+
+		this->InitMode();
+	}
+
+	void CGameStateMenu::InitMode()
+	{
+		frameMode.LoadBitmap("RES/opening_menu/options/graphics/mode/frame.bmp", RGB(255, 255, 255));
+		cursorMode.LoadBitmap("RES/opening_menu/cursor.bmp");
+
+		frameMode.SetTopLeft((SIZE_X - logo.Width()) + 200, SIZE_Y / 2 - 15);
+
+		char *path[A(MODE::AMOUNT)] =
+		{
+			"RES/opening_menu/options/graphics/mode/windowed.bmp",
+			"RES/opening_menu/options/graphics/mode/fullscreen.bmp",
+			"RES/opening_menu/back.bmp"
+		};
+		for (int i = 0; i < A(GRAPHICS::AMOUNT); i++)
+			mode[i].figure.AddBitmap(path[i]);
 	}
 
 	void CGameStateMenu::InitControls()
@@ -201,14 +222,14 @@ namespace game_framework {
 			"RES/opening_menu/options/audio/ambience_check.bmp",
 			"RES/opening_menu/back.bmp"
 		};
-		char *path_uncheck[A(AUDIO::AMOUNT) - 2] = {
+		char *path_uncheck[3] = {
 			"RES/opening_menu/options/audio/music_uncheck.bmp",
 			"RES/opening_menu/options/audio/sfx_uncheck.bmp",
 			"RES/opening_menu/options/audio/ambience_uncheck.bmp"
 		};
 		for (int i = 0; i < A(AUDIO::AMOUNT); i++)
 			audio[i].figure.AddBitmap(path[i]);
-		for (int i = 1, j = 0; i <= A(AUDIO::AMOUNT) - 2; i++, j++)
+		for (int i = 1, j = 0; i <= 3; i++, j++)
 			audio[i].figure.AddBitmap(path_uncheck[j]);
 	}
 
@@ -216,26 +237,28 @@ namespace game_framework {
 	{
 		frameExtras.LoadBitmap("RES/opening_menu/extras/frame.bmp", RGB(255, 255, 255));
 		cursorExtras.LoadBitmap("RES/opening_menu/cursor.bmp");
-		displayTimer.AddBitmap("RES/opening_menu/emptybox.bmp");
-		displayTimer.AddBitmap("RES/opening_menu/checkedbox.bmp");
 
 		frameExtras.SetTopLeft((SIZE_X - logo.Width()), SIZE_Y / 2 - 15);
-		displayTimer.SetTopLeft((SIZE_X - logo.Width()) / 2, SIZE_Y / 2);
 
 		char *path[A(EXTRAS::AMOUNT)] =
 		{
 			"RES/opening_menu/extras/credits.bmp",
 			"RES/opening_menu/extras/attribution.bmp",
 			"RES/opening_menu/extras/total_stats.bmp",
-			"RES/opening_menu/extras/display_timer_checked.bmp",
+			"RES/opening_menu/extras/display_timer_uncheck.bmp",
 			"RES/opening_menu/back.bmp"
+		};
+		char *path_check[1] = {
+			"RES/opening_menu/extras/display_timer_check.bmp",
 		};
 		for (int i = 0; i < A(EXTRAS::AMOUNT); i++)
 			extras[i].figure.AddBitmap(path[i]);
+		for (int i = 3, j = 0; i <= 3; i++, j++)
+			extras[i].figure.AddBitmap(path_check[j]);
 
-		InitCredits();
-		InitAttribution();
-		InitTotalStats();
+		this->InitCredits();
+		this->InitAttribution();
+		this->InitTotalStats();
 	}
 
 	void CGameStateMenu::InitCredits()
@@ -478,10 +501,9 @@ namespace game_framework {
 		{
 			if (nChar == KEY_SPACE)
 			{
-				if (CDDraw::IsFullScreen())
-					CDDraw::SetFullScreen(false);
-				else
-					CDDraw::SetFullScreen(true);
+				ctrllingMode = true;
+				mode[A(MODE::WINDOWED)].selected = true;
+				MoveCursorOnMenu(A(MODE::AMOUNT), &cursorMode, mode, 210, 15);
 			}
 			SelectAction(nChar, A(GRAPHICS::MODE), A(GRAPHICS::AMOUNT), graphics);
 		}
@@ -502,6 +524,37 @@ namespace game_framework {
 			SelectAction(nChar, A(GRAPHICS::BACK), A(GRAPHICS::AMOUNT), graphics);
 		}
 		MoveCursorOnMenu(A(GRAPHICS::AMOUNT), &cursorGraphics, graphics, 120, 15);
+	}
+
+	void CGameStateMenu::CtrlMode(UINT nChar)
+	{
+		if (nChar == KEY_ESC)
+		{
+			ctrllingMode = false;
+			InitAction(A(MODE::AMOUNT), mode);
+		}
+		if (mode[A(MODE::WINDOWED)].selected)
+		{
+			if (nChar == KEY_SPACE)
+				CDDraw::SetFullScreen(false);
+			SelectAction(nChar, A(MODE::WINDOWED), A(MODE::AMOUNT), mode);
+		}
+		else if (mode[A(MODE::FULLSCREEN)].selected)
+		{
+			if (nChar == KEY_SPACE)
+				CDDraw::SetFullScreen(true);
+			SelectAction(nChar, A(MODE::FULLSCREEN), A(MODE::AMOUNT), mode);
+		}
+		else if (mode[A(MODE::BACK)].selected)
+		{
+			if (nChar == KEY_SPACE)
+			{
+				ctrllingMode = false;
+				mode[A(MODE::BACK)].selected = false;
+			}
+			SelectAction(nChar, A(MODE::BACK), A(MODE::AMOUNT), mode);
+		}
+		MoveCursorOnMenu(A(MODE::AMOUNT), &cursorMode, mode, 210, 15);
 	}
 
 	void CGameStateMenu::CtrlControls(UINT nChar)
@@ -534,10 +587,21 @@ namespace game_framework {
 				{
 					audio[A(AUDIO::MUSIC)].figure.SetBitmapNumber(1);
 					//CAudio::Instance()->Pause();
+
+
+
+
+
 				}
 				else
 				{
 					audio[A(AUDIO::MUSIC)].figure.SetBitmapNumber(0);
+
+
+
+
+
+
 				}
 			}
 			SelectAction(nChar, A(AUDIO::MUSIC), A(AUDIO::AMOUNT), audio);
@@ -550,10 +614,21 @@ namespace game_framework {
 				{
 					audio[A(AUDIO::SFX)].figure.SetBitmapNumber(1);
 					//CAudio::Instance()->Pause();
+
+
+
+
+
 				}
 				else
 				{
 					audio[A(AUDIO::SFX)].figure.SetBitmapNumber(0);
+
+
+
+
+
+
 				}
 			}
 			SelectAction(nChar, A(AUDIO::SFX), A(AUDIO::AMOUNT), audio);
@@ -566,10 +641,21 @@ namespace game_framework {
 				{
 					audio[A(AUDIO::AMBIENCE)].figure.SetBitmapNumber(1);
 					//CAudio::Instance()->Pause();
+
+
+
+
+
 				}
 				else
 				{
 					audio[A(AUDIO::AMBIENCE)].figure.SetBitmapNumber(0);
+
+
+
+
+
+
 				}
 			}
 			SelectAction(nChar, A(AUDIO::AMBIENCE), A(AUDIO::AMOUNT), audio);
@@ -615,14 +701,23 @@ namespace game_framework {
 		{
 			if (nChar == KEY_SPACE)
 			{
-				//if (displayTimer.GetCurrentBitmapNumber() == 0)
-				//{
-				//	displayTimer.SetBitmapNumber(1);
-				//}
-				//else
-				//{
-				//	displayTimer.SetBitmapNumber(0);
-				//}
+				if (extras[A(EXTRAS::DISPLAY_TIMER)].figure.GetCurrentBitmapNumber() == 0)
+				{
+					extras[A(EXTRAS::DISPLAY_TIMER)].figure.SetBitmapNumber(1);
+
+
+
+
+				}
+				else
+				{
+					extras[A(EXTRAS::DISPLAY_TIMER)].figure.SetBitmapNumber(0);
+
+
+
+
+
+				}
 			}
 			SelectAction(nChar, A(EXTRAS::DISPLAY_TIMER), A(EXTRAS::AMOUNT), extras);
 		}
@@ -691,12 +786,18 @@ namespace game_framework {
 		else if (ctrllingOptions)
 		{
 			if (ctrllingGraphics)
-				CtrlGraphics(nChar);
+			{
+				if (ctrllingMode)
+					CtrlMode(nChar);
+				else
+					CtrlGraphics(nChar);
+			}
 			else if (ctrllingControls)
 				CtrlControls(nChar);
 			else if (ctrllingAudio)
 				CtrlAudio(nChar);
-			else CtrlOptions(nChar);
+			else
+				CtrlOptions(nChar);
 		}
 		else if (ctrllingExtras)
 		{
@@ -706,11 +807,13 @@ namespace game_framework {
 				CtrlAttribution(nChar);
 			else if (ctrllingTotalStats)
 				CtrlTotalStats(nChar);
-			else CtrlExtras(nChar);
+			else
+				CtrlExtras(nChar);
 		}
 		else if (ctrllingQuit)
 			CtrlQuit(nChar);
-		else CtrlMainMenu(nChar);
+		else
+			CtrlMainMenu(nChar);
 	}
 
 	void CGameStateMenu::OnMove()
@@ -771,6 +874,14 @@ namespace game_framework {
 					cursorGraphics.ShowBitmap();
 					for (i = 0; i < A(GRAPHICS::AMOUNT); i++)
 						graphics[i].figure.OnShow();
+
+					if (ctrllingMode)
+					{
+						frameMode.ShowBitmap();
+						cursorMode.ShowBitmap();
+						for (i = 0; i < A(MODE::AMOUNT); i++)
+							mode[i].figure.OnShow();
+					}
 				}
 				else if (ctrllingControls)
 				{
@@ -790,7 +901,6 @@ namespace game_framework {
 			{
 				frameExtras.ShowBitmap();
 				cursorExtras.ShowBitmap();
-				displayTimer.OnShow();
 				for (i = 0; i < A(EXTRAS::AMOUNT); i++)
 					extras[i].figure.OnShow();
 
