@@ -169,12 +169,17 @@ namespace game_framework {
 
 		char *path[A(GRAPHICS::AMOUNT)] =
 		{
-			"RES/opening_menu/options/graphics/mode/fullscreen.bmp",
+			"RES/opening_menu/options/graphics/mode/windowed.bmp",
 			"RES/opening_menu/options/graphics/x2.bmp",
 			"RES/opening_menu/back.bmp"
 		};
+		char *path_mode[1] =
+		{
+			"RES/opening_menu/options/graphics/mode/fullscreen.bmp"
+		};
 		for (int i = 0; i < A(GRAPHICS::AMOUNT); i++)
 			graphics[i].figure.AddBitmap(path[i]);
+		graphics[A(GRAPHICS::MODE)].figure.AddBitmap(path_mode[0]);
 
 		this->InitMode();
 	}
@@ -192,7 +197,7 @@ namespace game_framework {
 			"RES/opening_menu/options/graphics/mode/fullscreen.bmp",
 			"RES/opening_menu/back.bmp"
 		};
-		for (int i = 0; i < A(GRAPHICS::AMOUNT); i++)
+		for (int i = 0; i < A(MODE::AMOUNT); i++)
 			mode[i].figure.AddBitmap(path[i]);
 	}
 
@@ -253,8 +258,7 @@ namespace game_framework {
 		};
 		for (int i = 0; i < A(EXTRAS::AMOUNT); i++)
 			extras[i].figure.AddBitmap(path[i]);
-		for (int i = 3, j = 0; i <= 3; i++, j++)
-			extras[i].figure.AddBitmap(path_check[j]);
+		extras[A(EXTRAS::DISPLAY_TIMER)].figure.AddBitmap(path_check[0]);
 
 		this->InitCredits();
 		this->InitAttribution();
@@ -536,13 +540,19 @@ namespace game_framework {
 		if (mode[A(MODE::WINDOWED)].selected)
 		{
 			if (nChar == KEY_SPACE)
+			{
+				graphics[A(GRAPHICS::MODE)].figure.SetBitmapNumber(0);
 				CDDraw::SetFullScreen(false);
+			}
 			SelectAction(nChar, A(MODE::WINDOWED), A(MODE::AMOUNT), mode);
 		}
 		else if (mode[A(MODE::FULLSCREEN)].selected)
 		{
 			if (nChar == KEY_SPACE)
+			{
+				graphics[A(GRAPHICS::MODE)].figure.SetBitmapNumber(1);
 				CDDraw::SetFullScreen(true);
+			}
 			SelectAction(nChar, A(MODE::FULLSCREEN), A(MODE::AMOUNT), mode);
 		}
 		else if (mode[A(MODE::BACK)].selected)
