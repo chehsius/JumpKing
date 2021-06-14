@@ -73,10 +73,8 @@ namespace game_framework {
 			strcpy(path, ("RES/opening_menu/transition/faded_intro_" + to_string(i) + ".bmp").c_str());
 			introTransition.AddBitmap(path, RGB(200, 200, 200));
 		}
-		for (i = 1; i <= 5; i++)
-		{
+		for (i = 1; i <= 8; i++)
 			introTransition.AddBitmap("RES/opening_menu/transition/faded_intro_5.bmp", RGB(200, 200, 200));
-		}
 		for (i = 5; i >= 1; i--)
 		{
 			strcpy(path, ("RES/opening_menu/transition/faded_intro_" + to_string(i) + ".bmp").c_str());
@@ -84,8 +82,8 @@ namespace game_framework {
 		}
 		logoTransition.SetTopLeft((SIZE_X - logo.Width()) / 2, SIZE_Y / 10);
 		introTransition.SetTopLeft(SIZE_X / 4 + 3, SIZE_Y / 2 - 24);
-		logoTransition.SetDelayCount(15);
-		introTransition.SetDelayCount(15);
+		logoTransition.SetDelayCount(12);
+		introTransition.SetDelayCount(12);
 	}
 
 	void CGameStateMenu::InitMainMenu()
@@ -94,14 +92,14 @@ namespace game_framework {
 		frameMain.LoadBitmap("RES/opening_menu/frame.bmp", RGB(255, 255, 255));
 		cursorMain.LoadBitmap("RES/opening_menu/cursor.bmp");
 		record.LoadBitmap("RES/opening_menu/record.bmp", RGB(255, 255, 255));
-		kingSplat.LoadBitmap("RES/king/right/splat.bmp", RGB(255, 255, 255));
+		kingSplatRight.LoadBitmap("RES/king/right/splat.bmp", RGB(255, 255, 255));
 		hint.LoadBitmap("RES/opening_menu/saved_automatically.bmp");
 
 		logo.SetTopLeft((SIZE_X - logo.Width()) / 2, SIZE_Y / 10);
 		frameMain.SetTopLeft((SIZE_X - logo.Width()) / 2 - 30, SIZE_Y / 2 - 15);
 		record.SetTopLeft((SIZE_X - logo.Width()) + 220, SIZE_Y / 2 - 15);
-		kingSplat.SetTopLeft(SIZE_X / 2 - 30, SIZE_Y  - 120);
-		hint.SetTopLeft((SIZE_X - logo.Width()) + 150, SIZE_Y - 60);
+		kingSplatRight.SetTopLeft(SIZE_X / 2 - 25, SIZE_Y  - 75);
+		hint.SetTopLeft((SIZE_X - logo.Width()) + 150, SIZE_Y - 40);
 
 		char *path[A(MAIN::AMOUNT)] =
 		{
@@ -112,7 +110,7 @@ namespace game_framework {
 			"RES/opening_menu/quit.bmp"
 		};
 		for (int i = 0; i < A(MAIN::AMOUNT); i++)
-			main[i].figure.LoadBitmap(path[i]);
+			main[i].figure.AddBitmap(path[i]);
 
 		InitNewGame();
 		InitOptions();
@@ -135,7 +133,7 @@ namespace game_framework {
 			"RES/opening_menu/new_game/delete_save.bmp",
 		};
 		for (int i = 0; i < A(NEW_GAME::AMOUNT); i++)
-			newGame[i].figure.LoadBitmap(path[i]);
+			newGame[i].figure.AddBitmap(path[i]);
 	}
 
 	void CGameStateMenu::InitOptions()
@@ -153,7 +151,7 @@ namespace game_framework {
 			"RES/opening_menu/back.bmp"
 		};
 		for (int i = 0; i < A(OPTIONS::AMOUNT); i++)
-			options[i].figure.LoadBitmap(path[i]);
+			options[i].figure.AddBitmap(path[i]);
 
 		InitGraphics();
 		InitControls();
@@ -174,7 +172,7 @@ namespace game_framework {
 			"RES/opening_menu/back.bmp"
 		};
 		for (int i = 0; i < A(GRAPHICS::AMOUNT); i++)
-			graphics[i].figure.LoadBitmap(path[i]);
+			graphics[i].figure.AddBitmap(path[i]);
 	}
 
 	void CGameStateMenu::InitControls()
@@ -192,28 +190,26 @@ namespace game_framework {
 	{
 		frameAudio.LoadBitmap("RES/opening_menu/options/audio/frame.bmp", RGB(255, 255, 255));
 		cursorAudio.LoadBitmap("RES/opening_menu/cursor.bmp");
-		checkBoxMusic.AddBitmap("RES/opening_menu/emptybox.bmp");
-		checkBoxMusic.AddBitmap("RES/opening_menu/checkedbox.bmp");
-		checkBoxSFX.AddBitmap("RES/opening_menu/emptybox.bmp");
-		checkBoxSFX.AddBitmap("RES/opening_menu/checkedbox.bmp");
-		checkBoxAmbience.AddBitmap("RES/opening_menu/emptybox.bmp");
-		checkBoxAmbience.AddBitmap("RES/opening_menu/checkedbox.bmp");
 
 		frameAudio.SetTopLeft((SIZE_X - logo.Width()) + 110, SIZE_Y / 2 - 15);
-		checkBoxMusic.SetTopLeft((SIZE_X - logo.Width()) + 150, SIZE_Y / 2 - 15);
-		checkBoxSFX.SetTopLeft((SIZE_X - logo.Width()) + 150, SIZE_Y / 2 - 15);
-		checkBoxAmbience.SetTopLeft((SIZE_X - logo.Width()) + 150, SIZE_Y / 2 - 15);
 
 		char *path[A(AUDIO::AMOUNT)] =
 		{
 			"RES/opening_menu/options/audio/slider.bmp",
-			"RES/opening_menu/options/audio/music.bmp",
-			"RES/opening_menu/options/audio/sfx.bmp",
-			"RES/opening_menu/options/audio/ambience.bmp",
+			"RES/opening_menu/options/audio/music_check.bmp",
+			"RES/opening_menu/options/audio/sfx_check.bmp",
+			"RES/opening_menu/options/audio/ambience_check.bmp",
 			"RES/opening_menu/back.bmp"
 		};
+		char *path_uncheck[A(AUDIO::AMOUNT) - 2] = {
+			"RES/opening_menu/options/audio/music_uncheck.bmp",
+			"RES/opening_menu/options/audio/sfx_uncheck.bmp",
+			"RES/opening_menu/options/audio/ambience_uncheck.bmp"
+		};
 		for (int i = 0; i < A(AUDIO::AMOUNT); i++)
-			audio[i].figure.LoadBitmap(path[i]);
+			audio[i].figure.AddBitmap(path[i]);
+		for (int i = 1, j = 0; i <= A(AUDIO::AMOUNT) - 2; i++, j++)
+			audio[i].figure.AddBitmap(path_uncheck[j]);
 	}
 
 	void CGameStateMenu::InitExtras()
@@ -235,7 +231,7 @@ namespace game_framework {
 			"RES/opening_menu/back.bmp"
 		};
 		for (int i = 0; i < A(EXTRAS::AMOUNT); i++)
-			extras[i].figure.LoadBitmap(path[i]);
+			extras[i].figure.AddBitmap(path[i]);
 
 		InitCredits();
 		InitAttribution();
@@ -290,7 +286,7 @@ namespace game_framework {
 			"RES/opening_menu/quit/yes.bmp",
 		};
 		for (int i = 0; i < A(QUIT::AMOUNT); i++)
-			quit[i].figure.LoadBitmap(path[i]);
+			quit[i].figure.AddBitmap(path[i]);
 	}
 
 	void CGameStateMenu::InitAction(int amount, MenuAction* action)
@@ -482,7 +478,10 @@ namespace game_framework {
 		{
 			if (nChar == KEY_SPACE)
 			{
-
+				if (CDDraw::IsFullScreen())
+					CDDraw::SetFullScreen(false);
+				else
+					CDDraw::SetFullScreen(true);
 			}
 			SelectAction(nChar, A(GRAPHICS::MODE), A(GRAPHICS::AMOUNT), graphics);
 		}
@@ -531,7 +530,15 @@ namespace game_framework {
 		{
 			if (nChar == KEY_SPACE)
 			{
-
+				if (audio[A(AUDIO::MUSIC)].figure.GetCurrentBitmapNumber() == 0)
+				{
+					audio[A(AUDIO::MUSIC)].figure.SetBitmapNumber(1);
+					//CAudio::Instance()->Pause();
+				}
+				else
+				{
+					audio[A(AUDIO::MUSIC)].figure.SetBitmapNumber(0);
+				}
 			}
 			SelectAction(nChar, A(AUDIO::MUSIC), A(AUDIO::AMOUNT), audio);
 		}
@@ -539,7 +546,15 @@ namespace game_framework {
 		{
 			if (nChar == KEY_SPACE)
 			{
-
+				if (audio[A(AUDIO::SFX)].figure.GetCurrentBitmapNumber() == 0)
+				{
+					audio[A(AUDIO::SFX)].figure.SetBitmapNumber(1);
+					//CAudio::Instance()->Pause();
+				}
+				else
+				{
+					audio[A(AUDIO::SFX)].figure.SetBitmapNumber(0);
+				}
 			}
 			SelectAction(nChar, A(AUDIO::SFX), A(AUDIO::AMOUNT), audio);
 		}
@@ -547,7 +562,15 @@ namespace game_framework {
 		{
 			if (nChar == KEY_SPACE)
 			{
-
+				if (audio[A(AUDIO::AMBIENCE)].figure.GetCurrentBitmapNumber() == 0)
+				{
+					audio[A(AUDIO::AMBIENCE)].figure.SetBitmapNumber(1);
+					//CAudio::Instance()->Pause();
+				}
+				else
+				{
+					audio[A(AUDIO::AMBIENCE)].figure.SetBitmapNumber(0);
+				}
 			}
 			SelectAction(nChar, A(AUDIO::AMBIENCE), A(AUDIO::AMOUNT), audio);
 		}
@@ -706,6 +729,8 @@ namespace game_framework {
 
 	void CGameStateMenu::OnShow()
 	{
+		kingSplatRight.ShowBitmap();
+
 		if (transitioning)
 		{
 			if (logoTransition.IsFinalBitmap())
@@ -719,12 +744,11 @@ namespace game_framework {
 			frameMain.ShowBitmap();
 			cursorMain.ShowBitmap();
 			record.ShowBitmap();
-			kingSplat.ShowBitmap();
 			hint.ShowBitmap();
 
 			int i = 0;
 			for (i = 0; i < A(MAIN::AMOUNT); i++)
-				main[i].figure.ShowBitmap();
+				main[i].figure.OnShow();
 
 			if (ctrllingNewGame)
 			{
@@ -732,21 +756,21 @@ namespace game_framework {
 				titleNewGame.ShowBitmap();
 				cursorNewGame.ShowBitmap();
 				for (i = 0; i < A(NEW_GAME::AMOUNT); i++)
-					newGame[i].figure.ShowBitmap();
+					newGame[i].figure.OnShow();
 			}
 			else if (ctrllingOptions)
 			{
 				frameOptions.ShowBitmap();
 				cursorOptions.ShowBitmap();
 				for (i = 0; i < A(OPTIONS::AMOUNT); i++)
-					options[i].figure.ShowBitmap();
+					options[i].figure.OnShow();
 
 				if (ctrllingGraphics)
 				{
 					frameGraphics.ShowBitmap();
 					cursorGraphics.ShowBitmap();
 					for (i = 0; i < A(GRAPHICS::AMOUNT); i++)
-						graphics[i].figure.ShowBitmap();
+						graphics[i].figure.OnShow();
 				}
 				else if (ctrllingControls)
 				{
@@ -759,7 +783,7 @@ namespace game_framework {
 					frameAudio.ShowBitmap();
 					cursorAudio.ShowBitmap();
 					for (i = 0; i < A(AUDIO::AMOUNT); i++)
-						audio[i].figure.ShowBitmap();
+						audio[i].figure.OnShow();
 				}
 			}
 			else if (ctrllingExtras)
@@ -768,7 +792,7 @@ namespace game_framework {
 				cursorExtras.ShowBitmap();
 				displayTimer.OnShow();
 				for (i = 0; i < A(EXTRAS::AMOUNT); i++)
-					extras[i].figure.ShowBitmap();
+					extras[i].figure.OnShow();
 
 				if (ctrllingCredits)
 				{
@@ -795,7 +819,7 @@ namespace game_framework {
 				titleQuit.ShowBitmap();
 				cursorQuit.ShowBitmap();
 				for (i = 0; i < A(QUIT::AMOUNT); i++)
-					quit[i].figure.ShowBitmap();
+					quit[i].figure.OnShow();
 			}
 		}
 	}

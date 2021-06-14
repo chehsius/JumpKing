@@ -7,6 +7,10 @@ namespace game_framework {
 		void OnInit();
 		void OnBeginState();
 		void OnKeyDown(UINT, UINT, UINT);
+	protected:
+		void OnMove();
+		void OnShow();
+	private:
 		void InitTransition();
 		void InitMainMenu();
 		void InitNewGame();
@@ -33,10 +37,7 @@ namespace game_framework {
 		void CtrlAttribution(UINT);
 		void CtrlTotalStats(UINT);
 		void CtrlQuit(UINT);
-	protected:
-		void OnMove();
-		void OnShow();
-	private:
+
 		const char KEY_ESC, KEY_SPACE, KEY_UP, KEY_DOWN;
 		MenuAction main[A(MAIN::AMOUNT)];
 		MenuAction newGame[A(NEW_GAME::AMOUNT)];
@@ -46,7 +47,7 @@ namespace game_framework {
 		MenuAction extras[A(EXTRAS::AMOUNT)];
 		MenuAction quit[A(QUIT::AMOUNT)];
 		CAnimation logoTransition, introTransition;
-		CMovingBitmap logo, hint, record, kingSplat;
+		CMovingBitmap logo, hint, record, kingSplatRight;
 		CMovingBitmap frameMain, cursorMain;
 		CMovingBitmap frameNewGame, titleNewGame, cursorNewGame;
 		CMovingBitmap frameOptions, cursorOptions;

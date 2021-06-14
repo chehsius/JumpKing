@@ -27,6 +27,7 @@ namespace game_framework {
 	{
 		king.Initialize();
 		map.Initialize();
+		foreground.Initialize();
 		//hits_left.SetInteger(HITS_LEFT);					// 指定剩下的撞擊數
 		//hits_left.SetTopLeft(HITS_LEFT_X, HITS_LEFT_Y);		// 指定剩下撞擊數的座標
 	}
@@ -53,13 +54,14 @@ namespace game_framework {
 		//		}
 		//	}
 		//}
-		king.OnMove(&map);
+		king.OnMove(&map, &foreground);
 	}
 
 	void CGameStateRun::OnInit()  								// 遊戲的初值及圖形設定
 	{
 		king.LoadBitmap();
 		map.LoadBitmap();
+		foreground.LoadBitmap();
 		//hits_left.LoadBitmap();
 
 		//
@@ -101,6 +103,8 @@ namespace game_framework {
 	{
 		map.OnShow();
 		king.OnShow();
+		foreground.OnShow();
+
 		//hits_left.ShowBitmap();
 	}
 }
