@@ -53,6 +53,7 @@ namespace game_framework {
 	{
 		background.OnShow();
 		midground.OnShow();
+
 		for (int i = 0; i < 80; i++)
 		{
 			for (int j = 0; j < 60; j++)
@@ -72,7 +73,7 @@ namespace game_framework {
 		}
 	}
 
-	void CGameMap::NextStage()
+	void CGameMap::NextLevel()
 	{
 		levelIndex++;
 		background.SetBitmapNumber(levelIndex);
@@ -80,7 +81,7 @@ namespace game_framework {
 		this->OnLoad();
 	}
 
-	void CGameMap::BackStage()
+	void CGameMap::BackLevel()
 	{
 		levelIndex--;
 		background.SetBitmapNumber(levelIndex);

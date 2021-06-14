@@ -1,18 +1,23 @@
-#define MAX_LEVEL 43
-
 namespace game_framework {
 
-	class Foreground : public CAnimation {
+	class Texture : public CAnimation {
 	public:
-		Foreground();
-		~Foreground();
+		Texture();
+		~Texture();
 		void Initialize();
 		void LoadBitmap();
+		void LoadBonfire();
+		void OnMove();
 		void OnShow();
 		void NextLevel();
 		void BackLevel();
 	private:
-		CAnimation foreground;
+		CAnimation bonfire;
+
+
+
+
+
 		int levelIndex;
 	};
 }

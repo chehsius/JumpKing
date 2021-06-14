@@ -13,8 +13,8 @@ namespace game_framework {
 		bool isEmpty(int, int);
 		//int getX();
 		//int getY();
-		void NextStage();
-		void BackStage();
+		void NextLevel();
+		void BackLevel();
 	protected:
 		CMovingBitmap test;
 		CAnimation midground, background;

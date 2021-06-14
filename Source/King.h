@@ -1,7 +1,6 @@
 #include "CGameMap.h"
 #include "Foreground.h"
-
-
+#include "Texture.h"
 
 namespace game_framework {
 
@@ -18,7 +17,7 @@ namespace game_framework {
 
 		void Initialize();
 		void LoadBitmap();
-		void OnMove(CGameMap*, Foreground*);
+		void OnMove(CGameMap*, Foreground*, Texture*);
 		void OnShow();
 		
 		void SetMovingDown(bool);

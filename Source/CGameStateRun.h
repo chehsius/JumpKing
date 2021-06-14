@@ -17,6 +17,7 @@ namespace game_framework {
 		const char KEY_ESC, KEY_SPACE, KEY_LEFT, KEY_UP, KEY_RIGHT, KEY_DOWN;
 		King king;
 		CGameMap map;
+		Texture texture;
 		Foreground foreground;
 		//CInteger		hits_left;
 	};

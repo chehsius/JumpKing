@@ -10,7 +10,6 @@ namespace game_framework {
 
 	Foreground::Foreground()
 	{
-		this->Initialize();
 	}
 
 	Foreground::~Foreground()
@@ -38,13 +37,13 @@ namespace game_framework {
 		foreground.OnShow();
 	}
 
-	void Foreground::NextStage()
+	void Foreground::NextLevel()
 	{
 		levelIndex++;
 		foreground.SetBitmapNumber(levelIndex);
 	}
 
-	void Foreground::BackStage()
+	void Foreground::BackLevel()
 	{
 		levelIndex--;
 		foreground.SetBitmapNumber(levelIndex);

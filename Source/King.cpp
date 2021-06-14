@@ -135,7 +135,7 @@ namespace game_framework {
 	//		jumpRight.AddBitmap(path[i], RGB(255, 255, 255));
 	//}
 
-	void King::OnMove(CGameMap *map, Foreground* foreground)
+	void King::OnMove(CGameMap *map, Foreground* foreground, Texture* texture)
 	{
 		
 		//if (charging)
@@ -181,8 +181,9 @@ namespace game_framework {
 
 			if (y <= 1)
 			{
-				map->NextStage();
-				foreground->NextStage();
+				map->NextLevel();
+				foreground->NextLevel();
+				texture->NextLevel();
 				//y += 573;
 				y += MAP_EDGE;
 			}
@@ -195,8 +196,9 @@ namespace game_framework {
 
 			if (y >= MAP_EDGE)
 			{
-				map->BackStage();
-				foreground->BackStage();
+				map->BackLevel();
+				foreground->BackLevel();
+				texture->BackLevel();
 				//y -= 574;
 				y -= MAP_EDGE;
 			}
