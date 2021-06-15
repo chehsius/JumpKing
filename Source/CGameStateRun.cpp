@@ -1,3 +1,4 @@
+
 #include "stdafx.h"
 #include "Resource.h"
 #include <mmsystem.h>
@@ -17,6 +18,10 @@ namespace game_framework {
 		KEY_RIGHT(0x27),
 		KEY_DOWN(0x28)
 	{
+		map = CGameMap::Instance();
+		texture = Texture::Instance();
+		king = King::Instance();
+		foreground = Foreground::Instance();
 	}
 
 	CGameStateRun::~CGameStateRun()
@@ -25,16 +30,24 @@ namespace game_framework {
 
 	void CGameStateRun::OnBeginState()
 	{
-		map.Initialize();
-		texture.Initialize();
-		king.Initialize();
-		foreground.Initialize();
+		map->OnBeginState();
+		texture->OnBeginState();
+		king->OnBeginState();
+		foreground->OnBeginState();
+
+		//map.OnBeginState();
+		//texture.OnBeginState();
+		//foreground.OnBeginState();
+
 		//hits_left.SetInteger(HITS_LEFT);					// 指定剩下的撞擊數
 		//hits_left.SetTopLeft(HITS_LEFT_X, HITS_LEFT_Y);		// 指定剩下撞擊數的座標
 	}
 
 	void CGameStateRun::OnMove()
 	{
+		texture->OnMove();
+		king->OnMove(map, foreground, texture);
+
 		//
 		// 如果希望修改cursor的樣式，則將下面程式的commment取消即可
 		//
@@ -55,17 +68,15 @@ namespace game_framework {
 		//		}
 		//	}
 		//}
-		
-		texture.OnMove();
-		king.OnMove(&map, &foreground, &texture);
 	}
 
 	void CGameStateRun::OnInit()  								// 遊戲的初值及圖形設定
 	{
-		map.LoadBitmap();
-		texture.LoadBitmap();
-		king.LoadBitmap();
-		foreground.LoadBitmap();
+		map->OnInit();
+		texture->OnInit();
+		king->OnInit();
+		foreground->OnInit();
+
 		//hits_left.LoadBitmap();
 
 		//
@@ -76,39 +87,45 @@ namespace game_framework {
 	void CGameStateRun::OnKeyDown(UINT nChar, UINT nRepCnt, UINT nFlags)
 	{
 		if (nChar == KEY_ESC)
+		{
+
+
+
+			CAudio::Instance()->Play(MENU_OPEN);
 			GotoGameState(GAME_STATE_PAUSE);
+		}
 		if (nChar == KEY_LEFT)
-			king.SetMovingLeft(true);
+			king->SetMovingLeft(true);
 		if (nChar == KEY_RIGHT)
-			king.SetMovingRight(true);
+			king->SetMovingRight(true);
 		if (nChar == KEY_UP)
-			king.SetMovingUp(true);
+			king->SetMovingUp(true);
 		if (nChar == KEY_DOWN)
-			king.SetMovingDown(true);
+			king->SetMovingDown(true);
 		if (nChar == KEY_SPACE)
-			king.SetCharging(true);
+			king->SetCharging(true);
 	}
 
 	void CGameStateRun::OnKeyUp(UINT nChar, UINT nRepCnt, UINT nFlags)
 	{
 		if (nChar == KEY_LEFT)
-			king.SetMovingLeft(false);
+			king->SetMovingLeft(false);
 		if (nChar == KEY_RIGHT)
-			king.SetMovingRight(false);
+			king->SetMovingRight(false);
 		if (nChar == KEY_UP)
-			king.SetMovingUp(false);
+			king->SetMovingUp(false);
 		if (nChar == KEY_DOWN)
-			king.SetMovingDown(false);
+			king->SetMovingDown(false);
 		if (nChar == KEY_SPACE)
-			king.SetCharging(false);
+			king->SetCharging(false);
 	}
 
 	void CGameStateRun::OnShow()
 	{
-		map.OnShow();
-		texture.OnShow();
-		king.OnShow();
-		foreground.OnShow();
+		map->OnShow();
+		texture->OnShow();
+		king->OnShow();
+		foreground->OnShow();
 
 		//hits_left.ShowBitmap();
 	}

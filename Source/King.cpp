@@ -4,10 +4,12 @@
 #include <ddraw.h>
 #include "audio.h"
 #include "gamelib.h"
-#include "King.h"
 #include <windows.h>
+#include "King.h"
 
 namespace game_framework {
+
+	King *King::instance = nullptr;
 
 	King::King() :
 		STEP(6),
@@ -19,42 +21,24 @@ namespace game_framework {
 
 	King::~King()
 	{
+		delete &instance;
 	}
 
-	int King::GetWidth()
+	void King::OnInit()
 	{
-		return walkLeft.Width();
-	}
-
-	int King::GetHeight()
-	{
-		return walkRight.Height();
-	}
-
-	int King::GetX2()
-	{
-		return x + this->GetWidth();
-	}
-
-	int King::GetY2()
-	{
-		return y + this->GetHeight();
-	}
-
-	void King::Initialize()
-	{
+		this->LoadBitmap();
 		const int X_POS = SIZE_X / 2 - 25;
 		const int Y_POS = SIZE_Y - 75;
 		x = X_POS;
 		y = Y_POS;
 		floor = Y_POS;
+	}
 
+	void King::OnBeginState()
+	{
 		isMovingLeft = isMovingRight = false;
 		isMovingUp = isMovingDown = false;
 		jumping = false;
-
-		//initialVelocityY = initialVelocityX = 0;
-		//velocityX = velocityY = 0;
 
 		splatted = false;
 
@@ -91,13 +75,6 @@ namespace game_framework {
 
 		charge.LoadBitmap("RES/king/charge.bmp", RGB(255, 255, 255));
 
-		LoadBitmapWalk();
-		//LoadBitmapJumpLeft();
-		//LoadBitmapJumpRight();
-	}
-
-	void King::LoadBitmapWalk()
-	{
 		char path[100] = "";
 		for (int i = 1; i <= 3; i++)
 		{
@@ -105,13 +82,17 @@ namespace game_framework {
 			walkLeft.AddBitmap(path, RGB(255, 255, 255));
 		}
 		walkLeft.AddBitmap("RES/king/left/walk2.bmp", RGB(255, 255, 255));
-		for (int i = 1; i <= 3; i++) 
+		for (int i = 1; i <= 3; i++)
 		{
 			strcpy(path, ("RES/king/right/walk" + to_string(i) + ".bmp").c_str());
 			walkRight.AddBitmap(path, RGB(255, 255, 255));
 		}
 		walkRight.AddBitmap("RES/king/right/walk2.bmp", RGB(255, 255, 255));
 	}
+
+	
+
+	
 
 	//void King::LoadBitmapJumpLeft()
 	//{
@@ -153,12 +134,12 @@ namespace game_framework {
 
 		if (walking)
 		{
-			if (!decidedMoveLeft && !decidedMoveRight)
-			{
-				walking = false;
-				standing = true;
-			}
-			else if (decidedMoveLeft)
+			//if (!decidedMoveLeft && !decidedMoveRight)
+			//{
+			//	walking = false;
+			//	standing = true;
+			//}
+			if (decidedMoveLeft)
 			{
 				walkLeft.OnMove();
 				if (map->isEmpty(x - STEP, y) &&
@@ -184,8 +165,6 @@ namespace game_framework {
 				map->NextLevel();
 				foreground->NextLevel();
 				texture->NextLevel();
-				//y += 573;
-				//y += MAP_EDGE;
 				y += SIZE_Y - 1;
 			}
 		}
@@ -200,8 +179,6 @@ namespace game_framework {
 				map->BackLevel();
 				foreground->BackLevel();
 				texture->BackLevel();
-				//y -= 574;
-				//y -= MAP_EDGE;
 				y -= SIZE_Y - 1;
 			}
 		}
@@ -399,6 +376,26 @@ namespace game_framework {
 		//}
 	}
 
+	int King::GetWidth()
+	{
+		return walkLeft.Width();
+	}
+
+	int King::GetHeight()
+	{
+		return walkRight.Height();
+	}
+
+	int King::GetX2()
+	{
+		return x + this->GetWidth();
+	}
+
+	int King::GetY2()
+	{
+		return y + this->GetHeight();
+	}
+
 	void King::SetMovingDown(bool flag)
 	{
 		isMovingDown = flag;
@@ -420,17 +417,17 @@ namespace game_framework {
 			{
 				standing = false;
 				walking = true;
-				//facingRight = false;
-				//facingLeft = true;
-				//decidedMoveRight = false;
+				facingRight = false;
+				facingLeft = true;
+				decidedMoveRight = false;
 			}
 			else
 			{
 				standing = true;
 			}
 
-			facingRight = false;
-			facingLeft = true;
+			//facingRight = false;
+			//facingLeft = true;
 		}
 		
 		//if (!jumping)
@@ -665,5 +662,12 @@ namespace game_framework {
 	void King::SetFloor(int floor)
 	{
 		this->floor = floor;
+	}
+
+	King *King::Instance()
+	{
+		if (instance == nullptr)
+			instance = new King();
+		return instance;
 	}
 }

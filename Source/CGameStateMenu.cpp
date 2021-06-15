@@ -25,10 +25,6 @@ namespace game_framework {
 	{
 		InitMainMenu();
 		InitTransition();
-
-		CAudio::Instance()->Load(SELECT, "Sounds/select.wav");
-		CAudio::Instance()->Load(OPENING_THEME, "Sounds/opening_theme.wav");
-		CAudio::Instance()->Load(MENU_FAIL, "Sounds/menu_fail.wav");
 	}
 
 	void CGameStateMenu::OnBeginState()
@@ -253,7 +249,8 @@ namespace game_framework {
 			"RES/opening_menu/extras/display_timer_uncheck.bmp",
 			"RES/opening_menu/back.bmp"
 		};
-		char *path_check[1] = {
+		char *path_check[1] =
+		{
 			"RES/opening_menu/extras/display_timer_check.bmp",
 		};
 		for (int i = 0; i < A(EXTRAS::AMOUNT); i++)
@@ -541,8 +538,8 @@ namespace game_framework {
 		{
 			if (nChar == KEY_SPACE)
 			{
-				graphics[A(GRAPHICS::MODE)].figure.SetBitmapNumber(0);
-				CDDraw::SetFullScreen(false);
+				if (CDDraw::IsFullScreen())
+					CDDraw::SetFullScreen(false);
 			}
 			SelectAction(nChar, A(MODE::WINDOWED), A(MODE::AMOUNT), mode);
 		}
@@ -550,8 +547,8 @@ namespace game_framework {
 		{
 			if (nChar == KEY_SPACE)
 			{
-				graphics[A(GRAPHICS::MODE)].figure.SetBitmapNumber(1);
-				CDDraw::SetFullScreen(true);
+				if (!CDDraw::IsFullScreen())
+					CDDraw::SetFullScreen(true);
 			}
 			SelectAction(nChar, A(MODE::FULLSCREEN), A(MODE::AMOUNT), mode);
 		}
@@ -882,6 +879,12 @@ namespace game_framework {
 				{
 					frameGraphics.ShowBitmap();
 					cursorGraphics.ShowBitmap();
+
+					if (!CDDraw::IsFullScreen())
+						graphics[A(GRAPHICS::MODE)].figure.SetBitmapNumber(0);
+					else
+						graphics[A(GRAPHICS::MODE)].figure.SetBitmapNumber(1);
+
 					for (i = 0; i < A(GRAPHICS::AMOUNT); i++)
 						graphics[i].figure.OnShow();
 

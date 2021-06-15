@@ -1,3 +1,4 @@
+#pragma once
 #include "CGameMap.h"
 #include "Foreground.h"
 #include "Texture.h"
@@ -8,17 +9,14 @@ namespace game_framework {
 	public:
 		King();
 		~King();
-
-		int GetWidth();
-		int GetHeight();
-
-		int GetX2();
-		int GetY2();
-
-		void Initialize();
-		void LoadBitmap();
+		void OnInit();
+		void OnBeginState();
 		void OnMove(CGameMap*, Foreground*, Texture*);
 		void OnShow();
+		int GetWidth();
+		int GetHeight();
+		int GetX2();
+		int GetY2();
 		
 		void SetMovingDown(bool);
 		void SetMovingLeft(bool);
@@ -32,11 +30,10 @@ namespace game_framework {
 		void SetXY(int, int);
 		//void SetVelocity(int);
 		void SetFloor(int);
+		static King *Instance();
 	private:
-		void LoadBitmapWalk();
-		//void LoadBitmapJumpLeft();
-		//void LoadBitmapJumpRight();
-
+		void LoadBitmap();
+		static King* instance;
 		const int STEP, MAX_JUMP_DISTANCE, MAX_JUMP_HEIGHT;
 		const int MAP_EDGE;
 		CMovingBitmap standLeft, standRight;
@@ -72,5 +69,7 @@ namespace game_framework {
 
 		int collisionCon;
 		int mapEdgeY;
+
+
 	};
 }

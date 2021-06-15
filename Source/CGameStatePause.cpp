@@ -15,6 +15,10 @@ namespace game_framework {
 		KEY_UP(0x26),
 		KEY_DOWN(0x28)
 	{
+		map = CGameMap::Instance();
+		texture = Texture::Instance();
+		king = King::Instance();
+		foreground = Foreground::Instance();
 	}
 
 	CGameStatePause::~CGameStatePause()
@@ -62,13 +66,18 @@ namespace game_framework {
 		char *path[A(PAUSE::AMOUNT)] =
 		{
 			"RES/esc_menu/resume.bmp",
-			"RES/esc_menu/cheat.bmp",
+			"RES/esc_menu/cheat_off.bmp",
 			"RES/esc_menu/options.bmp",
 			"RES/esc_menu/save_exit.bmp",
 			"RES/esc_menu/give_up.bmp"
 		};
+		char *path_cheat[1]
+		{
+			"RES/esc_menu/cheat_on.bmp"
+		};
 		for (int i = 0; i < A(PAUSE::AMOUNT); i++)
 			pause[i].figure.AddBitmap(path[i]);
+		pause[A(PAUSE::CHEAT)].figure.AddBitmap(path_cheat[0]);
 
 		InitOptions();
 		InitSaveExit();
@@ -273,10 +282,29 @@ namespace game_framework {
 		{
 			if (nChar == KEY_SPACE)
 			{
+				if (pause[A(PAUSE::CHEAT)].figure.GetCurrentBitmapNumber() == 0)
+				{
+					pause[A(PAUSE::CHEAT)].figure.SetBitmapNumber(1);
 
 
 
 
+
+
+				}
+				else
+				{
+					pause[A(PAUSE::CHEAT)].figure.SetBitmapNumber(0);
+
+
+
+
+
+
+
+
+
+				}
 			}
 			SelectAction(nChar, A(PAUSE::CHEAT), A(PAUSE::AMOUNT), pause);
 		}
@@ -405,8 +433,8 @@ namespace game_framework {
 		{
 			if (nChar == KEY_SPACE)
 			{
-				graphics[A(GRAPHICS::MODE)].figure.SetBitmapNumber(0);
-				CDDraw::SetFullScreen(false);
+				if (CDDraw::IsFullScreen())
+					CDDraw::SetFullScreen(false);
 			}
 			SelectAction(nChar, A(MODE::WINDOWED), A(MODE::AMOUNT), mode);
 		}
@@ -414,8 +442,8 @@ namespace game_framework {
 		{
 			if (nChar == KEY_SPACE)
 			{
-				graphics[A(GRAPHICS::MODE)].figure.SetBitmapNumber(1);
-				CDDraw::SetFullScreen(true);
+				if (!CDDraw::IsFullScreen())
+					CDDraw::SetFullScreen(true);
 			}
 			SelectAction(nChar, A(MODE::FULLSCREEN), A(MODE::AMOUNT), mode);
 		}
@@ -470,6 +498,13 @@ namespace game_framework {
 				}
 				else
 				{
+
+
+
+
+
+
+
 					audio[A(AUDIO::MUSIC)].figure.SetBitmapNumber(0);
 				}
 			}
@@ -492,6 +527,13 @@ namespace game_framework {
 				}
 				else
 				{
+
+
+
+
+
+
+
 					audio[A(AUDIO::SFX)].figure.SetBitmapNumber(0);
 				}
 			}
@@ -505,10 +547,21 @@ namespace game_framework {
 				{
 					audio[A(AUDIO::AMBIENCE)].figure.SetBitmapNumber(1);
 					//CAudio::Instance()->Pause();
+
+
+
+
 				}
 				else
 				{
 					audio[A(AUDIO::AMBIENCE)].figure.SetBitmapNumber(0);
+
+
+
+
+
+
+
 				}
 			}
 			SelectAction(nChar, A(AUDIO::AMBIENCE), A(AUDIO::AMOUNT), audio);
@@ -542,6 +595,7 @@ namespace game_framework {
 		{
 			if (nChar == KEY_SPACE)
 			{
+				CAudio::Instance()->Play(MENU_INTRO, true);
 				GotoGameState(GAME_STATE_INIT);
 			}
 			SelectAction(nChar, A(SAVE_EXIT::YES), A(SAVE_EXIT::AMOUNT), saveExit);
@@ -565,9 +619,7 @@ namespace game_framework {
 		else if (giveUp[A(GIVE_UP::DELETE_SAVE)].selected)
 		{
 			if (nChar == KEY_SPACE)
-			{
 				PostMessage(AfxGetMainWnd()->m_hWnd, WM_CLOSE, 0, 0);
-			}
 			SelectAction(nChar, A(GIVE_UP::DELETE_SAVE), A(GIVE_UP::AMOUNT), giveUp);
 		}
 		MoveCursorOnMenu(A(GIVE_UP::AMOUNT), &cursorGiveUp, giveUp, 50, 60);
@@ -599,6 +651,11 @@ namespace game_framework {
 
 	void CGameStatePause::OnShow()
 	{
+		map->OnShow();
+		texture->OnShow();
+		king->OnShow();
+		foreground->OnShow();
+
 		framePause.ShowBitmap();
 		cursorPause.ShowBitmap();
 		record.ShowBitmap();
@@ -619,6 +676,12 @@ namespace game_framework {
 			{
 				frameGraphics.ShowBitmap();
 				cursorGraphics.ShowBitmap();
+
+				if (!CDDraw::IsFullScreen())
+					graphics[A(GRAPHICS::MODE)].figure.SetBitmapNumber(0);
+				else
+					graphics[A(GRAPHICS::MODE)].figure.SetBitmapNumber(1);
+
 				for (i = 0; i < A(GRAPHICS::AMOUNT); i++)
 					graphics[i].figure.OnShow();
 
@@ -661,5 +724,4 @@ namespace game_framework {
 				giveUp[i].figure.OnShow();
 		}
 	}
-
 }

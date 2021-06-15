@@ -6,12 +6,15 @@ namespace game_framework {
 	public:
 		Foreground();
 		~Foreground();
-		void Initialize();
-		void LoadBitmap();
+		void OnInit();
+		void OnBeginState();
 		void OnShow();
 		void NextLevel();
 		void BackLevel();
+		static Foreground *Instance();
 	private:
+		void LoadBitmap();
+		static Foreground* instance;
 		CAnimation foreground;
 		int levelIndex;
 	};

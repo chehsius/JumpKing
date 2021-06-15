@@ -15,10 +15,9 @@ namespace game_framework {
 		void OnShow();									// 顯示這個狀態的遊戲畫面
 	private:
 		const char KEY_ESC, KEY_SPACE, KEY_LEFT, KEY_UP, KEY_RIGHT, KEY_DOWN;
-		King king;
-		CGameMap map;
-		Texture texture;
-		Foreground foreground;
-		//CInteger		hits_left;
+		CGameMap *map;
+		Texture *texture;
+		King *king;
+		Foreground *foreground;
 	};
 }

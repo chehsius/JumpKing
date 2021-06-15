@@ -8,6 +8,8 @@
 
 namespace game_framework {
 
+	Texture *Texture::instance = nullptr;
+
 	Texture::Texture()
 	{
 	}
@@ -16,9 +18,14 @@ namespace game_framework {
 	{
 	}
 
-	void Texture::Initialize()
+	void Texture::OnInit()
 	{
+		this->LoadBitmap();
 		levelIndex = 0;
+	}
+
+	void Texture::OnBeginState()
+	{
 	}
 
 	void Texture::LoadBitmap()
@@ -77,5 +84,12 @@ namespace game_framework {
 
 
 
+	}
+
+	Texture *Texture::Instance()
+	{
+		if (instance == nullptr)
+			instance = new Texture();
+		return instance;
 	}
 }

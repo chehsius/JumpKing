@@ -1,3 +1,5 @@
+#include "King.h"
+
 namespace game_framework {
 
 	class CGameStatePause : public CGameState {
@@ -30,7 +32,12 @@ namespace game_framework {
 		void CtrlSaveExit(UINT);
 		void CtrlGiveUp(UINT);
 
+		
 		const char KEY_ESC, KEY_SPACE, KEY_UP, KEY_DOWN;
+		CGameMap *map;
+		Texture *texture;
+		King *king;
+		Foreground *foreground;
 		MenuAction pause[A(PAUSE::AMOUNT)];
 		MenuAction options[A(OPTIONS::AMOUNT)];
 		MenuAction graphics[A(GRAPHICS::AMOUNT)];

@@ -8,7 +8,10 @@
 
 namespace game_framework {
 
-	CGameStateInit::CGameStateInit(CGame *g) : CGameState(g)
+	CGameStateInit::CGameStateInit(CGame *g) : 
+		CGameState(g),
+		KEY_ESC(0x27),
+		KEY_SPACE(0x20)
 	{
 	}
 
@@ -28,8 +31,25 @@ namespace game_framework {
 		title_logo.SetTopLeft((SIZE_X - title_logo.Width()) / 2, SIZE_Y / 10);
 		press_space.SetTopLeft((SIZE_X - press_space.Width()) / 2, SIZE_Y / 2 + 30);
 		
-		CAudio::Instance()->Load(MENU_INTRO, "Sounds/menu_intro.wav");
-		CAudio::Instance()->Load(PRESS_START, "Sounds/press_start.wav");
+
+		/////////////////////////////////////////////////////////////////////////////
+		// Music
+		/////////////////////////////////////////////////////////////////////////////
+		CAudio::Instance()->Load(MENU_INTRO, "Sounds/music/menu_intro.wav");
+		CAudio::Instance()->Load(OPENING_THEME, "Sounds/music/opening_theme.wav");
+		CAudio::Instance()->Load(ENDING, "Sounds/music/ending.wav");
+
+		/////////////////////////////////////////////////////////////////////////////
+		// SFX
+		/////////////////////////////////////////////////////////////////////////////
+		CAudio::Instance()->Load(PRESS_START, "Sounds/sfx/press_start.wav");
+		CAudio::Instance()->Load(SELECT, "Sounds/sfx/select.wav");
+		CAudio::Instance()->Load(MENU_OPEN, "Sounds/sfx/menu_open.wav");
+		CAudio::Instance()->Load(JUMP, "Sounds/sfx/jump.wav");
+		CAudio::Instance()->Load(BUMP, "Sounds/sfx/bump.wav");
+		CAudio::Instance()->Load(LAND, "Sounds/sfx/land.wav");
+		CAudio::Instance()->Load(SPLAT, "Sounds/sfx/splat.wav");
+
 		CAudio::Instance()->Play(MENU_INTRO, true);
 	}
 
@@ -41,9 +61,6 @@ namespace game_framework {
 
 	void CGameStateInit::OnKeyDown(UINT nChar, UINT nRepCnt, UINT nFlags)
 	{
-		const char KEY_ESC   = 0x27;
-		const char KEY_SPACE = 0x20;
-
 		if (nChar == KEY_SPACE && !pressedSpace) {
 			CAudio::Instance()->Play(PRESS_START);
 			pressedSpace = true;

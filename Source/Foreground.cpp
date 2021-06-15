@@ -8,11 +8,24 @@
 
 namespace game_framework {
 
+	Foreground *Foreground::instance = nullptr;
+
 	Foreground::Foreground()
 	{
 	}
 
 	Foreground::~Foreground()
+	{
+	}
+
+	void Foreground::OnInit()
+	{
+		this->LoadBitmap();
+		levelIndex = 0;
+		//foreground.SetBitmapNumber(levelIndex);
+	}
+
+	void Foreground::OnBeginState()
 	{
 	}
 
@@ -25,11 +38,6 @@ namespace game_framework {
 			foreground.AddBitmap(path, RGB(255, 255, 255));
 		}
 		foreground.SetTopLeft(0, 0);
-	}
-
-	void Foreground::Initialize()
-	{
-		levelIndex = 0;
 	}
 
 	void Foreground::OnShow()
@@ -47,5 +55,12 @@ namespace game_framework {
 	{
 		levelIndex--;
 		foreground.SetBitmapNumber(levelIndex);
+	}
+
+	Foreground *Foreground::Instance()
+	{
+		if (instance == nullptr)
+			instance = new Foreground();
+		return instance;
 	}
 }

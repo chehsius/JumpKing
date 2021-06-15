@@ -11,6 +11,7 @@ namespace game_framework {
 		void OnMove();
 		void OnShow();									// 顯示這個狀態的遊戲畫面
 	private:
+		const char KEY_ESC, KEY_SPACE;
 		CMovingBitmap title_logo;
 		CAnimation	  press_space;
 		bool		  pressedSpace;

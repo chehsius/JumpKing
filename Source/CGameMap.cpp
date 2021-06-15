@@ -8,12 +8,24 @@
 
 namespace game_framework {
 
+	CGameMap *CGameMap::instance = nullptr;
+
 	CGameMap::CGameMap()
 	{
-		this->Initialize();
 	}
 
 	CGameMap::~CGameMap()
+	{
+	}
+
+	void CGameMap::OnInit()
+	{
+		this->LoadBitmap();
+		levelIndex = 0;
+		this->OnLoad();
+	}
+
+	void CGameMap::OnBeginState()
 	{
 	}
 
@@ -34,12 +46,6 @@ namespace game_framework {
 		background.SetTopLeft(0, 0);
 
 		test.LoadBitmap(IDB_BITMAP2);
-	}
-
-	void CGameMap::Initialize()
-	{
-		levelIndex = 0;
-		this->OnLoad();
 	}
 
 	void CGameMap::OnLoad()
@@ -94,5 +100,12 @@ namespace game_framework {
 		int gridX = mapX / 10;
 		int gridY = mapY / 10;
 		return levelGrid[gridX][gridY] == 0;
+	}
+
+	CGameMap *CGameMap::Instance()
+	{
+		if (instance == nullptr)
+			instance = new CGameMap();
+		return instance;
 	}
 }

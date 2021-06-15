@@ -285,6 +285,7 @@ class CGameStateMenu;
 class CGameStateRun;
 class CGameStatePause;
 class CGameStateOver;
+//class King;
 
 #define A(x) static_cast<int>(x)
 
@@ -376,6 +377,7 @@ typedef struct {
 // 每個Public Interface的用法都要懂，Implementation可以不懂
 /////////////////////////////////////////////////////////////////////////////
 
+
 class CGameState {
 public:
 	CGameState(CGame *g);
@@ -403,6 +405,7 @@ protected:
 	virtual void OnMove() {}								// 移動這個狀態的遊戲元素
 	virtual void OnShow() = 0;								// 顯示這個狀態的遊戲畫面
 	CGame *game;
+	//static King king;
 };
 
 /////////////////////////////////////////////////////////////////////////////
