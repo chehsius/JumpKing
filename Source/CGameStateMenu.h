@@ -24,7 +24,7 @@ namespace game_framework {
 		void InitAttribution();
 		void InitTotalStats();
 		void InitQuit();
-		void InitAction(int, MenuAction*);
+		void ResetAction(int, MenuAction*);
 		void MoveCursorOnMenu(int, CMovingBitmap*, MenuAction*, int, int);
 		void SelectAction(UINT, int, int, MenuAction*);
 		void CtrlMainMenu(UINT);

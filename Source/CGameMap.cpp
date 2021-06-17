@@ -21,12 +21,15 @@ namespace game_framework {
 	void CGameMap::OnInit()
 	{
 		this->LoadBitmap();
-		levelIndex = 0;
-		this->OnLoad();
+		this->OnBeginState();
 	}
 
 	void CGameMap::OnBeginState()
 	{
+		levelIndex = 0;
+		background.SetBitmapNumber(levelIndex);
+		midground.SetBitmapNumber(levelIndex);
+		this->OnLoad();
 	}
 
 	void CGameMap::LoadBitmap()
@@ -69,8 +72,8 @@ namespace game_framework {
 					case 0:
 						break;
 					case 1:
-						test.SetTopLeft(10 * i, 10 * j);
-						test.ShowBitmap();
+						//test.SetTopLeft(10 * i, 10 * j);
+						//test.ShowBitmap();
 						break;
 					default:
 						break;
@@ -107,5 +110,11 @@ namespace game_framework {
 		if (instance == nullptr)
 			instance = new CGameMap();
 		return instance;
+	}
+
+	void CGameMap::releaseInstance()
+	{
+		delete instance;
+		instance = nullptr;
 	}
 }

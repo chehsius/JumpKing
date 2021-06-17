@@ -62,8 +62,6 @@ END
 // Bitmap
 //
 
-IDB_BALL                BITMAP                  "..\\res\\ball.bmp"
-
 IDB_0                   BITMAP                  "..\\res\\bmp0.bmp"
 
 IDB_1                   BITMAP                  "..\\res\\bmp1.bmp"
@@ -85,15 +83,6 @@ IDB_8                   BITMAP                  "..\\res\\bmp8.bmp"
 IDB_9                   BITMAP                  "..\\res\\bmp9.bmp"
 
 IDB_MINUS               BITMAP                  "..\\res\\bmp10.bmp"
-
-IDB_CENTER              BITMAP                  "..\\res\\center.bmp"
-
-IDB_CONTINUE            BITMAP                  "..\\res\\continue.bmp"
-
-IDB_HELP                BITMAP                  "..\\res\\help.bmp"
-
-IDB_LOADING             BITMAP                  "..\\res\\loading.bmp"
-
 
 /////////////////////////////////////////////////////////////////////////////
 //
@@ -118,7 +107,6 @@ LANGUAGE LANG_CHINESE, SUBLANG_CHINESE_HONGKONG
 // Bitmap
 //
 
-IDB_BITMAP9             BITMAP                  "..\\res\\bitmap9.bmp"
 
 #endif    // Chinese (Traditional, Hong Kong SAR) resources
 /////////////////////////////////////////////////////////////////////////////
@@ -148,7 +136,7 @@ IDB_BITMAP2             BITMAP                  "..\\res\\bitmap2.bmp"
 
 // Icon with lowest ID value placed first to ensure application icon
 // remains consistent on all systems.
-IDR_GAMETYPE            ICON                    "..\\res\\jumpKing.ico"
+IDR_GAMETYPE            ICON                    "..\\res\\JumpKing.ico"
 
 
 /////////////////////////////////////////////////////////////////////////////

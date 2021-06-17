@@ -42,14 +42,14 @@ namespace game_framework {
 		ctrllingTotalStats = false;
 		ctrllingQuit = false;
 
-		InitAction(A(MAIN::AMOUNT), main);
-		InitAction(A(NEW_GAME::AMOUNT), newGame);
-		InitAction(A(OPTIONS::AMOUNT), options);
-		InitAction(A(GRAPHICS::AMOUNT), graphics);
-		InitAction(A(MODE::AMOUNT), mode);
-		InitAction(A(AUDIO::AMOUNT), audio);
-		InitAction(A(EXTRAS::AMOUNT), extras);
-		InitAction(A(QUIT::AMOUNT), quit);
+		ResetAction(A(MAIN::AMOUNT), main);
+		ResetAction(A(NEW_GAME::AMOUNT), newGame);
+		ResetAction(A(OPTIONS::AMOUNT), options);
+		ResetAction(A(GRAPHICS::AMOUNT), graphics);
+		ResetAction(A(MODE::AMOUNT), mode);
+		ResetAction(A(AUDIO::AMOUNT), audio);
+		ResetAction(A(EXTRAS::AMOUNT), extras);
+		ResetAction(A(QUIT::AMOUNT), quit);
 
 		main[A(MAIN::CONTINUE)].selected = true;
 		MoveCursorOnMenu(A(MAIN::AMOUNT), &cursorMain, main, -80, 15);
@@ -96,7 +96,7 @@ namespace game_framework {
 		logo.SetTopLeft((SIZE_X - logo.Width()) / 2, SIZE_Y / 10);
 		frameMain.SetTopLeft((SIZE_X - logo.Width()) / 2 - 30, SIZE_Y / 2 - 15);
 		record.SetTopLeft((SIZE_X - logo.Width()) + 220, SIZE_Y / 2 - 15);
-		kingSplatRight.SetTopLeft(SIZE_X / 2 - 25, SIZE_Y  - 75);
+		kingSplatRight.SetTopLeft(SIZE_X / 2 - 25, SIZE_Y  - 96);
 		hint.SetTopLeft((SIZE_X - logo.Width()) + 150, SIZE_Y - 40);
 
 		char *path[A(MAIN::AMOUNT)] =
@@ -169,13 +169,13 @@ namespace game_framework {
 			"RES/opening_menu/options/graphics/x2.bmp",
 			"RES/opening_menu/back.bmp"
 		};
-		char *path_mode[1] =
+		char *path_fullscreen[1] =
 		{
 			"RES/opening_menu/options/graphics/mode/fullscreen.bmp"
 		};
 		for (int i = 0; i < A(GRAPHICS::AMOUNT); i++)
 			graphics[i].figure.AddBitmap(path[i]);
-		graphics[A(GRAPHICS::MODE)].figure.AddBitmap(path_mode[0]);
+		graphics[A(GRAPHICS::MODE)].figure.AddBitmap(path_fullscreen[0]);
 
 		this->InitMode();
 	}
@@ -218,20 +218,21 @@ namespace game_framework {
 		char *path[A(AUDIO::AMOUNT)] =
 		{
 			"RES/opening_menu/options/audio/slider.bmp",
-			"RES/opening_menu/options/audio/music_check.bmp",
-			"RES/opening_menu/options/audio/sfx_check.bmp",
-			"RES/opening_menu/options/audio/ambience_check.bmp",
-			"RES/opening_menu/back.bmp"
-		};
-		char *path_uncheck[3] = {
 			"RES/opening_menu/options/audio/music_uncheck.bmp",
 			"RES/opening_menu/options/audio/sfx_uncheck.bmp",
-			"RES/opening_menu/options/audio/ambience_uncheck.bmp"
+			"RES/opening_menu/options/audio/ambience_uncheck.bmp",
+			"RES/opening_menu/back.bmp"
+		};
+		char *path_check[3] =
+		{
+			"RES/opening_menu/options/audio/music_check.bmp",
+			"RES/opening_menu/options/audio/sfx_check.bmp",
+			"RES/opening_menu/options/audio/ambience_check.bmp"
 		};
 		for (int i = 0; i < A(AUDIO::AMOUNT); i++)
 			audio[i].figure.AddBitmap(path[i]);
 		for (int i = 1, j = 0; i <= 3; i++, j++)
-			audio[i].figure.AddBitmap(path_uncheck[j]);
+			audio[i].figure.AddBitmap(path_check[j]);
 	}
 
 	void CGameStateMenu::InitExtras()
@@ -313,7 +314,7 @@ namespace game_framework {
 			quit[i].figure.AddBitmap(path[i]);
 	}
 
-	void CGameStateMenu::InitAction(int amount, MenuAction* action)
+	void CGameStateMenu::ResetAction(int amount, MenuAction* action)
 	{
 		for (int i = 0; i < amount; i++)
 			action[i].selected = false;
@@ -342,7 +343,10 @@ namespace game_framework {
 	void CGameStateMenu::SelectAction(UINT nChar, int index, int amount, MenuAction* action)
 	{
 		if (nChar == KEY_SPACE && !transitioning)
-			CAudio::Instance()->Play(SELECT);
+		{
+			if (turnOnSFX)
+				CAudio::Instance()->Play(SELECT);
+		}
 		else if (nChar == KEY_UP)
 		{
 			if (index != 0)
@@ -367,8 +371,12 @@ namespace game_framework {
 		{
 			if (nChar == KEY_SPACE && !transitioning)
 			{
-				CAudio::Instance()->Stop(MENU_INTRO);
-				CAudio::Instance()->Play(OPENING_THEME);
+				if (turnOnMusic)
+				{
+					CAudio::Instance()->Stop(MENU_INTRO);
+					CAudio::Instance()->Play(OPENING_THEME);
+				}
+				startedNewGame = false;
 				transitioning = true;
 				logoTransition.Reset();
 				introTransition.Reset();
@@ -423,7 +431,7 @@ namespace game_framework {
 		if (nChar == KEY_ESC)
 		{
 			ctrllingNewGame = false;
-			InitAction(A(NEW_GAME::AMOUNT), newGame);
+			ResetAction(A(NEW_GAME::AMOUNT), newGame);
 		}
 		if (newGame[A(NEW_GAME::NO)].selected)
 		{
@@ -435,9 +443,17 @@ namespace game_framework {
 		{
 			if (nChar == KEY_SPACE && !transitioning)
 			{
-				CAudio::Instance()->Stop(MENU_INTRO);
-				CAudio::Instance()->Play(OPENING_THEME);
+				if (turnOnMusic)
+				{
+					CAudio::Instance()->Stop(MENU_INTRO);
+					CAudio::Instance()->Play(OPENING_THEME);
+				}
+				startedNewGame = true;
 				transitioning = true;
+				turnOnMusic = true;
+				turnOnSFX = true;
+				turnOnAmbience = true;
+				cheatMode = false;
 				logoTransition.Reset();
 				introTransition.Reset();
 			}
@@ -451,7 +467,7 @@ namespace game_framework {
 		if (nChar == KEY_ESC)
 		{
 			ctrllingOptions = false;
-			InitAction(A(OPTIONS::AMOUNT), options);
+			ResetAction(A(OPTIONS::AMOUNT), options);
 		}
 		if (options[A(OPTIONS::GRAPHICS)].selected)
 		{
@@ -496,7 +512,7 @@ namespace game_framework {
 		if (nChar == KEY_ESC)
 		{
 			ctrllingGraphics = false;
-			InitAction(A(GRAPHICS::AMOUNT), graphics);
+			ResetAction(A(GRAPHICS::AMOUNT), graphics);
 		}
 		if (graphics[A(GRAPHICS::MODE)].selected)
 		{
@@ -532,7 +548,7 @@ namespace game_framework {
 		if (nChar == KEY_ESC)
 		{
 			ctrllingMode = false;
-			InitAction(A(MODE::AMOUNT), mode);
+			ResetAction(A(MODE::AMOUNT), mode);
 		}
 		if (mode[A(MODE::WINDOWED)].selected)
 		{
@@ -567,7 +583,10 @@ namespace game_framework {
 	void CGameStateMenu::CtrlControls(UINT nChar)
 	{
 		if (nChar == KEY_SPACE)
-			CAudio::Instance()->Play(SELECT);
+		{
+			if (turnOnSFX)
+				CAudio::Instance()->Play(SELECT);
+		}
 		if (nChar == KEY_SPACE || nChar == KEY_ESC)
 			ctrllingControls = false;
 	}
@@ -577,7 +596,7 @@ namespace game_framework {
 		if (nChar == KEY_ESC)
 		{
 			ctrllingAudio = false;
-			InitAction(A(AUDIO::AMOUNT), audio);
+			ResetAction(A(AUDIO::AMOUNT), audio);
 		}
 		if (audio[A(AUDIO::SLIDER)].selected)
 		{
@@ -590,81 +609,30 @@ namespace game_framework {
 		{
 			if (nChar == KEY_SPACE)
 			{
-				if (audio[A(AUDIO::MUSIC)].figure.GetCurrentBitmapNumber() == 0)
+				if (turnOnMusic)
 				{
-					audio[A(AUDIO::MUSIC)].figure.SetBitmapNumber(1);
-					//CAudio::Instance()->Pause();
-
-
-
-
-
+					for (int i = 0; i <= 2; i++)
+						CAudio::Instance()->Pause(i);
 				}
 				else
 				{
-					audio[A(AUDIO::MUSIC)].figure.SetBitmapNumber(0);
-
-
-
-
-
-
+					for (int i = 0; i <= 2; i++)
+						CAudio::Instance()->Resume(i);
 				}
+				turnOnMusic = turnOnMusic ? false : true;
 			}
 			SelectAction(nChar, A(AUDIO::MUSIC), A(AUDIO::AMOUNT), audio);
 		}
 		else if (audio[A(AUDIO::SFX)].selected)
 		{
 			if (nChar == KEY_SPACE)
-			{
-				if (audio[A(AUDIO::SFX)].figure.GetCurrentBitmapNumber() == 0)
-				{
-					audio[A(AUDIO::SFX)].figure.SetBitmapNumber(1);
-					//CAudio::Instance()->Pause();
-
-
-
-
-
-				}
-				else
-				{
-					audio[A(AUDIO::SFX)].figure.SetBitmapNumber(0);
-
-
-
-
-
-
-				}
-			}
+				turnOnSFX = turnOnSFX ? false : true;
 			SelectAction(nChar, A(AUDIO::SFX), A(AUDIO::AMOUNT), audio);
 		}
 		else if (audio[A(AUDIO::AMBIENCE)].selected)
 		{
 			if (nChar == KEY_SPACE)
-			{
-				if (audio[A(AUDIO::AMBIENCE)].figure.GetCurrentBitmapNumber() == 0)
-				{
-					audio[A(AUDIO::AMBIENCE)].figure.SetBitmapNumber(1);
-					//CAudio::Instance()->Pause();
-
-
-
-
-
-				}
-				else
-				{
-					audio[A(AUDIO::AMBIENCE)].figure.SetBitmapNumber(0);
-
-
-
-
-
-
-				}
-			}
+				turnOnAmbience = turnOnAmbience ? false : true;
 			SelectAction(nChar, A(AUDIO::AMBIENCE), A(AUDIO::AMOUNT), audio);
 		}
 		else if (audio[A(AUDIO::BACK)].selected)
@@ -684,7 +652,7 @@ namespace game_framework {
 		if (nChar == KEY_ESC)
 		{
 			ctrllingExtras = false;
-			InitAction(A(EXTRAS::AMOUNT), extras);
+			ResetAction(A(EXTRAS::AMOUNT), extras);
 		}
 		if (extras[A(EXTRAS::CREDITS)].selected)
 		{
@@ -743,7 +711,10 @@ namespace game_framework {
 	void CGameStateMenu::CtrlCredits(UINT nChar)
 	{
 		if (nChar == KEY_SPACE)
-			CAudio::Instance()->Play(SELECT);
+		{
+			if (turnOnSFX)
+				CAudio::Instance()->Play(SELECT);
+		}
 		if (nChar == KEY_SPACE || nChar == KEY_ESC)
 			ctrllingCredits = false;
 	}
@@ -751,7 +722,10 @@ namespace game_framework {
 	void CGameStateMenu::CtrlAttribution(UINT nChar)
 	{
 		if (nChar == KEY_SPACE)
-			CAudio::Instance()->Play(SELECT);
+		{
+			if (turnOnSFX)
+				CAudio::Instance()->Play(SELECT);
+		}
 		if (nChar == KEY_SPACE || nChar == KEY_ESC)
 			ctrllingAttribution = false;
 	}
@@ -759,7 +733,10 @@ namespace game_framework {
 	void CGameStateMenu::CtrlTotalStats(UINT nChar)
 	{
 		if (nChar == KEY_SPACE)
-			CAudio::Instance()->Play(SELECT);
+		{
+			if (turnOnSFX)
+				CAudio::Instance()->Play(SELECT);
+		}
 		if (nChar == KEY_SPACE || nChar == KEY_ESC)
 			ctrllingTotalStats = false;
 	}
@@ -769,7 +746,7 @@ namespace game_framework {
 		if (nChar == KEY_ESC)
 		{
 			ctrllingQuit = false;
-			InitAction(A(QUIT::AMOUNT), quit);
+			ResetAction(A(QUIT::AMOUNT), quit);
 		}
 		if (quit[A(QUIT::NO)].selected)
 		{
@@ -843,10 +820,9 @@ namespace game_framework {
 
 		if (transitioning)
 		{
-			if (logoTransition.IsFinalBitmap())
-				introTransition.OnShow();
-			else
-				logoTransition.OnShow();
+			logoTransition.IsFinalBitmap() 
+				? introTransition.OnShow()
+				: logoTransition.OnShow();
 		}
 		else
 		{
@@ -879,12 +855,9 @@ namespace game_framework {
 				{
 					frameGraphics.ShowBitmap();
 					cursorGraphics.ShowBitmap();
-
-					if (!CDDraw::IsFullScreen())
-						graphics[A(GRAPHICS::MODE)].figure.SetBitmapNumber(0);
-					else
-						graphics[A(GRAPHICS::MODE)].figure.SetBitmapNumber(1);
-
+					graphics[A(GRAPHICS::MODE)]
+						.figure
+						.SetBitmapNumber(CDDraw::IsFullScreen() ? 1 : 0);
 					for (i = 0; i < A(GRAPHICS::AMOUNT); i++)
 						graphics[i].figure.OnShow();
 
@@ -906,6 +879,15 @@ namespace game_framework {
 				{
 					frameAudio.ShowBitmap();
 					cursorAudio.ShowBitmap();
+					audio[A(AUDIO::MUSIC)]
+						.figure
+						.SetBitmapNumber(turnOnMusic ? 1 : 0);
+					audio[A(AUDIO::SFX)]
+						.figure
+						.SetBitmapNumber(turnOnSFX ? 1 : 0);
+					audio[A(AUDIO::AMBIENCE)]
+						.figure
+						.SetBitmapNumber(turnOnAmbience ? 1 : 0);
 					for (i = 0; i < A(AUDIO::AMOUNT); i++)
 						audio[i].figure.OnShow();
 				}

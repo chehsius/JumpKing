@@ -26,19 +26,21 @@ namespace game_framework {
 
 	CGameStateRun::~CGameStateRun()
 	{
+		map->releaseInstance();
+		texture->releaseInstance();
+		king->releaseInstance();
+		foreground->releaseInstance();
 	}
 
 	void CGameStateRun::OnBeginState()
 	{
-		map->OnBeginState();
-		texture->OnBeginState();
-		king->OnBeginState();
-		foreground->OnBeginState();
-
-		//map.OnBeginState();
-		//texture.OnBeginState();
-		//foreground.OnBeginState();
-
+		if (startedNewGame)
+		{
+			map->OnBeginState();
+			texture->OnBeginState();
+			king->OnBeginState();
+			foreground->OnBeginState();
+		}
 		//hits_left.SetInteger(HITS_LEFT);					// 指定剩下的撞擊數
 		//hits_left.SetTopLeft(HITS_LEFT_X, HITS_LEFT_Y);		// 指定剩下撞擊數的座標
 	}
@@ -88,20 +90,33 @@ namespace game_framework {
 	{
 		if (nChar == KEY_ESC)
 		{
-
-
-
-			CAudio::Instance()->Play(MENU_OPEN);
+			startedNewGame = false;
+			if (turnOnSFX)
+				CAudio::Instance()->Play(MENU_OPEN);
 			GotoGameState(GAME_STATE_PAUSE);
 		}
 		if (nChar == KEY_LEFT)
-			king->SetMovingLeft(true);
+		{
+			if (king->isCharging())
+			{
+
+			}
+			else
+			{
+				king->SetMoveLeft(true);
+			}
+		}
 		if (nChar == KEY_RIGHT)
-			king->SetMovingRight(true);
-		if (nChar == KEY_UP)
-			king->SetMovingUp(true);
-		if (nChar == KEY_DOWN)
-			king->SetMovingDown(true);
+		{
+			king->SetMoveRight(true);
+		}
+		if (cheatMode)
+		{
+			if (nChar == KEY_UP)
+				king->SetMoveUp(true);
+			if (nChar == KEY_DOWN)
+				king->SetMoveDown(true);
+		}
 		if (nChar == KEY_SPACE)
 			king->SetCharging(true);
 	}
@@ -109,13 +124,20 @@ namespace game_framework {
 	void CGameStateRun::OnKeyUp(UINT nChar, UINT nRepCnt, UINT nFlags)
 	{
 		if (nChar == KEY_LEFT)
-			king->SetMovingLeft(false);
+		{
+			king->SetMoveLeft(false);
+		}
 		if (nChar == KEY_RIGHT)
-			king->SetMovingRight(false);
-		if (nChar == KEY_UP)
-			king->SetMovingUp(false);
-		if (nChar == KEY_DOWN)
-			king->SetMovingDown(false);
+		{
+			king->SetMoveRight(false);
+		}
+		if (cheatMode)
+		{
+			if (nChar == KEY_UP)
+				king->SetMoveUp(false);
+			if (nChar == KEY_DOWN)
+				king->SetMoveDown(false);
+		}
 		if (nChar == KEY_SPACE)
 			king->SetCharging(false);
 	}

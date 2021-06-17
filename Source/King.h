@@ -17,25 +17,31 @@ namespace game_framework {
 		int GetHeight();
 		int GetX2();
 		int GetY2();
-		
-		void SetMovingDown(bool);
-		void SetMovingLeft(bool);
-		void SetMovingRight(bool);
-		void SetMovingUp(bool);
+		bool isCharging();
+
+		void SetMoveUp(bool);
+		void SetMoveDown(bool);
+		void SetMoveLeft(bool);
+		void SetMoveRight(bool);
 		void SetCharging(bool);
+
 
 		void SetStanding(bool);
 
+		void SetStatus(bool);
 
 		void SetXY(int, int);
-		//void SetVelocity(int);
 		void SetFloor(int);
+
+		
+
 		static King *Instance();
+		static void releaseInstance();
 	private:
 		void LoadBitmap();
 		static King* instance;
 		const int STEP, MAX_JUMP_DISTANCE, MAX_JUMP_HEIGHT;
-		const int MAP_EDGE;
+		const int MAP_EDGE, START_X, START_Y;
 		CMovingBitmap standLeft, standRight;
 		CAnimation walkLeft, walkRight;
 		CAnimation jumpLeft, jumpRight;
@@ -48,27 +54,20 @@ namespace game_framework {
 		int x, y;
 		int floor;
 
-		bool isMovingDown, isMovingUp;
-		bool isMovingLeft, isMovingRight;
-		
+		bool moveUp, moveDown;
+		bool moveLeft, moveRight;
 		bool jumping;
 
-		bool splatted;
-		bool rising, falling;
+		bool rising, falling, splatted;
 		bool standing, walking, charging;
 		bool facingLeft, facingRight;
-		bool moveLeft, moveRight;
 		bool decidedMoveLeft, decidedMoveRight;
 		bool decidedJumpLeft, decidedJumpRight;
-
-		//int initialVelocityX, initialVelocityY;
-		//int velocityX, velocityY;
 
 		int chargedJumpHeight, chargedJumpDistance;
 		int jumpHeight, jumpDistance;
 
 		int collisionCon;
-		int mapEdgeY;
 
 
 	};

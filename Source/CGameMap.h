@@ -15,6 +15,7 @@ namespace game_framework {
 		void NextLevel();
 		void BackLevel();
 		static CGameMap *Instance();
+		static void releaseInstance();
 	protected:
 		void LoadBitmap();
 		static CGameMap* instance;

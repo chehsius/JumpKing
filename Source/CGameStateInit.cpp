@@ -27,10 +27,8 @@ namespace game_framework {
 			press_space.AddBitmap("RES/opening_menu/init/press_space.bmp");
 			press_space.AddBitmap("RES/opening_menu/init/faded_press_space.bmp", RGB(255, 255, 255));
 		}
-
 		title_logo.SetTopLeft((SIZE_X - title_logo.Width()) / 2, SIZE_Y / 10);
 		press_space.SetTopLeft((SIZE_X - press_space.Width()) / 2, SIZE_Y / 2 + 30);
-		
 
 		/////////////////////////////////////////////////////////////////////////////
 		// Music
@@ -50,7 +48,16 @@ namespace game_framework {
 		CAudio::Instance()->Load(LAND, "Sounds/sfx/land.wav");
 		CAudio::Instance()->Load(SPLAT, "Sounds/sfx/splat.wav");
 
-		CAudio::Instance()->Play(MENU_INTRO, true);
+		/////////////////////////////////////////////////////////////////////////////
+		// Ambience
+		/////////////////////////////////////////////////////////////////////////////
+
+
+
+
+
+		if (turnOnMusic)
+			CAudio::Instance()->Play(MENU_INTRO, true);
 	}
 
 	void CGameStateInit::OnBeginState()
@@ -62,7 +69,8 @@ namespace game_framework {
 	void CGameStateInit::OnKeyDown(UINT nChar, UINT nRepCnt, UINT nFlags)
 	{
 		if (nChar == KEY_SPACE && !pressedSpace) {
-			CAudio::Instance()->Play(PRESS_START);
+			if (turnOnSFX)
+				CAudio::Instance()->Play(PRESS_START);
 			pressedSpace = true;
 			press_space.Reset();
 			press_space.SetDelayCount(2);

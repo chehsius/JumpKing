@@ -262,7 +262,7 @@
     <ClCompile Include="Source\CBouncingBall.cpp" />
     <ClCompile Include="Source\CGameStateInit.cpp" />
     <ClCompile Include="Source\CGameStateMenu.cpp" />
-    <ClCompile Include="Source\CGameStateOver.cpp" />
+    <ClCompile Include="Source\CGameStateEnd.cpp" />
     <ClCompile Include="Source\CGameStatePause.cpp" />
     <ClCompile Include="Source\CGameStateRun.cpp" />
     <ClCompile Include="Source\Foreground.cpp" />
@@ -310,7 +310,7 @@
     <ClInclude Include="Source\CBouncingBall.h" />
     <ClInclude Include="Source\CGameStateInit.h" />
     <ClInclude Include="Source\CGameStateMenu.h" />
-    <ClInclude Include="Source\CGameStateOver.h" />
+    <ClInclude Include="Source\CGameStateEnd.h" />
     <ClInclude Include="Source\CGameStatePause.h" />
     <ClInclude Include="Source\CGameStateRun.h" />
     <ClInclude Include="Source\Foreground.h" />

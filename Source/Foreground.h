@@ -12,6 +12,7 @@ namespace game_framework {
 		void NextLevel();
 		void BackLevel();
 		static Foreground *Instance();
+		static void releaseInstance();
 	private:
 		void LoadBitmap();
 		static Foreground* instance;

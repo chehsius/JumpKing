@@ -21,12 +21,13 @@ namespace game_framework {
 	void Foreground::OnInit()
 	{
 		this->LoadBitmap();
-		levelIndex = 0;
-		//foreground.SetBitmapNumber(levelIndex);
+		this->OnBeginState();
 	}
 
 	void Foreground::OnBeginState()
 	{
+		levelIndex = 0;
+		foreground.SetBitmapNumber(levelIndex);
 	}
 
 	void Foreground::LoadBitmap()
@@ -62,5 +63,11 @@ namespace game_framework {
 		if (instance == nullptr)
 			instance = new Foreground();
 		return instance;
+	}
+
+	void Foreground::releaseInstance()
+	{
+		delete instance;
+		instance = nullptr;
 	}
 }

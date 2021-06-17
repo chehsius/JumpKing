@@ -20,7 +20,7 @@ namespace game_framework {
 		void InitAudio();
 		void InitSaveExit();
 		void InitGiveUp();
-		void InitAction(int, MenuAction*);
+		void ResetAction(int, MenuAction*);
 		void MoveCursorOnMenu(int, CMovingBitmap*, MenuAction*, int, int);
 		void SelectAction(UINT, int, int, MenuAction*);
 		void CtrlPauseMenu(UINT);
@@ -31,7 +31,6 @@ namespace game_framework {
 		void CtrlAudio(UINT);
 		void CtrlSaveExit(UINT);
 		void CtrlGiveUp(UINT);
-
 		
 		const char KEY_ESC, KEY_SPACE, KEY_UP, KEY_DOWN;
 		CGameMap *map;

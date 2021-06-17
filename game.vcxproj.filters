@@ -132,9 +132,6 @@
     <ClCompile Include="Source\CGameStateMenu.cpp">
       <Filter>MyGame</Filter>
     </ClCompile>
-    <ClCompile Include="Source\CGameStateOver.cpp">
-      <Filter>MyGame</Filter>
-    </ClCompile>
     <ClCompile Include="Source\CGameMap.cpp">
       <Filter>MyGame</Filter>
     </ClCompile>
@@ -145,6 +142,9 @@
       <Filter>MyGame</Filter>
     </ClCompile>
     <ClCompile Include="Source\Texture.cpp">
+      <Filter>MyGame</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\CGameStateEnd.cpp">
       <Filter>MyGame</Filter>
     </ClCompile>
   </ItemGroup>
@@ -188,9 +188,6 @@
     <ClInclude Include="Source\CGameStateMenu.h">
       <Filter>MyGame</Filter>
     </ClInclude>
-    <ClInclude Include="Source\CGameStateOver.h">
-      <Filter>MyGame</Filter>
-    </ClInclude>
     <ClInclude Include="Source\CGameMap.h">
       <Filter>MyGame</Filter>
     </ClInclude>
@@ -201,6 +198,9 @@
       <Filter>MyGame</Filter>
     </ClInclude>
     <ClInclude Include="Source\Texture.h">
+      <Filter>MyGame</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\CGameStateEnd.h">
       <Filter>MyGame</Filter>
     </ClInclude>
   </ItemGroup>
