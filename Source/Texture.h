@@ -3,7 +3,6 @@ namespace game_framework {
 
 	class Texture : public CAnimation {
 	public:
-		Texture();
 		~Texture();
 		void OnInit();
 		void OnBeginState();
@@ -11,9 +10,13 @@ namespace game_framework {
 		void OnShow();
 		void NextLevel();
 		void BackLevel();
+		int GetPrincessX();
+		int GetPrincessY();
+		void SetPrincessXY(int, int);
 		static Texture *Instance();
 		static void releaseInstance();
 	private:
+		Texture();
 		void LoadBitmap();
 		void LoadBonfire();
 		void LoadWater();
@@ -33,7 +36,7 @@ namespace game_framework {
 		int levelIndex;
 		CAnimation bonfire;
 		CAnimation water;
-		CAnimation old_man, merchant, hermit;
+		CAnimation old_man, merchant, hermit, skeleton;
 		CAnimation sewerDrop;
 		CAnimation rain_level9;
 		CAnimation rain_level10;

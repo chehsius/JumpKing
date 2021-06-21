@@ -13,7 +13,7 @@ namespace game_framework {
 
 	King::King() :
 		STEP(6),
-		MAX_JUMP_DISTANCE(16),
+		MAX_JUMP_DISTANCE(15),
 		MAX_JUMP_HEIGHT(21),
 		MAP_EDGE(SIZE_Y - 45),
 		START_X(SIZE_X / 2 - 25),
@@ -23,6 +23,46 @@ namespace game_framework {
 
 	King::~King()
 	{
+	}
+
+	int King::GetX()
+	{
+		return x;
+	}
+
+	int King::GetY()
+	{
+		return y;
+	}
+
+	int King::GetWalkWidth()
+	{
+		return x + walkRight.Width();
+	}
+
+	int King::GetWalkHeight()
+	{
+		return y + walkRight.Height();
+	}
+
+	int King::GetRiseWidth()
+	{
+		return x + riseRight.Width();
+	}
+
+	int King::GetRiseHeight()
+	{
+		return y + riseRight.Height();
+	}
+
+	int King::GetFallWidth()
+	{
+		return y + fallRight.Width();
+	}
+
+	int King::GetFallHeight()
+	{
+		return y + fallRight.Height();
 	}
 
 	void King::OnInit()
@@ -37,17 +77,11 @@ namespace game_framework {
 		moveUp = moveDown = false;
 		jumping = false;
 
-		splatted = true;
+		SetStatus(&splatted);
+		SetFacingDirection(&facingRight);
 
-		rising = falling = false;
-		standing = walking = charging = false;
-		facingLeft = false;
-		facingRight = true;
-		moveLeft = moveRight = false;
 		decidedMoveLeft = decidedMoveRight = false;
 		decidedJumpLeft = decidedJumpRight = false;
-
-		//standing = true;
 
 		chargedJumpHeight = chargedJumpDistance = 0;
 		jumpHeight = jumpDistance = 0;
@@ -65,112 +99,92 @@ namespace game_framework {
 		fallLeft.LoadBitmap("RES/king/left/fall.bmp", RGB(255, 255, 255));
 		slipLeft.LoadBitmap("RES/king/left/slip.bmp", RGB(255, 255, 255));
 		splatLeft.LoadBitmap("RES/king/left/splat.bmp", RGB(255, 255, 255));
-
 		standRight.LoadBitmap("RES/king/right/stand.bmp", RGB(255, 255, 255));
 		riseRight.LoadBitmap("RES/king/right/rise.bmp", RGB(255, 255, 255));
 		fallRight.LoadBitmap("RES/king/right/fall.bmp", RGB(255, 255, 255));
 		slipRight.LoadBitmap("RES/king/right/slip.bmp", RGB(255, 255, 255));
 		splatRight.LoadBitmap("RES/king/right/splat.bmp", RGB(255, 255, 255));
-
 		charge.LoadBitmap("RES/king/charge.bmp", RGB(255, 255, 255));
 
 		char path[100] = "";
-		for (int i = 1; i <= 3; i++)
+		int i = 0;
+		for (i = 1; i <= 3; i++)
 		{
 			strcpy(path, ("RES/king/left/walk/" + to_string(i) + ".bmp").c_str());
 			walkLeft.AddBitmap(path, RGB(255, 255, 255));
 		}
 		walkLeft.AddBitmap("RES/king/left/walk/2.bmp", RGB(255, 255, 255));
-		for (int i = 1; i <= 3; i++)
+		for (i = 1; i <= 3; i++)
 		{
 			strcpy(path, ("RES/king/right/walk/" + to_string(i) + ".bmp").c_str());
 			walkRight.AddBitmap(path, RGB(255, 255, 255));
 		}
 		walkRight.AddBitmap("RES/king/right/walk/2.bmp", RGB(255, 255, 255));
+		for (i = 1; i <= 5; i++)
+		{
+			strcpy(path, ("RES/particles/jump/" + to_string(i) + ".bmp").c_str());
+			jumpParticles.AddBitmap(path, RGB(255, 255, 255));
+		}
 	}
 
-	void King::OnMove(CGameMap *map, Foreground* foreground, Texture* texture)
+	void King::OnMove(CGameMap *map, 
+					  Foreground* foreground, 
+					  Texture* texture,
+					  Ambience* ambience)
 	{
-		//if (charging)
-		//{
-		//	initialVelocityY++;
-		//	if (isMoveLeft)
-		//	{
-		//		if (initialVelocityX < MAX_MOVE)
-		//		{
-		//			initialVelocityX--;
-		//		}
-		//		decidedJumpLeft = true;
-		//	}
-		//	if (isMoveRight)
-		//	{
-		//		if (initialVelocityX < MAX_MOVE)
-		//		{
-		//			initialVelocityX++;
-		//		}
-		//		decidedJumpLeft = false;
-		//	}
-		//	if (initialVelocityY > MAX_JUMP)
-		//	{
-		//		charging = false;
-		//		jumping = true;
-		//	}
-		//	velocityY = initialVelocityY;
-		//	velocityX = initialVelocityX;
-		//}
-		
 		if (charging)
 		{
 			chargedJumpHeight++;
 			if (chargedJumpHeight > MAX_JUMP_HEIGHT)
 			{
-				charging = false;
-				rising = true;
+				SetStatus(&rising);
 			}
+
+			decidedJumpLeft = decidedMoveLeft;
+			decidedJumpRight = decidedMoveRight;
 			if (chargedJumpDistance < MAX_JUMP_DISTANCE)
 			{
 				chargedJumpDistance++;
-				//if (decidedJumpLeft)
-				//{
-
-				//}
-				//else if (decidedJumpRight)
-				//{
-
-				//}
 			}
 			jumpHeight = chargedJumpHeight;
-			jumpDistance = chargedJumpDistance;
+			//jumpDistance = chargedJumpDistance;
+			jumpDistance = 1;
 		}
-	//	initialVelocityY = 0;
-	//	if (rising)
-	//	{
-	//		jumping = true;
-	//		if (velocityY > 0)
-	//		{
-	//			if (y <= 1)
-	//			{
-	//				map->NextStage();
-	//				y = y + 573;
-	//			}
-	//		}
-		if (rising)
+		else if (rising)
 		{
 			if (jumpHeight > 0)
 			{
-				if (map->isEmpty(x, y - STEP) &&
-					map->isEmpty(GetX2(), y - STEP))
-					y -= jumpHeight;
-
-				if (y <= 1)
+				if (map->isEmpty(x, y - jumpHeight) &&
+					map->isEmpty(this->GetRiseWidth(), y - jumpHeight))
+					y -= jumpHeight--;
+				else
 				{
-					map->NextLevel();
-					foreground->NextLevel();
-					texture->NextLevel();
-					y += SIZE_Y - 1;
+					SetStatus(&falling);
 				}
 
-				jumpHeight--;
+				if (decidedJumpLeft)
+				{
+					if (map->isEmpty(x - jumpDistance, y) &&
+						map->isEmpty(x - jumpDistance, this->GetRiseHeight()))
+					{
+						x -= jumpDistance;
+					}
+					//else
+					//{
+					//	SetStatus(&slipped);
+					//}
+				}
+				else if (decidedJumpRight)
+				{
+					if (map->isEmpty(this->GetRiseWidth() + jumpDistance, y) &&
+						map->isEmpty(this->GetRiseWidth() + jumpDistance, this->GetRiseHeight()))
+						x += jumpDistance;
+				}
+
+				if (jumpDistance < chargedJumpDistance)
+				{
+					jumpDistance++;
+				}
 
 				
 
@@ -210,109 +224,144 @@ namespace game_framework {
 			}
 			else
 			{
-				rising = false;
-				falling = true;
+				SetStatus(&falling);
 				jumpHeight = 1;
+				jumpDistance = 1;
+				decidedJumpLeft = decidedJumpRight = false;
 			}
 		}
 		else if (falling)
 		{
-			if (y < floor - 1)
+			if (decidedJumpLeft)
 			{
-				if (map->isEmpty(x, GetY2() + STEP) &&
-					map->isEmpty(GetX2(), GetY2() + STEP))
-					y += jumpHeight;
+				//jumpDistance -= ;
 
-				if (y >= MAP_EDGE - 1)
+				if (map->isEmpty(x - jumpDistance, y) &&
+					map->isEmpty(x - jumpDistance, this->GetFallHeight()))
 				{
-					map->BackLevel();
-					foreground->BackLevel();
-					texture->BackLevel();
-					y -= SIZE_Y - 1;
+					x -= jumpDistance;
 				}
+				//else
+				//{
+				//	SetStatus(&slipped);
+				//}
+			}
+			else if (decidedJumpRight)
+			{
+				if (map->isEmpty(this->GetFallWidth() + jumpDistance, y) &&
+					map->isEmpty(this->GetFallWidth() + jumpDistance, this->GetFallHeight()))
+					x += jumpDistance;
+			}
 
-				//floor = GetY2() - 1;
+			if (jumpDistance < chargedJumpDistance)
+			{
+				jumpDistance++;
+			}
+
+			if (map->isEmpty(x, this->GetFallHeight() + jumpHeight) &&
+				map->isEmpty(this->GetFallWidth(), this->GetFallHeight() + jumpHeight))
+			{
+				y += jumpHeight++;
 			}
 			else
 			{
-				falling = false;
-				standing = true;
-				y = floor - 1;
-				chargedJumpHeight = 0;
-				chargedJumpDistance = 0;
+				SetStatus(&standing);
+				y += jumpHeight--;
+				floor = this->GetFallHeight() - 1;
+				chargedJumpHeight = chargedJumpDistance = 0;
+				jumpHeight = jumpDistance = 0;
 			}
-		}
-		if (walking)
-		{
-			//if (!decidedMoveLeft && !decidedMoveRight)
+
+			//if (y < floor - 1)
 			//{
-			//	walking = false;
-			//	standing = true;
+			//	if (map->isEmpty(x, GetFallHeight() + jumpHeight) &&
+			//		map->isEmpty(GetX2(), GetFallHeight() + jumpHeight))
+			//		y += jumpHeight++;
+			//	else
+			//	{
+			//		floor = GetFallHeight() - 1;
+			//	}
 			//}
-			if (decidedMoveLeft)
-			{
-				walkLeft.OnMove();
-				if (map->isEmpty(x - STEP, y) &&
-					map->isEmpty(x - STEP, GetY2()))
-					x -= STEP;
-			}
-			else if (decidedMoveRight)
-			{
-				walkRight.OnMove();
-				if (map->isEmpty(GetX2() + STEP, y) && 
-					map->isEmpty(GetX2() + STEP, GetY2()))
-					x += STEP;
-			}
-			//	if (isMovingLeft)
-			//	{
-			//		standing = false;
-			//		if ((!(collisionCon > 0)) || (collisionCon == 3))
-			//		{
-			//			walkLeft.OnMove();
-			//			facingLeft = true;
-			//			if (map->isEmpty(x - STEP, y))
-			//				x -= STEP;
-			//		}
-			//	}
-			//	if (isMovingRight)
-			//	{
-			//		standing = false;
-			//		if ((!(collisionCon > 0)) || (collisionCon == 3))
-			//		{
-			//			walkRight.OnMove();
-			//			facingLeft = false;
-			//			if (map->isEmpty(GetX2() + STEP, GetY2()))
-			//				x += STEP;
-			//		}
-			//	}
+			//else
+			//{
+			//	SetStatus(&standing);
+			//	y = floor - 1;
+			//	chargedJumpHeight = 0;
+			//	chargedJumpDistance = 0;
+			//}
 		}
+		else if (slipped)
+		{
+
+		}
+		else if (splatted)
+		{
+
+		}
+		else
+		{
+			if (!decidedMoveLeft && !decidedMoveRight)
+			{
+				SetStatus(&standing);
+			}
+			else if (walking)
+			{
+				if (facingLeft)
+				{
+					walkLeft.OnMove();
+					if (map->isEmpty(x - STEP, y) &&
+						map->isEmpty(x - STEP, this->GetWalkHeight()))
+						x -= STEP;
+
+					if (map->isEmpty(this->GetWalkWidth(), this->GetWalkHeight() + 10))
+					{
+						SetStatus(&falling);
+					}
+				}
+				else if (facingRight)
+				{
+					walkRight.OnMove();
+					if (map->isEmpty(this->GetWalkWidth() + STEP, y) &&
+						map->isEmpty(this->GetWalkWidth() + STEP, this->GetWalkHeight()))
+						x += STEP;
+
+					if (map->isEmpty(x, this->GetWalkHeight() + 10))
+					{
+						SetStatus(&falling);
+					}
+				}
+			}
+		}
+		
 		if (moveUp)
 		{
 			if (map->isEmpty(x, y - STEP) &&
-				map->isEmpty(GetX2(), y - STEP))
+				map->isEmpty(this->GetRiseWidth(), y - STEP))
 				y -= STEP;
-
-			if (y <= 1)
-			{
-				map->NextLevel();
-				foreground->NextLevel();
-				texture->NextLevel();
-				y += SIZE_Y - 1;
-			}
 		}
 		if (moveDown)
 		{
-			if (map->isEmpty(x, GetY2() + STEP) &&
-				map->isEmpty(GetX2(), GetY2() + STEP))
+			if (map->isEmpty(x, this->GetWalkHeight() + STEP) &&
+				map->isEmpty(this->GetFallWidth(), this->GetWalkHeight() + STEP))
 				y += STEP;
+		}
 
-			if (y >= MAP_EDGE - 1)
-			{
-				map->BackLevel();
-				foreground->BackLevel();
-				texture->BackLevel();
-				y -= SIZE_Y - 1;
-			}
+
+		if (y <= 1)
+		{
+			map->NextLevel();
+			foreground->NextLevel();
+			texture->NextLevel();
+			ambience->NextLevel();
+			y += SIZE_Y - 1;
+		}
+		else if (y >= MAP_EDGE - 1)
+		{
+			map->BackLevel();
+			foreground->BackLevel();
+			texture->BackLevel();
+			ambience->BackLevel();
+			y -= SIZE_Y - 1;
 		}
 		
 		//else
@@ -413,6 +462,19 @@ namespace game_framework {
 				fallRight.ShowBitmap();
 			}
 		}
+		else if (slipped)
+		{
+			if (facingLeft)
+			{
+				slipLeft.SetTopLeft(x, y);
+				slipLeft.ShowBitmap();
+			}
+			else if (facingRight)
+			{
+				slipRight.SetTopLeft(x, y);
+				slipRight.ShowBitmap();
+			}
+		}
 		else if (splatted)
 		{
 			if (facingLeft)
@@ -452,63 +514,6 @@ namespace game_framework {
 				standRight.ShowBitmap();
 			}
 		}
-
-		//if (jumping)
-		//{
-		//	if (decidedJumpLeft)
-		//	{
-		//		jumpLeft.SetTopLeft(x, y);
-		//		jumpLeft.OnShow();
-		//	}
-		//	if (!decidedJumpLeft)
-		//	{
-		//		jumpRight.SetTopLeft(x, y);
-		//		jumpRight.OnShow();
-		//	}
-		//}
-		//else
-		//{
-		//	if (charging)
-		//	{
-		//		charge.SetTopLeft(x, y);
-		//		charge.ShowBitmap();
-		//	}
-		//	else
-		//	{
-		//		if (facingLeft)
-		//		{
-		//			if (standing)
-		//			{
-		//				standLeft.SetTopLeft(x, y);
-		//				standLeft.ShowBitmap();
-		//			}
-		//			else
-		//			{
-		//				if (isMoveLeft)
-		//				{
-		//					walkLeft.SetTopLeft(x, y);
-		//					walkLeft.OnShow();
-		//				}
-		//			}
-		//		}
-		//		else 
-		//		{
-		//			if (standing) 
-		//			{
-		//				standRight.SetTopLeft(x, y);
-		//				standRight.ShowBitmap();
-		//			}
-		//			else 
-		//			{
-		//				if (isMoveRight) 
-		//				{
-		//					walkRight.SetTopLeft(x, y);
-		//					walkRight.OnShow();
-		//				}
-		//			}
-		//		}
-		//	}
-		//}
 	}
 
 	bool King::isCharging()
@@ -516,29 +521,10 @@ namespace game_framework {
 		return charging;
 	}
 
-	int King::GetWidth()
-	{
-		return walkLeft.Width();
-	}
-
-	int King::GetHeight()
-	{
-		return walkRight.Height();
-	}
-
-	int King::GetX2()
-	{
-		return x + this->GetWidth();
-	}
-
-	int King::GetY2()
-	{
-		return y + this->GetHeight();
-	}
-
 	void King::SetMoveUp(bool flag)
 	{
 		moveUp = flag;
+
 	}
 
 	void King::SetMoveDown(bool flag)
@@ -548,121 +534,94 @@ namespace game_framework {
 
 	void King::SetMoveLeft(bool flag)
 	{
-		if (!rising && !falling)
+		if (!rising && !falling && !slipped)
 		{
 			decidedMoveLeft = flag;
 			//if (decidedMoveLeft && decidedMoveRight)
 			//{
-			//	facingRight = false;
-			//	facingLeft = true;
-			//	walking = false;
-			//	standing = true;
+			//	SetStatus(&standing);
+			//}
+			//else if (decidedMoveLeft && !decidedMoveRight)
+			//{
+			//	SetStatus(&walking);
+			//	SetFacingDirection(&facingLeft);
 			//}
 			if (decidedMoveLeft)
 			{
-				splatted = standing = false;
-				walking = true;
-				facingRight = false;
-				facingLeft = true;
-				decidedMoveRight = false;
+				if (!charging)
+				{
+					SetStatus(&walking);
+				}
+				SetFacingDirection(&facingLeft);
 			}
-			else
-			{
-				standing = true;
-			}
-
-			//facingRight = false;
-			//facingLeft = true;
+			//else
+			//{
+			//	SetStatus(&standing);
+			//}
 		}
-		
-		//if (!jumping)
-		//{
-		//	decidedMoveLeft = flag;
-		//	if (decidedMoveLeft)
-		//	{
-		//		facingLeft = true;
-		//	}
-		//}
 	}
 
 	void King::SetMoveRight(bool flag)
 	{
-		if (!rising && !falling)
+		if (!rising && !falling && !slipped)
 		{
 			decidedMoveRight = flag;
 			//if (decidedMoveRight && decidedMoveLeft)
 			//{
-			//	facingLeft = false;
-			//	facingRight = true;
-			//	walking = false;
-			//	standing = true;
+			//	SetStatus(&standing);
+			//}
+			//else if (decidedMoveRight && !decidedMoveLeft)
+			//{
+			//	SetStatus(&walking);
+			//	SetFacingDirection(&facingRight);
 			//}
 			if (decidedMoveRight)
 			{
-				splatted = standing = false;
-				walking = true;
-				facingLeft = false;
-				facingRight = true;
-				decidedMoveLeft = false;
+				if (!charging)
+				{
+					SetStatus(&walking);
+				}
+				SetFacingDirection(&facingRight);
 			}
-			else
-			{
-				standing = true;
-			}
-
-			//facingLeft = false;
-			//facingRight = true;
+			//else
+			//{
+			//	SetStatus(&standing);
+			//}
 		}
-		
-		//if (!jumping)
-		//{
-		//	decidedMoveRight = flag;
-		//	if (decidedMoveRight)
-		//	{
-		//		facingLeft = false;
-		//	}
-		//}
 	}
 
 	void King::SetCharging(bool flag)
 	{
-		if (!rising && !falling)
+		if (!rising && !falling && !slipped)
 		{
-			charging = flag;
-			if (charging)
+			if (flag)
 			{
-				standing = false;
-				walking = false;
-				rising = true;
+				SetStatus(&charging);
+			}
+			else
+			{
+				SetStatus(&rising);
 			}
 		}
-		//if (!jumping)
-		//{
-		//	charging = flag;
-		//	if (charging)
-		//	{
-		//		charge.SetTopLeft(x, y);
-		//		charge.ShowBitmap();
-		//		rising = true;
-		//	}
-		//}
 	}
 
-	void King::SetStanding(bool flag)
+	void King::SetStatus(bool* status)
 	{
-		standing = flag;
+		rising = falling = slipped = splatted = false;
+		standing = walking = charging = false;
+		*status = true;
+	}
+
+	void King::SetFacingDirection(bool* facingDirection)
+	{
+		facingLeft = facingRight = false;
+		*facingDirection = true;
 	}
 
 	void King::SetXY(int nx, int ny)
 	{
 		x = nx; y = ny;
 	}
-
-	//void King::SetVelocity(int velocity)
-	//{
-	//	this->velocityY = velocity;
-	//	this->initialVelocityY = velocity;
-	//}
 
 	void King::SetFloor(int floor)
 	{

@@ -1,4 +1,3 @@
-
 #include "stdafx.h"
 #include "Resource.h"
 #include <mmsystem.h>
@@ -22,6 +21,7 @@ namespace game_framework {
 		texture = Texture::Instance();
 		king = King::Instance();
 		foreground = Foreground::Instance();
+		ambience = Ambience::Instance();
 	}
 
 	CGameStateRun::~CGameStateRun()
@@ -30,10 +30,13 @@ namespace game_framework {
 		texture->releaseInstance();
 		king->releaseInstance();
 		foreground->releaseInstance();
+		ambience->releaseInstance();
 	}
 
 	void CGameStateRun::OnBeginState()
 	{
+		CAudio::Instance()->Resume();
+
 		if (startedNewGame)
 		{
 			map->OnBeginState();
@@ -41,14 +44,86 @@ namespace game_framework {
 			king->OnBeginState();
 			foreground->OnBeginState();
 		}
+		ambience->OnBeginState();
 		//hits_left.SetInteger(HITS_LEFT);					// 指定剩下的撞擊數
 		//hits_left.SetTopLeft(HITS_LEFT_X, HITS_LEFT_Y);		// 指定剩下撞擊數的座標
 	}
 
+	void CGameStateRun::OnInit()  								// 遊戲的初值及圖形設定
+	{
+		map->OnInit();
+		texture->OnInit();
+		king->OnInit();
+		foreground->OnInit();
+		ambience->OnInit();
+
+		//hits_left.LoadBitmap();
+	}
+
+	void CGameStateRun::OnKeyDown(UINT nChar, UINT nRepCnt, UINT nFlags)
+	{
+		if (nChar == KEY_ESC)
+		{
+			startedNewGame = false;
+			GotoGameState(GAME_STATE_PAUSE);
+		}
+		if (cheatMode)
+		{
+			if (nChar == KEY_UP)
+				king->SetMoveUp(true);
+			if (nChar == KEY_DOWN)
+				king->SetMoveDown(true);
+		}
+		else
+		{
+			if (nChar == KEY_SPACE)
+				king->SetCharging(true);
+		}
+		if (nChar == KEY_LEFT)
+		{
+			king->SetMoveLeft(true);
+		}
+		if (nChar == KEY_RIGHT)
+		{
+			king->SetMoveRight(true);
+		}
+	}
+
+	void CGameStateRun::OnKeyUp(UINT nChar, UINT nRepCnt, UINT nFlags)
+	{
+		if (cheatMode)
+		{
+			if (nChar == KEY_UP)
+				king->SetMoveUp(false);
+			if (nChar == KEY_DOWN)
+				king->SetMoveDown(false);
+		}
+		else
+		{
+			if (nChar == KEY_SPACE)
+				king->SetCharging(false);
+		}
+		if (nChar == KEY_LEFT)
+		{
+			king->SetMoveLeft(false);
+		}
+		if (nChar == KEY_RIGHT)
+		{
+			king->SetMoveRight(false);
+		}
+	}
+
 	void CGameStateRun::OnMove()
 	{
+		if (map->GetCurrentLevel() == 42 &&
+			king->GetX() >= 540 &&
+			king->GetY() >= 150)
+		{
+			GotoGameState(GAME_STATE_END);
+		}
+
 		texture->OnMove();
-		king->OnMove(map, foreground, texture);
+		king->OnMove(map, foreground, texture, ambience);
 
 		//
 		// 如果希望修改cursor的樣式，則將下面程式的commment取消即可
@@ -70,76 +145,6 @@ namespace game_framework {
 		//		}
 		//	}
 		//}
-	}
-
-	void CGameStateRun::OnInit()  								// 遊戲的初值及圖形設定
-	{
-		map->OnInit();
-		texture->OnInit();
-		king->OnInit();
-		foreground->OnInit();
-
-		//hits_left.LoadBitmap();
-
-		//
-		// 此OnInit動作會接到CGameStaterOver::OnInit()，所以進度還沒到100%
-		//
-	}
-
-	void CGameStateRun::OnKeyDown(UINT nChar, UINT nRepCnt, UINT nFlags)
-	{
-		if (nChar == KEY_ESC)
-		{
-			startedNewGame = false;
-			if (turnOnSFX)
-				CAudio::Instance()->Play(MENU_OPEN);
-			GotoGameState(GAME_STATE_PAUSE);
-		}
-		if (nChar == KEY_LEFT)
-		{
-			if (king->isCharging())
-			{
-
-			}
-			else
-			{
-				king->SetMoveLeft(true);
-			}
-		}
-		if (nChar == KEY_RIGHT)
-		{
-			king->SetMoveRight(true);
-		}
-		if (cheatMode)
-		{
-			if (nChar == KEY_UP)
-				king->SetMoveUp(true);
-			if (nChar == KEY_DOWN)
-				king->SetMoveDown(true);
-		}
-		if (nChar == KEY_SPACE)
-			king->SetCharging(true);
-	}
-
-	void CGameStateRun::OnKeyUp(UINT nChar, UINT nRepCnt, UINT nFlags)
-	{
-		if (nChar == KEY_LEFT)
-		{
-			king->SetMoveLeft(false);
-		}
-		if (nChar == KEY_RIGHT)
-		{
-			king->SetMoveRight(false);
-		}
-		if (cheatMode)
-		{
-			if (nChar == KEY_UP)
-				king->SetMoveUp(false);
-			if (nChar == KEY_DOWN)
-				king->SetMoveDown(false);
-		}
-		if (nChar == KEY_SPACE)
-			king->SetCharging(false);
 	}
 
 	void CGameStateRun::OnShow()

@@ -71,7 +71,7 @@
 #define OPEN_AS_FULLSCREEN	 false		// 是否以全螢幕方式開啟遊戲
 #define SHOW_LOAD_PROGRESS   false		// 是否顯示loading(OnInit)的進度
 #define DEFAULT_BG_COLOR	 RGB(0,0,0)	// 遊戲畫面預設的背景顏色(黑色)
-#define GAME_CYCLE_TIME		 15		    // 每33ms跑一次Move及Show(每秒30次)
+#define GAME_CYCLE_TIME		 21		    // 每33ms跑一次Move及Show(每秒30次)
 #define SHOW_GAME_CYCLE_TIME false		// 是否在debug mode顯示cycle time
 #define ENABLE_GAME_PAUSE	 false		// 是否允許以 Ctrl-Q 暫停遊戲
 #define ENABLE_AUDIO		 true		// 啟動音效介面
@@ -399,9 +399,7 @@ namespace game_framework {
 		virtual void OnShow() = 0;								// 顯示這個狀態的遊戲畫面
 		CGame *game;
 		static bool startedNewGame;
-		static bool turnOnMusic;
-		static bool turnOnSFX;
-		static bool turnOnAmbience;
+		static bool turnOnDisplayTimer;
 		static bool cheatMode;
 	};
 

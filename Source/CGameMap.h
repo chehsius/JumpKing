@@ -12,11 +12,19 @@ namespace game_framework {
 		void OnLoad();
 		void OnShow();
 		bool isEmpty(int, int);
+		bool isRamp(int, int);
 		void NextLevel();
 		void BackLevel();
+		int GetCurrentLevel();
+		int GetMidgroundX();
+		int GetMidgroundY();
+		int GetBackgroundX();
+		int GetBackgroundY();
+		void SetMidgroundXY(int, int);
+		void SetBackgroundXY(int, int);
 		static CGameMap *Instance();
 		static void releaseInstance();
-	protected:
+	private:
 		void LoadBitmap();
 		static CGameMap* instance;
 		CMovingBitmap test;

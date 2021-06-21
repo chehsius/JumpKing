@@ -344,8 +344,7 @@ namespace game_framework {
 	{
 		if (nChar == KEY_SPACE && !transitioning)
 		{
-			if (turnOnSFX)
-				CAudio::Instance()->Play(SELECT);
+			CAudio::Instance()->Play(SELECT);
 		}
 		else if (nChar == KEY_UP)
 		{
@@ -371,11 +370,8 @@ namespace game_framework {
 		{
 			if (nChar == KEY_SPACE && !transitioning)
 			{
-				if (turnOnMusic)
-				{
-					CAudio::Instance()->Stop(MENU_INTRO);
-					CAudio::Instance()->Play(OPENING_THEME);
-				}
+				CAudio::Instance()->Stop(MENU_INTRO);
+				CAudio::Instance()->Play(OPENING_THEME);
 				startedNewGame = false;
 				transitioning = true;
 				logoTransition.Reset();
@@ -443,16 +439,13 @@ namespace game_framework {
 		{
 			if (nChar == KEY_SPACE && !transitioning)
 			{
-				if (turnOnMusic)
-				{
-					CAudio::Instance()->Stop(MENU_INTRO);
-					CAudio::Instance()->Play(OPENING_THEME);
-				}
+				CAudio::Instance()->Stop(MENU_INTRO);
+				CAudio::Instance()->Play(OPENING_THEME);
+				//CAudio::Instance()->TurnOnMusic(true);
+				//CAudio::Instance()->TurnOnSFX(true);
+				//CAudio::Instance()->TurnOnAmbience(true);
 				startedNewGame = true;
 				transitioning = true;
-				turnOnMusic = true;
-				turnOnSFX = true;
-				turnOnAmbience = true;
 				cheatMode = false;
 				logoTransition.Reset();
 				introTransition.Reset();
@@ -584,8 +577,7 @@ namespace game_framework {
 	{
 		if (nChar == KEY_SPACE)
 		{
-			if (turnOnSFX)
-				CAudio::Instance()->Play(SELECT);
+			CAudio::Instance()->Play(SELECT);
 		}
 		if (nChar == KEY_SPACE || nChar == KEY_ESC)
 			ctrllingControls = false;
@@ -609,30 +601,34 @@ namespace game_framework {
 		{
 			if (nChar == KEY_SPACE)
 			{
-				if (turnOnMusic)
+				if (CAudio::Instance()->IsMusicOn())
 				{
-					for (int i = 0; i <= 2; i++)
+					for (int i = MENU_INTRO; i <= ENDING; i++)
 						CAudio::Instance()->Pause(i);
 				}
 				else
 				{
-					for (int i = 0; i <= 2; i++)
+					for (int i = MENU_INTRO; i <= ENDING; i++)
 						CAudio::Instance()->Resume(i);
 				}
-				turnOnMusic = turnOnMusic ? false : true;
+				CAudio::Instance()->TurnOnMusic(CAudio::Instance()->IsMusicOn() ? false : true);
 			}
 			SelectAction(nChar, A(AUDIO::MUSIC), A(AUDIO::AMOUNT), audio);
 		}
 		else if (audio[A(AUDIO::SFX)].selected)
 		{
 			if (nChar == KEY_SPACE)
-				turnOnSFX = turnOnSFX ? false : true;
+			{
+				CAudio::Instance()->TurnOnSFX(CAudio::Instance()->IsSFXOn() ? false : true);
+			}
 			SelectAction(nChar, A(AUDIO::SFX), A(AUDIO::AMOUNT), audio);
 		}
 		else if (audio[A(AUDIO::AMBIENCE)].selected)
 		{
 			if (nChar == KEY_SPACE)
-				turnOnAmbience = turnOnAmbience ? false : true;
+			{
+				CAudio::Instance()->TurnOnAmbience(CAudio::Instance()->IsAmbienceOn() ? false : true);
+			}
 			SelectAction(nChar, A(AUDIO::AMBIENCE), A(AUDIO::AMOUNT), audio);
 		}
 		else if (audio[A(AUDIO::BACK)].selected)
@@ -675,25 +671,7 @@ namespace game_framework {
 		else if (extras[A(EXTRAS::DISPLAY_TIMER)].selected)
 		{
 			if (nChar == KEY_SPACE)
-			{
-				if (extras[A(EXTRAS::DISPLAY_TIMER)].figure.GetCurrentBitmapNumber() == 0)
-				{
-					extras[A(EXTRAS::DISPLAY_TIMER)].figure.SetBitmapNumber(1);
-
-
-
-
-				}
-				else
-				{
-					extras[A(EXTRAS::DISPLAY_TIMER)].figure.SetBitmapNumber(0);
-
-
-
-
-
-				}
-			}
+				turnOnDisplayTimer = turnOnDisplayTimer ? false : true;
 			SelectAction(nChar, A(EXTRAS::DISPLAY_TIMER), A(EXTRAS::AMOUNT), extras);
 		}
 		else if (extras[A(EXTRAS::BACK)].selected)
@@ -712,8 +690,7 @@ namespace game_framework {
 	{
 		if (nChar == KEY_SPACE)
 		{
-			if (turnOnSFX)
-				CAudio::Instance()->Play(SELECT);
+			CAudio::Instance()->Play(SELECT);
 		}
 		if (nChar == KEY_SPACE || nChar == KEY_ESC)
 			ctrllingCredits = false;
@@ -723,8 +700,7 @@ namespace game_framework {
 	{
 		if (nChar == KEY_SPACE)
 		{
-			if (turnOnSFX)
-				CAudio::Instance()->Play(SELECT);
+			CAudio::Instance()->Play(SELECT);
 		}
 		if (nChar == KEY_SPACE || nChar == KEY_ESC)
 			ctrllingAttribution = false;
@@ -734,8 +710,7 @@ namespace game_framework {
 	{
 		if (nChar == KEY_SPACE)
 		{
-			if (turnOnSFX)
-				CAudio::Instance()->Play(SELECT);
+			CAudio::Instance()->Play(SELECT);
 		}
 		if (nChar == KEY_SPACE || nChar == KEY_ESC)
 			ctrllingTotalStats = false;
@@ -881,13 +856,13 @@ namespace game_framework {
 					cursorAudio.ShowBitmap();
 					audio[A(AUDIO::MUSIC)]
 						.figure
-						.SetBitmapNumber(turnOnMusic ? 1 : 0);
+						.SetBitmapNumber(CAudio::Instance()->IsMusicOn() ? 1 : 0);
 					audio[A(AUDIO::SFX)]
 						.figure
-						.SetBitmapNumber(turnOnSFX ? 1 : 0);
+						.SetBitmapNumber(CAudio::Instance()->IsSFXOn() ? 1 : 0);
 					audio[A(AUDIO::AMBIENCE)]
 						.figure
-						.SetBitmapNumber(turnOnAmbience ? 1 : 0);
+						.SetBitmapNumber(CAudio::Instance()->IsAmbienceOn() ? 1 : 0);
 					for (i = 0; i < A(AUDIO::AMOUNT); i++)
 						audio[i].figure.OnShow();
 				}
@@ -896,6 +871,10 @@ namespace game_framework {
 			{
 				frameExtras.ShowBitmap();
 				cursorExtras.ShowBitmap();
+				extras[A(EXTRAS::DISPLAY_TIMER)]
+					.figure
+					.SetBitmapNumber(turnOnDisplayTimer ? 1 : 0);
+
 				for (i = 0; i < A(EXTRAS::AMOUNT); i++)
 					extras[i].figure.OnShow();
 

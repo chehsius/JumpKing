@@ -1,3 +1,4 @@
+#pragma once
 #include "King.h"
 
 namespace game_framework {
@@ -19,5 +20,6 @@ namespace game_framework {
 		Texture *texture;
 		King *king;
 		Foreground *foreground;
+		Ambience *ambience;
 	};
 }

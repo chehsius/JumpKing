@@ -27,11 +27,15 @@ namespace game_framework {
 
 	void CGameStatePause::OnInit()
 	{
-		InitPauseMenu();
+		this->InitPauseMenu();
 	}
 
 	void CGameStatePause::OnBeginState()
 	{
+		CAudio::Instance()->Play(MENU_OPEN);
+		Sleep(300);
+		CAudio::Instance()->Pause();
+
 		ctrllingOptions = false;
 		ctrllingGraphics = false;
 		ctrllingMode = false;
@@ -79,9 +83,9 @@ namespace game_framework {
 			pause[i].figure.AddBitmap(path[i]);
 		pause[A(PAUSE::CHEAT)].figure.AddBitmap(path_cheat[0]);
 
-		InitOptions();
-		InitSaveExit();
-		InitGiveUp();
+		this->InitOptions();
+		this->InitSaveExit();
+		this->InitGiveUp();
 	}
 
 	void CGameStatePause::InitOptions()
@@ -251,8 +255,7 @@ namespace game_framework {
 	{
 		if (nChar == KEY_SPACE)
 		{
-			if (turnOnSFX)
-				CAudio::Instance()->Play(SELECT);
+			CAudio::Instance()->Play(SELECT);
 		}
 		if (nChar == KEY_UP)
 		{
@@ -275,11 +278,15 @@ namespace game_framework {
 	void CGameStatePause::CtrlPauseMenu(UINT nChar)
 	{
 		if (nChar == KEY_ESC)
+		{
 			GotoGameState(GAME_STATE_RUN);
+		}
 		if (pause[A(PAUSE::RESUME)].selected)
 		{
 			if (nChar == KEY_SPACE)
+			{
 				GotoGameState(GAME_STATE_RUN);
+			}
 			SelectAction(nChar, A(PAUSE::RESUME), A(PAUSE::AMOUNT), pause);
 		}
 		else if (pause[A(PAUSE::CHEAT)].selected)
@@ -443,8 +450,7 @@ namespace game_framework {
 	{
 		if (nChar == KEY_SPACE)
 		{
-			if (turnOnSFX)
-				CAudio::Instance()->Play(SELECT);
+			CAudio::Instance()->Play(SELECT);
 		}
 		if (nChar == KEY_SPACE || nChar == KEY_ESC)
 			ctrllingControls = false;
@@ -468,30 +474,44 @@ namespace game_framework {
 		{
 			if (nChar == KEY_SPACE)
 			{
-				if (turnOnMusic)
-				{
-					for (int i = 0; i <= 2; i++)
-						CAudio::Instance()->Pause(i);
-				}
-				else
-				{
-					for (int i = 0; i <= 2; i++)
-						CAudio::Instance()->Resume(i);
-				}
-				turnOnMusic = turnOnMusic ? false : true;
+				//if (CAudio::Instance()->IsMusicOn())
+				//{
+				//	for (int i = MENU_INTRO; i <= ENDING; i++)
+				//		CAudio::Instance()->Pause(i);
+				//}
+				//else
+				//{
+				//	for (int i = MENU_INTRO; i <= ENDING; i++)
+				//		CAudio::Instance()->Resume(i);
+				//}
+				CAudio::Instance()->TurnOnMusic(CAudio::Instance()->IsMusicOn() ? false : true);
 			}
 			SelectAction(nChar, A(AUDIO::MUSIC), A(AUDIO::AMOUNT), audio);
 		}
 		else if (audio[A(AUDIO::SFX)].selected)
 		{
 			if (nChar == KEY_SPACE)
-				turnOnSFX = turnOnSFX ? false : true;
+			{
+				CAudio::Instance()->TurnOnSFX(CAudio::Instance()->IsSFXOn() ? false : true);
+			}
 			SelectAction(nChar, A(AUDIO::SFX), A(AUDIO::AMOUNT), audio);
 		}
 		else if (audio[A(AUDIO::AMBIENCE)].selected)
 		{
 			if (nChar == KEY_SPACE)
-				turnOnAmbience = turnOnAmbience ? false : true;
+			{
+				if (CAudio::Instance()->IsAmbienceOn())
+				{
+					for (int i = NATURE_BG; i <= ENDING_JINGLE; i++)
+						CAudio::Instance()->Pause(i);
+				}
+				else
+				{
+					for (int i = NATURE_BG; i <= ENDING_JINGLE; i++)
+						CAudio::Instance()->Resume(i);
+				}
+				CAudio::Instance()->TurnOnAmbience(CAudio::Instance()->IsAmbienceOn() ? false : true);
+			}
 			SelectAction(nChar, A(AUDIO::AMBIENCE), A(AUDIO::AMOUNT), audio);
 		}
 		else if (audio[A(AUDIO::BACK)].selected)
@@ -523,8 +543,7 @@ namespace game_framework {
 		{
 			if (nChar == KEY_SPACE)
 			{
-				if (turnOnMusic)
-					CAudio::Instance()->Play(MENU_INTRO, true);
+				CAudio::Instance()->Play(MENU_INTRO, true);
 				GotoGameState(GAME_STATE_INIT);
 			}
 			SelectAction(nChar, A(SAVE_EXIT::YES), A(SAVE_EXIT::AMOUNT), saveExit);
@@ -634,13 +653,13 @@ namespace game_framework {
 				cursorAudio.ShowBitmap();
 				audio[A(AUDIO::MUSIC)]
 					.figure
-					.SetBitmapNumber(turnOnMusic ? 1 : 0);
+					.SetBitmapNumber(CAudio::Instance()->IsMusicOn() ? 1 : 0);
 				audio[A(AUDIO::SFX)]
 					.figure
-					.SetBitmapNumber(turnOnSFX ? 1 : 0);
+					.SetBitmapNumber(CAudio::Instance()->IsSFXOn() ? 1 : 0);
 				audio[A(AUDIO::AMBIENCE)]
 					.figure
-					.SetBitmapNumber(turnOnAmbience ? 1 : 0);
+					.SetBitmapNumber(CAudio::Instance()->IsAmbienceOn() ? 1 : 0);
 				for (i = 0; i < A(AUDIO::AMOUNT); i++)
 					audio[i].figure.OnShow();
 			}

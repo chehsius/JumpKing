@@ -29,6 +29,8 @@ namespace game_framework {
 		levelIndex = 0;
 		background.SetBitmapNumber(levelIndex);
 		midground.SetBitmapNumber(levelIndex);
+		this->SetMidgroundXY(0, 0);
+		this->SetBackgroundXY(0, 0);
 		this->OnLoad();
 	}
 
@@ -45,8 +47,6 @@ namespace game_framework {
 			strcpy(path, ("RES/background/bg" + to_string(i) + ".bmp").c_str());
 			background.AddBitmap(path, RGB(255, 255, 255));
 		}
-		midground.SetTopLeft(0, 0);
-		background.SetTopLeft(0, 0);
 
 		test.LoadBitmap(IDB_BITMAP2);
 	}
@@ -72,14 +72,30 @@ namespace game_framework {
 					case 0:
 						break;
 					case 1:
-						//test.SetTopLeft(10 * i, 10 * j);
-						//test.ShowBitmap();
+						break;
+					case 2:
+						test.SetTopLeft(10 * i, 10 * j);
+						test.ShowBitmap();
 						break;
 					default:
 						break;
 				}
 			}
 		}
+	}
+
+	bool CGameMap::isEmpty(int mapX, int mapY)
+	{
+		int gridX = mapX / 10;
+		int gridY = mapY / 10;
+		return levelGrid[gridX][gridY] == 0;
+	}
+
+	bool CGameMap::isRamp(int mapX, int mapY)
+	{
+		int gridX = mapX / 10;
+		int gridY = mapY / 10;
+		return levelGrid[gridX][gridY] == 2;
 	}
 
 	void CGameMap::NextLevel()
@@ -98,11 +114,39 @@ namespace game_framework {
 		this->OnLoad();
 	}
 
-	bool CGameMap::isEmpty(int mapX, int mapY)
+	int CGameMap::GetCurrentLevel()
 	{
-		int gridX = mapX / 10;
-		int gridY = mapY / 10;
-		return levelGrid[gridX][gridY] == 0;
+		return levelIndex;
+	}
+
+	int CGameMap::GetMidgroundX()
+	{
+		return midground.Left();
+	}
+
+	int CGameMap::GetMidgroundY()
+	{
+		return midground.Top();
+	}
+
+	int CGameMap::GetBackgroundX()
+	{
+		return background.Left();
+	}
+
+	int CGameMap::GetBackgroundY()
+	{
+		return background.Top();
+	}
+
+	void CGameMap::SetMidgroundXY(int x, int y)
+	{
+		midground.SetTopLeft(x, y);
+	}
+
+	void CGameMap::SetBackgroundXY(int x, int y)
+	{
+		background.SetTopLeft(x, y);
 	}
 
 	CGameMap *CGameMap::Instance()

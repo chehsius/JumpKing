@@ -1,3 +1,4 @@
+#pragma once
 namespace game_framework {
 
 	class CGameStateMenu : public CGameState {

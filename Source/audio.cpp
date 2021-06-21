@@ -76,6 +76,7 @@ namespace game_framework {
 	{
 		const int PIPE_SIZE = 400;
 		isOpened = false;
+		music = SFX = ambience = true;
 		// Create a pipe and a thread for MCI commands
 		DWORD dwThreadID;
 		HANDLE hReadEnd; 
@@ -281,8 +282,11 @@ namespace game_framework {
 		for (i = info.begin(); i != info.end(); i++) {
 			if (i->second.isGood) {
 				char command[MAX_MCI_COMMAND_SIZE];
-				sprintf(command, "pause device%d wait", i->first);
-				SendMciCommand(command);
+				//if (CheckIsAudioOn(i->first))
+				//{
+					sprintf(command, "pause device%d wait", i->first);
+					SendMciCommand(command);
+				//}
 			}
 		}
 	}
@@ -310,11 +314,14 @@ namespace game_framework {
 		if (!info[id].isGood)		
 			return;
 		char command[MAX_MCI_COMMAND_SIZE];
-		if (repeat_flag)
-			sprintf(command, "play device%d from 0 repeat", id);
-		else
-			sprintf(command, "play device%d from 0", id);
-		SendMciCommand(command);
+		if (CheckIsAudioOn(id))
+		{
+			if (repeat_flag)
+				sprintf(command, "play device%d from 0 repeat", id);
+			else
+				sprintf(command, "play device%d from 0", id);
+			SendMciCommand(command);
+		}
 	}
 
 	void CAudio::SetPowerResume()
@@ -330,8 +337,11 @@ namespace game_framework {
 		map<int, Info>::iterator i;
 		for (i = info.begin(); i != info.end(); i++) {
 			char command[MAX_MCI_COMMAND_SIZE];
-			sprintf(command, "resume device%d", i->first);
-			SendMciCommand(command);
+			if (CheckIsAudioOn(i->first))
+			{
+				sprintf(command, "resume device%d", i->first);
+				SendMciCommand(command);
+			}
 		}
 	}
 
@@ -346,6 +356,20 @@ namespace game_framework {
 		}
 	}
 
+	void CAudio::Stop()
+	{
+		if (!isOpened)
+			return;
+		map<int, Info>::iterator i;
+		for (i = info.begin(); i != info.end(); i++) {
+			if (info[i->first].isGood) {
+				char command[MAX_MCI_COMMAND_SIZE];
+				sprintf(command, "stop device%d", i->first);
+				SendMciCommand(command);
+			}
+		}
+	}
+
 	void CAudio::Stop(unsigned id)
 	{
 		if (!isOpened)
@@ -355,6 +379,82 @@ namespace game_framework {
 			char command[MAX_MCI_COMMAND_SIZE];
 			sprintf(command, "stop device%d", id);
 			SendMciCommand(command);
+		}
+	}
+
+	void CAudio::TurnOnMusic(bool flag)
+	{
+		music = flag;
+		//if (music)
+		//{
+		//	for (int i = MENU_INTRO; i <= ENDING; i++)
+		//		CAudio::Instance()->Resume(i);
+		//}
+		//else
+		//{
+		//	for (int i = MENU_INTRO; i <= ENDING; i++)
+		//		CAudio::Instance()->Pause(i);
+		//}
+	}
+
+	void CAudio::TurnOnSFX(bool flag)
+	{
+		SFX = flag;
+	}
+
+	void CAudio::TurnOnAmbience(bool flag)
+	{
+		ambience = flag;
+		//if (ambience)
+		//{
+		//	for (int i = NATURE_BG; i <= ENDING_JINGLE; i++)
+		//		CAudio::Instance()->Resume(i);
+		//}
+		//else
+		//{
+		//	for (int i = NATURE_BG; i <= ENDING_JINGLE; i++)
+		//		CAudio::Instance()->Pause(i);
+		//}
+	}
+
+	bool CAudio::IsMusicOn()
+	{
+		return music;
+	}
+
+	bool CAudio::IsSFXOn()
+	{
+		return SFX;
+	}
+
+	bool CAudio::IsAmbienceOn()
+	{
+		return ambience;
+	}
+	
+	bool CAudio::CheckIsAudioOn(unsigned id)
+	{
+		if (id >= MENU_INTRO && id <= ENDING)
+		{
+			return music;
+			//if (!music)
+			//	return false;
+		}
+		else if (id >= PRESS_START && id <= SPLAT)
+		{
+			return SFX;
+			//if (!SFX)
+			//	return false;
+		}
+		else if (id >= NATURE_BG && id <= ENDING_JINGLE)
+		{
+			return ambience;
+			//if (!ambience)
+			//	return false;
+		}
+		else
+		{
+			return false;
 		}
 	}
 }

@@ -28,6 +28,7 @@ namespace game_framework {
 	{
 		levelIndex = 0;
 		foreground.SetBitmapNumber(levelIndex);
+		this->SetXY(0, 0);
 	}
 
 	void Foreground::LoadBitmap()
@@ -38,7 +39,6 @@ namespace game_framework {
 			strcpy(path, ("RES/foreground/fg" + to_string(i) + ".bmp").c_str());
 			foreground.AddBitmap(path, RGB(255, 255, 255));
 		}
-		foreground.SetTopLeft(0, 0);
 	}
 
 	void Foreground::OnShow()
@@ -56,6 +56,21 @@ namespace game_framework {
 	{
 		levelIndex--;
 		foreground.SetBitmapNumber(levelIndex);
+	}
+
+	int Foreground::GetX()
+	{
+		return foreground.Left();
+	}
+
+	int Foreground::GetY()
+	{
+		return foreground.Top();
+	}
+
+	void Foreground::SetXY(int x, int y)
+	{
+		foreground.SetTopLeft(x, y);
 	}
 
 	Foreground *Foreground::Instance()

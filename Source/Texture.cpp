@@ -27,6 +27,7 @@ namespace game_framework {
 	void Texture::OnBeginState()
 	{
 		levelIndex = 0;
+		this->SetPrincessXY(639, 186);
 	}
 
 	void Texture::LoadBitmap()
@@ -81,23 +82,29 @@ namespace game_framework {
 			strcpy(path, ("RES/texture/old_man/old_man/" + to_string(i) + ".bmp").c_str());
 			old_man.AddBitmap(path, RGB(255, 255, 255));
 		}
-		old_man.SetDelayCount(9);
-		
+		for (i = 1; i <= 2; i++)
+		{
+			strcpy(path, ("RES/texture/old_man/skeleton/" + to_string(i) + ".bmp").c_str());
+			skeleton.AddBitmap(path, RGB(255, 255, 255));
+		}
 		for (i = 1; i <= 4; i++)
 		{
 			strcpy(path, ("RES/texture/old_man/merchant/" + to_string(i) + ".bmp").c_str());
 			merchant.AddBitmap(path, RGB(255, 255, 255));
 		}
-		merchant.SetDelayCount(12);
-
 		for (i = 1; i <= 8; i++)
 		{
 			strcpy(path, ("RES/texture/old_man/hermit/" + to_string(i) + ".bmp").c_str());
 			hermit.AddBitmap(path, RGB(255, 255, 255));
 		}
-		hermit.SetDelayCount(12);
+		
+		old_man.SetDelayCount(9);
+		skeleton.SetDelayCount(15);
+		merchant.SetDelayCount(12);
+		hermit.SetDelayCount(15);
 
 		old_man.SetTopLeft(531, 507);
+		skeleton.SetTopLeft(654, 406);
 		merchant.SetTopLeft(57, 453);
 		hermit.SetTopLeft(657, 521);
 	}
@@ -120,15 +127,15 @@ namespace game_framework {
 		int i = 0, j = 0;
 		for (i = 1; i <= 4; i++)
 		{
-			strcpy(path, ("RES/particles/rain_level_9/" + to_string(i) + ".bmp").c_str());
+			strcpy(path, ("RES/particles/rain/level_9/" + to_string(i) + ".bmp").c_str());
 			rain_level9.AddBitmap(path, RGB(255, 255, 255));
-			strcpy(path, ("RES/particles/rain_level_10/" + to_string(i) + ".bmp").c_str());
+			strcpy(path, ("RES/particles/rain/level_10/" + to_string(i) + ".bmp").c_str());
 			rain_level10.AddBitmap(path, RGB(255, 255, 255));
-			strcpy(path, ("RES/particles/rain_level_11/" + to_string(i) + ".bmp").c_str());
+			strcpy(path, ("RES/particles/rain/level_11/" + to_string(i) + ".bmp").c_str());
 			rain_level11.AddBitmap(path, RGB(255, 255, 255));
-			strcpy(path, ("RES/particles/rain_level_12/" + to_string(i) + ".bmp").c_str());
+			strcpy(path, ("RES/particles/rain/level_12/" + to_string(i) + ".bmp").c_str());
 			rain_level12.AddBitmap(path, RGB(255, 255, 255));
-			strcpy(path, ("RES/particles/rain_level_13/" + to_string(i) + ".bmp").c_str());
+			strcpy(path, ("RES/particles/rain/level_13/" + to_string(i) + ".bmp").c_str());
 			rain_level13.AddBitmap(path, RGB(255, 255, 255));
 		}
 
@@ -369,7 +376,6 @@ namespace game_framework {
 		candle_level33[54].SetTopLeft(455 + 155, 365 - 364);
 		candle_level33[55].SetTopLeft(440 + 155, 365 - 364);
 
-		//Two
 		candle_level34[0].SetTopLeft(407 - 220, 375 + 175);
 		candle_level34[1].SetTopLeft(415 - 220, 365 + 175);
 		candle_level34[2].SetTopLeft(400 - 220, 365 + 175);
@@ -463,7 +469,6 @@ namespace game_framework {
 		candle_level34[90].SetTopLeft(490 + 130, 450 - 73);
 		candle_level34[91].SetTopLeft(505 + 130, 450 - 73);
 
-		//Three
 		candle_level35[0].SetTopLeft(407 - 3, 375 - 128);
 		candle_level35[1].SetTopLeft(415 - 3, 365 - 128);
 		candle_level35[2].SetTopLeft(400 - 3, 365 - 128);
@@ -511,10 +516,9 @@ namespace game_framework {
 		char path[100] = "";
 		for (int i = 1; i <= 3; i++)
 		{
-			strcpy(path, ("RES/princess/princess/" + to_string(i) + ".bmp").c_str());
+			strcpy(path, ("RES/texture/princess/" + to_string(i) + ".bmp").c_str());
 			princess.AddBitmap(path, RGB(255, 255, 255));
 		}
-		princess.SetTopLeft(639, 189);
 	}
 
 	void Texture::OnMove()
@@ -532,6 +536,7 @@ namespace game_framework {
 		}
 		else if (levelIndex == 8)
 		{
+			skeleton.OnMove();
 			rain_level9.OnMove();
 		}
 		else if (levelIndex == 9)
@@ -617,13 +622,14 @@ namespace game_framework {
 		}
 		else if (levelIndex == 8)
 		{
+			skeleton.OnShow();
 			rain_level9.OnShow();
 		}
 		else if (levelIndex == 9)
 		{
-			rain_level10.OnShow();
 			kettle.OnShow();
 			ovenfire.OnShow();
+			rain_level10.OnShow();
 			dungeonTorch_level10.OnShow();
 		}
 		else if (levelIndex == 10)
@@ -695,6 +701,21 @@ namespace game_framework {
 	void Texture::BackLevel()
 	{
 		levelIndex--;
+	}
+
+	int Texture::GetPrincessX()
+	{
+		return princess.Left();
+	}
+
+	int Texture::GetPrincessY()
+	{
+		return princess.Top();
+	}
+
+	void Texture::SetPrincessXY(int x, int y)
+	{
+		princess.SetTopLeft(x, y);
 	}
 
 	Texture *Texture::Instance()

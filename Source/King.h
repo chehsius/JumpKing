@@ -2,21 +2,28 @@
 #include "CGameMap.h"
 #include "Foreground.h"
 #include "Texture.h"
+#include "Ambience.h"
 
 namespace game_framework {
 
 	class King {
 	public:
-		King();
 		~King();
 		void OnInit();
 		void OnBeginState();
-		void OnMove(CGameMap*, Foreground*, Texture*);
+		void OnMove(CGameMap*, Foreground*, Texture*, Ambience*);
 		void OnShow();
-		int GetWidth();
-		int GetHeight();
-		int GetX2();
-		int GetY2();
+
+		int GetX();
+		int GetY();
+		
+		int GetWalkWidth();
+		int GetWalkHeight();
+		int GetRiseWidth();
+		int GetRiseHeight();
+		int GetFallWidth();
+		int GetFallHeight();
+
 		bool isCharging();
 
 		void SetMoveUp(bool);
@@ -25,31 +32,28 @@ namespace game_framework {
 		void SetMoveRight(bool);
 		void SetCharging(bool);
 
-
-		void SetStanding(bool);
-
-		void SetStatus(bool);
+		void SetStatus(bool*);
+		void SetFacingDirection(bool*);
 
 		void SetXY(int, int);
 		void SetFloor(int);
 
-		
-
 		static King *Instance();
 		static void releaseInstance();
 	private:
+		King();
 		void LoadBitmap();
 		static King* instance;
 		const int STEP, MAX_JUMP_DISTANCE, MAX_JUMP_HEIGHT;
 		const int MAP_EDGE, START_X, START_Y;
 		CMovingBitmap standLeft, standRight;
-		CAnimation walkLeft, walkRight;
-		CAnimation jumpLeft, jumpRight;
 		CMovingBitmap riseLeft, riseRight;
 		CMovingBitmap fallLeft, fallRight;
 		CMovingBitmap slipLeft, slipRight;
 		CMovingBitmap splatLeft, splatRight;
 		CMovingBitmap charge;
+		CAnimation walkLeft, walkRight;
+		CAnimation jumpParticles;
 
 		int x, y;
 		int floor;
@@ -58,7 +62,7 @@ namespace game_framework {
 		bool moveLeft, moveRight;
 		bool jumping;
 
-		bool rising, falling, splatted;
+		bool rising, falling, slipped, splatted;
 		bool standing, walking, charging;
 		bool facingLeft, facingRight;
 		bool decidedMoveLeft, decidedMoveRight;
@@ -68,7 +72,5 @@ namespace game_framework {
 		int jumpHeight, jumpDistance;
 
 		int collisionCon;
-
-
 	};
 }

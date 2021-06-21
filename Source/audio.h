@@ -84,6 +84,27 @@ enum AUDIO_ID {
 	BUMP,
 	LAND,
 	SPLAT,
+	/////////////////////////////////////////////////////////////////////////////
+	// Ambience
+	/////////////////////////////////////////////////////////////////////////////
+	NATURE_BG,
+	NEW_LOCATION,
+	SEWER,
+	SEWER_CAGE_RAIN,
+	FRONTIER_RAIN,
+	HARD_RAIN_AND_FIRE,
+	HIDDENROOM,
+	FRONTIER_WIND,
+	CITY_1,
+	MERCHANT_LOOP,
+	TOWERS_1,
+	WINDY_SNOWY_1,
+	WINDY_SNOWY_2,
+	CATHEDRAL,
+	TEST_SONG_ICE,
+	FINAL_CLIMB,
+	QUAKE,
+	ENDING_JINGLE
 };
 
 /////////////////////////////////////////////////////////////////////////////
@@ -110,7 +131,14 @@ namespace game_framework {
 		void		   Resume();					// 復原暫停播放的音效
 		void		   Resume(unsigned);
 		void           SetPowerResume();			// 電源恢復
+		void		   Stop();
 		void           Stop(unsigned);				// 停止撥放編號i的聲音
+		void		   TurnOnMusic(bool);
+		void		   TurnOnSFX(bool);
+		void		   TurnOnAmbience(bool);
+		bool		   IsMusicOn();
+		bool		   IsSFXOn();
+		bool		   IsAmbienceOn();
 	private:
 		class Info {
 		public:
@@ -130,5 +158,10 @@ namespace game_framework {
 		HANDLE				hThread;	// MCI command thread
 		HANDLE				hWriteEnd;	// Pipe write handle for thread
 		const static int	MAX_MCI_COMMAND_SIZE = 400;
+
+		bool CheckIsAudioOn(unsigned);
+		bool music;
+		bool SFX;
+		bool ambience;
 	};
 }

@@ -425,9 +425,7 @@ namespace game_framework {
 	/////////////////////////////////////////////////////////////////////////////
 
 	bool CGameState::startedNewGame = true;
-	bool CGameState::turnOnMusic = true;
-	bool CGameState::turnOnSFX = true;
-	bool CGameState::turnOnAmbience = true;
+	bool CGameState::turnOnDisplayTimer = false;
 	bool CGameState::cheatMode = false;
 
 	CGameState::CGameState(CGame *g)
@@ -546,7 +544,8 @@ namespace game_framework {
 			//
 			// ¼È°±ª¬ºA
 			//
-			//if (gameState == gameStateTable[GAME_STATE_RUN]) {
+			//if (gameState == gameStateTable[GAME_STATE_RUN])
+			//{
 			//	gameState = gameStateTable[GAME_STATE_PAUSE];
 			//	gameState->OnBeginState();
 			//	gameState->OnDraw();
@@ -559,15 +558,13 @@ namespace game_framework {
 	void  CGame::OnFilePause()
 	{
 		if (ENABLE_GAME_PAUSE) {
-			if (running)
-				CAudio::Instance()->Pause();
-			else
-				CAudio::Instance()->Resume();
-			running = !running;
-			//if (gameState == gameStateTable[GAME_STATE_RUN]) {
-			//}
+			//if (running)
+			//	CAudio::Instance()->Pause();
+			//else
+			//	CAudio::Instance()->Resume();
+			//running = !running;
 		} else {
-			CAudio::Instance()->Resume();
+			//CAudio::Instance()->Resume();
 			running = true;
 		}
 	}
@@ -654,7 +651,7 @@ namespace game_framework {
 
 	void CGame::OnKillFocus()
 	{
-		CAudio::Instance()->Pause();
+		//CAudio::Instance()->Pause();
 		if (ENABLE_GAME_PAUSE)
 			running = false;
 		else if (CDDraw::IsFullScreen())
@@ -701,7 +698,7 @@ namespace game_framework {
 	void CGame::OnSetFocus()
 	{
 		if (!ENABLE_GAME_PAUSE) {
-			CAudio::Instance()->Resume();
+			//CAudio::Instance()->Resume();
 			running = true;
 		}
 	}
