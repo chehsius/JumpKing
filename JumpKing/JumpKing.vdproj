@@ -2369,11 +2369,19 @@
         "InstallerBootstrapper" = "3:2"
             "BootstrapperCfg:{63ACBE69-63AA-4F98-B2B6-99F9E24495F2}"
             {
-            "Enabled" = "11:TRUE"
+            "Enabled" = "11:FALSE"
             "PromptEnabled" = "11:TRUE"
             "PrerequisitesLocation" = "2:1"
             "Url" = "8:"
             "ComponentsUrl" = "8:"
+                "Items"
+                {
+                    "{EDC2488A-8267-493A-A98E-7D9C3B36CDF3}:.NETFramework,Version=v4.6.1"
+                    {
+                    "Name" = "8:Microsoft .NET Framework 4.6.1 (x86 and x64)"
+                    "ProductCode" = "8:.NETFramework,Version=v4.6.1"
+                    }
+                }
             }
         }
     }
@@ -10880,15 +10888,15 @@
         {
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:JumpKing"
-        "ProductCode" = "8:{7207CEE7-BEBD-4529-B23C-4F6448E6975F}"
-        "PackageCode" = "8:{7AA8683A-0B12-4487-8BFA-39C291075F5F}"
-        "UpgradeCode" = "8:{3A156C30-0DB7-4F93-A53A-B77CF92C0A76}"
+        "ProductCode" = "8:{098D3D9A-8B12-4692-B808-4E53C50AFD65}"
+        "PackageCode" = "8:{2F37FB0A-E1D1-4255-B9B2-94F8B43BD3CE}"
+        "UpgradeCode" = "8:{A4EBA346-BB13-49E7-88A0-9ED5DF7EE821}"
         "AspNetVersion" = "8:2.0.50727.0"
         "RestartWWWService" = "11:FALSE"
         "RemovePreviousVersions" = "11:FALSE"
         "DetectNewerInstalledVersion" = "11:TRUE"
         "InstallAllUsers" = "11:FALSE"
-        "ProductVersion" = "8:1.0.0"
+        "ProductVersion" = "8:1.0.1"
         "Manufacturer" = "8:NTUT-CSIE-2021Games"
         "ARPHELPTELEPHONE" = "8:"
         "ARPHELPLINK" = "8:"
