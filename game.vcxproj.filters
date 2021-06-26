@@ -661,7 +661,13 @@
     <Image Include="res\bitmap2.bmp">
       <Filter>Resource Files</Filter>
     </Image>
-    <Image Include="res\jumpKing.ico">
+    <Image Include="res\icon1.ico">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\icon2.ico">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="RES\JumpKing.ico">
       <Filter>Resource Files</Filter>
     </Image>
   </ItemGroup>

@@ -16,7 +16,6 @@ namespace game_framework {
 
 		int GetX();
 		int GetY();
-		
 		int GetWalkWidth();
 		int GetWalkHeight();
 		int GetRiseWidth();
@@ -24,19 +23,18 @@ namespace game_framework {
 		int GetFallWidth();
 		int GetFallHeight();
 
-		bool isCharging();
+		bool IsCharging();
+		bool IsNotJumping();
 
+		void SetXY(int, int);
+		void SetFloor(int);
 		void SetMoveUp(bool);
 		void SetMoveDown(bool);
 		void SetMoveLeft(bool);
 		void SetMoveRight(bool);
 		void SetCharging(bool);
-
 		void SetStatus(bool*);
 		void SetFacingDirection(bool*);
-
-		void SetXY(int, int);
-		void SetFloor(int);
 
 		static King *Instance();
 		static void releaseInstance();
@@ -59,8 +57,6 @@ namespace game_framework {
 		int floor;
 
 		bool moveUp, moveDown;
-		bool moveLeft, moveRight;
-		bool jumping;
 
 		bool rising, falling, slipped, splatted;
 		bool standing, walking, charging;

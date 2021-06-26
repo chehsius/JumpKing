@@ -305,7 +305,7 @@
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_E350ABF676DB4825AB1A7955895D6884"
             {
             "SourcePath" = "8:RES\\GAME.ICO"
-            "TargetName" = "8:JumpKing.ICO"
+            "TargetName" = "8:GAME.ICO"
             "Tag" = "8:"
             "Folder" = "8:_A62E3FBC3C2C4A6D9157A8D6CE468FB2"
             "Condition" = "8:"

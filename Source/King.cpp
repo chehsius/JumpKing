@@ -65,6 +65,26 @@ namespace game_framework {
 		return y + fallRight.Height();
 	}
 
+	void King::SetXY(int nx, int ny)
+	{
+		x = nx; y = ny;
+	}
+
+	void King::SetFloor(int floor)
+	{
+		this->floor = floor;
+	}
+
+	bool King::IsCharging()
+	{
+		return charging;
+	}
+
+	bool King::IsNotJumping()
+	{
+		return !rising && !falling && !slipped;
+	}
+
 	void King::OnInit()
 	{
 		this->LoadBitmap();
@@ -73,9 +93,7 @@ namespace game_framework {
 
 	void King::OnBeginState()
 	{
-		moveLeft = moveRight = false;
 		moveUp = moveDown = false;
-		jumping = false;
 
 		SetStatus(&splatted);
 		SetFacingDirection(&facingRight);
@@ -139,15 +157,11 @@ namespace game_framework {
 			{
 				SetStatus(&rising);
 			}
-
-			decidedJumpLeft = decidedMoveLeft;
-			decidedJumpRight = decidedMoveRight;
 			if (chargedJumpDistance < MAX_JUMP_DISTANCE)
 			{
 				chargedJumpDistance++;
 			}
 			jumpHeight = chargedJumpHeight;
-			//jumpDistance = chargedJumpDistance;
 			jumpDistance = 1;
 		}
 		else if (rising)
@@ -156,10 +170,23 @@ namespace game_framework {
 			{
 				if (map->isEmpty(x, y - jumpHeight) &&
 					map->isEmpty(this->GetRiseWidth(), y - jumpHeight))
+				{
 					y -= jumpHeight--;
+				}
 				else
 				{
+					jumpHeight = 1;
+					jumpDistance = 1;
 					SetStatus(&falling);
+				}
+
+				if (y <= 1)
+				{
+					map->NextLevel();
+					foreground->NextLevel();
+					texture->NextLevel();
+					ambience->NextLevel();
+					y += SIZE_Y - 1;
 				}
 
 				if (decidedJumpLeft)
@@ -167,7 +194,7 @@ namespace game_framework {
 					if (map->isEmpty(x - jumpDistance, y) &&
 						map->isEmpty(x - jumpDistance, this->GetRiseHeight()))
 					{
-						x -= jumpDistance;
+						x -= jumpDistance++;
 					}
 					//else
 					//{
@@ -178,48 +205,42 @@ namespace game_framework {
 				{
 					if (map->isEmpty(this->GetRiseWidth() + jumpDistance, y) &&
 						map->isEmpty(this->GetRiseWidth() + jumpDistance, this->GetRiseHeight()))
-						x += jumpDistance;
+						x += jumpDistance++;
 				}
 
-				if (jumpDistance < chargedJumpDistance)
-				{
-					jumpDistance++;
-				}
-
-				
 
 				//if (collisionCon == 1)
-					//			{
-					//				jumping = false;
-					//				x += STEP + 1;
-					//			}
-					//			if (collisionCon == 2)
-					//			{
-					//				jumping = false;
-					//				x -= STEP + 1;
-					//			}
-					//			if (collisionCon == 3)
-					//			{
-					//				jumping = false;
-					//				velocityY = 0;
-					//				//y += STEP_SIZE+1;
-					//			}
-					//			if (!(map->isEmpty(x - STEP, y)))
-					//			{
-					//				jumping = false;
-					//				collisionCon = 1;
-					//			}
-					//			if (!(map->isEmpty(GetX2() + STEP, GetY2())))
-					//			{
-					//				jumping = false;
-					//				collisionCon = 2;
-					//			}
+				//{
+				//	jumping = false;
+				//	x += STEP + 1;
+				//}
+				//if (collisionCon == 2)
+				//{
+				//	jumping = false;
+				//	x -= STEP + 1;
+				//}
+				//if (collisionCon == 3)
+				//{
+				//	jumping = false;
+				//	velocityY = 0;
+				//	//y += STEP_SIZE+1;
+				//}
+				//if (!(map->isEmpty(x - STEP, y)))
+				//{
+				//	jumping = false;
+				//	collisionCon = 1;
+				//}
+				//if (!(map->isEmpty(GetX2() + STEP, GetY2())))
+				//{
+				//	jumping = false;
+				//	collisionCon = 2;
+				//}
 
-					//			if (!(map->isEmpty(x, y - STEP)))
-					//			{
-					//				jumping = false;
-					//				collisionCon = 3;
-					//			}
+				//if (!(map->isEmpty(x, y - STEP)))
+				//{
+				//	jumping = false;
+				//	collisionCon = 3;
+				//}		
 				
 			}
 			else
@@ -227,50 +248,65 @@ namespace game_framework {
 				SetStatus(&falling);
 				jumpHeight = 1;
 				jumpDistance = 1;
-				decidedJumpLeft = decidedJumpRight = false;
 			}
 		}
 		else if (falling)
 		{
-			if (decidedJumpLeft)
-			{
-				//jumpDistance -= ;
-
-				if (map->isEmpty(x - jumpDistance, y) &&
-					map->isEmpty(x - jumpDistance, this->GetFallHeight()))
+			//if (y +  < floor - 1)
+			//{
+				if (map->isEmpty(x, this->GetFallHeight() + jumpHeight) &&
+					map->isEmpty(this->GetFallWidth(), this->GetFallHeight() + jumpHeight))
 				{
-					x -= jumpDistance;
+					y += jumpHeight++;
 				}
-				//else
-				//{
-				//	SetStatus(&slipped);
-				//}
-			}
-			else if (decidedJumpRight)
-			{
-				if (map->isEmpty(this->GetFallWidth() + jumpDistance, y) &&
-					map->isEmpty(this->GetFallWidth() + jumpDistance, this->GetFallHeight()))
-					x += jumpDistance;
-			}
+				else
+				{
+					SetFloor(y + standLeft.Height() + jumpHeight - 1);
+					this->SetXY(x, y);
+					SetStatus(&standing);
+					chargedJumpHeight = chargedJumpDistance = 0;
+					jumpHeight = jumpDistance = 0;
+				}
 
-			if (jumpDistance < chargedJumpDistance)
-			{
-				jumpDistance++;
-			}
+				if (y >= MAP_EDGE - 1)
+				{
+					map->BackLevel();
+					foreground->BackLevel();
+					texture->BackLevel();
+					ambience->BackLevel();
+					y -= SIZE_Y - 1;
+				}
 
-			if (map->isEmpty(x, this->GetFallHeight() + jumpHeight) &&
-				map->isEmpty(this->GetFallWidth(), this->GetFallHeight() + jumpHeight))
-			{
-				y += jumpHeight++;
-			}
-			else
-			{
-				SetStatus(&standing);
-				y += jumpHeight--;
-				floor = this->GetFallHeight() - 1;
-				chargedJumpHeight = chargedJumpDistance = 0;
-				jumpHeight = jumpDistance = 0;
-			}
+				if (decidedJumpLeft)
+				{
+					if (map->isEmpty(x - jumpDistance, y) &&
+						map->isEmpty(x - jumpDistance, this->GetFallHeight()))
+					{
+						x -= jumpDistance++;
+					}
+					//else
+					//{
+					//	SetStatus(&slipped);
+					//}
+				}
+				else if (decidedJumpRight)
+				{
+					if (map->isEmpty(this->GetFallWidth() + jumpDistance, y) &&
+						map->isEmpty(this->GetFallWidth() + jumpDistance, this->GetFallHeight()))
+						x += jumpDistance++;
+				}
+
+
+			//}
+			//else
+			//{
+				//y += --jumpHeight;
+				//floor = this->GetFallHeight() - 1;
+				//SetFloor(this->GetFallHeight() - 1);
+			//	SetStatus(&standing);
+			//	chargedJumpHeight = chargedJumpDistance = 0;
+			//	jumpHeight = jumpDistance = 0;
+			//}
 
 			//if (y < floor - 1)
 			//{
@@ -292,7 +328,7 @@ namespace game_framework {
 		}
 		else if (slipped)
 		{
-
+			
 		}
 		else if (splatted)
 		{
@@ -309,26 +345,32 @@ namespace game_framework {
 				if (facingLeft)
 				{
 					walkLeft.OnMove();
+
 					if (map->isEmpty(x - STEP, y) &&
 						map->isEmpty(x - STEP, this->GetWalkHeight()))
-						x -= STEP;
-
-					if (map->isEmpty(this->GetWalkWidth(), this->GetWalkHeight() + 10))
 					{
-						SetStatus(&falling);
+						x -= STEP;
 					}
+
+					//if (map->isEmpty(x, this->GetWalkHeight() + 10) &&
+					//	map->isEmpty(this->GetWalkWidth(), this->GetWalkHeight() + 10))
+					//{
+					//	SetStatus(&falling);
+					//}
 				}
 				else if (facingRight)
 				{
 					walkRight.OnMove();
+
 					if (map->isEmpty(this->GetWalkWidth() + STEP, y) &&
 						map->isEmpty(this->GetWalkWidth() + STEP, this->GetWalkHeight()))
 						x += STEP;
 
-					if (map->isEmpty(x, this->GetWalkHeight() + 10))
-					{
-						SetStatus(&falling);
-					}
+					//if (map->isEmpty(x, this->GetWalkHeight() + 10) &&
+					//	map->isEmpty(this->GetWalkWidth(), this->GetWalkHeight() + 10))
+					//{
+					//	SetStatus(&falling);
+					//}
 				}
 			}
 		}
@@ -338,49 +380,40 @@ namespace game_framework {
 			if (map->isEmpty(x, y - STEP) &&
 				map->isEmpty(this->GetRiseWidth(), y - STEP))
 				y -= STEP;
+
+			if (y <= 1)
+			{
+				map->NextLevel();
+				foreground->NextLevel();
+				texture->NextLevel();
+				ambience->NextLevel();
+				y += SIZE_Y - 1;
+			}
+
 		}
 		if (moveDown)
 		{
 			if (map->isEmpty(x, this->GetWalkHeight() + STEP) &&
 				map->isEmpty(this->GetFallWidth(), this->GetWalkHeight() + STEP))
 				y += STEP;
+
+			if (y >= MAP_EDGE - 1)
+			{
+				map->BackLevel();
+				foreground->BackLevel();
+				texture->BackLevel();
+				ambience->BackLevel();
+				y -= SIZE_Y - 1;
+			}
 		}
 
-
-		if (y <= 1)
-		{
-			map->NextLevel();
-			foreground->NextLevel();
-			texture->NextLevel();
-			ambience->NextLevel();
-			y += SIZE_Y - 1;
-		}
-		else if (y >= MAP_EDGE - 1)
-		{
-			map->BackLevel();
-			foreground->BackLevel();
-			texture->BackLevel();
-			ambience->BackLevel();
-			y -= SIZE_Y - 1;
-		}
 		
-		//else
-		//{
-		//	if ((!isMoveLeft) || (!isMoveRight))
-		//	{
-		//		standing = true;
-		//	}
 		//	else
 		//	{
 		//		if (y < floor - 1)
 		//		{
 		//			if (map->isEmpty(x, GetY2() + velocityY))
 		//			{
-		//				y += velocityY;
-		//				velocityY++;
-
-		//				floor = GetY2();
-
 		//				if (collisionCon == 4)
 		//				{
 		//					jumping = false;
@@ -412,11 +445,6 @@ namespace game_framework {
 		//					rising = false;
 		//					initialVelocityY = initialVelocityX = 0;
 		//					velocityX = velocityY = 0;
-		//				}
-		//				if (y >= mapEdgeY)
-		//				{
-		//					map->BackStage();
-		//					y = y - 574;
 		//				}
 		//			}
 		//		}
@@ -516,15 +544,9 @@ namespace game_framework {
 		}
 	}
 
-	bool King::isCharging()
-	{
-		return charging;
-	}
-
 	void King::SetMoveUp(bool flag)
 	{
 		moveUp = flag;
-
 	}
 
 	void King::SetMoveDown(bool flag)
@@ -534,69 +556,62 @@ namespace game_framework {
 
 	void King::SetMoveLeft(bool flag)
 	{
-		if (!rising && !falling && !slipped)
+		if (this->IsNotJumping())
 		{
 			decidedMoveLeft = flag;
-			//if (decidedMoveLeft && decidedMoveRight)
-			//{
-			//	SetStatus(&standing);
-			//}
-			//else if (decidedMoveLeft && !decidedMoveRight)
-			//{
-			//	SetStatus(&walking);
-			//	SetFacingDirection(&facingLeft);
-			//}
 			if (decidedMoveLeft)
 			{
-				if (!charging)
+				if (charging)
+				{
+					decidedJumpLeft = decidedMoveLeft;
+				}
+				else
 				{
 					SetStatus(&walking);
 				}
 				SetFacingDirection(&facingLeft);
 			}
-			//else
-			//{
-			//	SetStatus(&standing);
-			//}
 		}
 	}
 
 	void King::SetMoveRight(bool flag)
 	{
-		if (!rising && !falling && !slipped)
+		if (this->IsNotJumping())
 		{
 			decidedMoveRight = flag;
-			//if (decidedMoveRight && decidedMoveLeft)
-			//{
-			//	SetStatus(&standing);
-			//}
-			//else if (decidedMoveRight && !decidedMoveLeft)
-			//{
-			//	SetStatus(&walking);
-			//	SetFacingDirection(&facingRight);
-			//}
 			if (decidedMoveRight)
 			{
-				if (!charging)
+				if (charging)
+				{
+					decidedJumpRight = decidedMoveRight;
+				}
+				else
 				{
 					SetStatus(&walking);
-				}
+				}				
 				SetFacingDirection(&facingRight);
-			}
-			//else
-			//{
-			//	SetStatus(&standing);
-			//}
+			} 
 		}
 	}
 
 	void King::SetCharging(bool flag)
 	{
-		if (!rising && !falling && !slipped)
+		if (this->IsNotJumping())
 		{
 			if (flag)
 			{
 				SetStatus(&charging);
+
+				if (decidedMoveLeft)
+				{
+					decidedJumpLeft = true;
+					SetFacingDirection(&facingLeft);
+				}
+				else if (decidedMoveRight)
+				{
+					decidedJumpRight = true;
+					SetFacingDirection(&facingRight);
+				}
 			}
 			else
 			{
@@ -616,16 +631,6 @@ namespace game_framework {
 	{
 		facingLeft = facingRight = false;
 		*facingDirection = true;
-	}
-
-	void King::SetXY(int nx, int ny)
-	{
-		x = nx; y = ny;
-	}
-
-	void King::SetFloor(int floor)
-	{
-		this->floor = floor;
 	}
 
 	King *King::Instance()

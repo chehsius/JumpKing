@@ -72,10 +72,12 @@ namespace game_framework {
 					case 0:
 						break;
 					case 1:
+						//test.SetTopLeft(10 * i, 10 * j);
+						//test.ShowBitmap();
 						break;
 					case 2:
-						test.SetTopLeft(10 * i, 10 * j);
-						test.ShowBitmap();
+						//test.SetTopLeft(10 * i, 10 * j);
+						//test.ShowBitmap();
 						break;
 					default:
 						break;
